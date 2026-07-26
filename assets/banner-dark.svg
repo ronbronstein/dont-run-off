@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="Don't Run Off — a context-engineering harness for AI coding agents">
+  <defs>
+    <linearGradient id="bgD" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141317"/>
+      <stop offset="100%" stop-color="#0B0A0C"/>
+    </linearGradient>
+    <linearGradient id="fadeD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8845F" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#E8845F" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="320" fill="url(#bgD)"/>
+
+  <!-- the map/territory motif: a straight intended path, and a drift away from it -->
+  <g opacity="0.6">
+    <path d="M0 258 H1200" stroke="#2E2B33" stroke-width="1.5" stroke-dasharray="7 9"/>
+    <path d="M0 258 C 300 258, 470 258, 620 250 S 900 196, 1200 120"
+          fill="none" stroke="url(#fadeD)" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <circle cx="620" cy="250" r="4.5" fill="#E8845F"/>
+
+  <g font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Helvetica, Arial, sans-serif">
+    <text x="80" y="132" font-size="76" font-weight="700" letter-spacing="-2.5" fill="#F7F5F0">Don't Run Off</text>
+    <text x="82" y="180" font-size="23" font-weight="400" fill="#B0A897">A context-engineering harness for AI coding agents.</text>
+    <text x="82" y="216" font-size="19" font-weight="500" fill="#7E7666">Align before it builds the wrong thing. Stay oriented while it works.</text>
+  </g>
+</svg>

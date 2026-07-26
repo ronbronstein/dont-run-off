@@ -1,0 +1,35 @@
+{
+  "name": "dont-run-off",
+  "version": "0.1.0",
+  "description": "A context-engineering harness for AI coding agents — make the agent stop and align before it builds the wrong thing, then keep you oriented while it works. For people who ship software without reading every line of it.",
+  "keywords": [
+    "agent-skill",
+    "agent-skills",
+    "claude",
+    "claude-code",
+    "skills",
+    "ai-agents",
+    "productivity",
+    "prompting"
+  ],
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs"
+  },
+  "license": "MIT",
+  "author": "Ron Bronstein <ronbronstein8@gmail.com>",
+  "homepage": "https://github.com/ronbronstein/dont-run-off",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ronbronstein/dont-run-off.git"
+  },
+  "files": [
+    "skills/",
+    "harness/",
+    "templates/",
+    "docs/",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ]
+}

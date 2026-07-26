@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+*.bak
+*.tgz
+
+# private leak blocklist — never commit
+blocklist.local.txt
