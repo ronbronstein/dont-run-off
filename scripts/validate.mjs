@@ -200,6 +200,52 @@ if (setupSkill && !setupSkill.includes("<!-- dont-run-off:method"))
     "skills/setup/SKILL.md: missing the dont-run-off:method marker — upgrades need a target",
   );
 
+// ---------- plugin + marketplace manifests ----------
+// These are the install path. Malformed JSON here means `/plugin marketplace
+// add` fails for everyone, and nothing else in this file would catch it.
+
+function readJson(rel) {
+  const path = join(ROOT, rel);
+  if (!existsSync(path)) {
+    errors.push(`${rel}: missing — this is how the plugin installs`);
+    return null;
+  }
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (e) {
+    errors.push(`${rel}: invalid JSON — ${e.message}`);
+    return null;
+  }
+}
+
+const plugin = readJson(".claude-plugin/plugin.json");
+const marketplace = readJson(".claude-plugin/marketplace.json");
+
+if (plugin && !plugin.name)
+  errors.push(".claude-plugin/plugin.json: missing 'name'");
+if (plugin && !plugin.version)
+  warnings.push(
+    ".claude-plugin/plugin.json: no 'version' — every commit then reads as a new release",
+  );
+
+if (marketplace) {
+  if (!marketplace.name)
+    errors.push(".claude-plugin/marketplace.json: missing 'name'");
+  const listed = marketplace.plugins ?? [];
+  if (!listed.length)
+    errors.push(".claude-plugin/marketplace.json: lists no plugins");
+  // A marketplace entry whose name doesn't match the manifest installs a
+  // plugin under a name that doesn't exist.
+  if (
+    plugin?.name &&
+    listed.length &&
+    !listed.some((p) => p.name === plugin.name)
+  )
+    errors.push(
+      `.claude-plugin/marketplace.json: no entry named '${plugin.name}' to match plugin.json`,
+    );
+}
+
 // ---------- docs and templates ----------
 
 for (const rel of ["README.md", "CONTRIBUTING.md", "docs/architecture.md"]) {

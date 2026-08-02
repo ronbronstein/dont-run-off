@@ -24,8 +24,8 @@
     "url": "https://github.com/ronbronstein/dont-run-off.git"
   },
   "files": [
+    ".claude-plugin/",
     "skills/",
-    "harness/",
     "templates/",
     "docs/",
     "README.md",

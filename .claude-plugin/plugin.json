@@ -1,0 +1,17 @@
+{
+  "name": "dont-run-off",
+  "description": "Makes the agent stop and align before it builds the wrong thing, then keeps you oriented while it works. Ten skills plus a setup wizard that installs and personalizes the method in your CLAUDE.md.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ron Bronstein",
+    "url": "https://github.com/ronbronstein"
+  },
+  "homepage": "https://github.com/ronbronstein/dont-run-off",
+  "license": "MIT",
+  "keywords": [
+    "context-engineering",
+    "planning",
+    "workflow",
+    "skills"
+  ]
+}

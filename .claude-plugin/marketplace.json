@@ -1,0 +1,14 @@
+{
+  "name": "ronbronstein",
+  "owner": {
+    "name": "Ron Bronstein",
+    "url": "https://github.com/ronbronstein"
+  },
+  "plugins": [
+    {
+      "name": "dont-run-off",
+      "source": "./",
+      "description": "Makes the agent stop and align before it builds the wrong thing, then keeps you oriented while it works."
+    }
+  ]
+}
