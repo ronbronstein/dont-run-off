@@ -61,6 +61,7 @@ Reach for these skills as the moment calls for them:
 | `quiz` | I need to confirm I actually understand what landed |
 | `catchup` | I've lost the thread |
 | `wrap-session` | Ending or pausing a session |
+| `checkup` | Something isn't firing, or my setup needs auditing |
 
 ## Checking this actually loaded
 

@@ -71,8 +71,14 @@ Then write the target as:
 
 For a **project** target, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain.
 
-## 6. Verify, then hand back
+## 6. Check what you just installed into
+
+Run the `checkup` skill. A fresh install lands on top of whatever was already there, and the collisions are silent — a personal skill outranks the plugin copy of the same name, and a slash command with a skill's name wins when typed. Someone can install this, see no errors, and be running none of it.
+
+Report what it finds before offering to fix anything.
+
+## 7. Verify, then hand back
 
 Check the total line count. Over 200 and adherence drops — if it's close, say so and offer to trim.
 
-Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, and that `profile.md`'s content is theirs to edit freely — upgrades only touch the marked block.
+Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, anything `checkup` flagged, and that the profile content is theirs to edit freely — upgrades only touch the marked block.
