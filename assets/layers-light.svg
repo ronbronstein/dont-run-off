@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="368" viewBox="0 0 1200 368" role="img" aria-label="The three layers by when they load: rules are present on every message, skills only when one fires, records only when a skill reads or writes one.">
+  <rect width="1200" height="368" fill="#FBFAF8"/>
+
+  <g font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Helvetica, Arial, sans-serif">
+
+    <text x="64" y="52" font-size="15" font-weight="600" letter-spacing="1.6" fill="#B5AC9B">WHEN EACH LAYER LOADS</text>
+    <g opacity="0.9">
+      <text x="1136" y="52" font-size="14" font-weight="500" fill="#B5AC9B" text-anchor="end">one session</text>
+      <path d="M360 74 H1136" stroke="#E4DFD5" stroke-width="1"/>
+      <path d="M1128 70 L1136 74 L1128 78" fill="none" stroke="#E4DFD5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- rules: unbroken, the whole way -->
+    <text x="64" y="132" font-size="21" font-weight="700" fill="#3B3A36">Rules</text>
+    <text x="64" y="156" font-size="15" fill="#8A8168">CLAUDE.md</text>
+    <path d="M360 126 H1136" stroke="#C86A4A" stroke-width="5" stroke-linecap="round"/>
+    <text x="360" y="160" font-size="15" fill="#8A8168">Every message, in full, forever. This is why it stays under 200 lines.</text>
+
+    <!-- skills: absent until the moment matches -->
+    <text x="64" y="228" font-size="21" font-weight="700" fill="#3B3A36">Skills</text>
+    <text x="64" y="252" font-size="15" fill="#8A8168">ten of them</text>
+    <path d="M360 222 H1136" stroke="#D9D3C8" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <circle cx="452" cy="222" r="7" fill="#C86A4A"/>
+    <circle cx="742" cy="222" r="7" fill="#C86A4A"/>
+    <circle cx="1046" cy="222" r="7" fill="#C86A4A"/>
+    <text x="360" y="256" font-size="15" fill="#8A8168">Only when the moment matches. Free the rest of the time.</text>
+
+    <!-- records: written by the skills above them -->
+    <text x="64" y="324" font-size="21" font-weight="700" fill="#3B3A36">Records</text>
+    <text x="64" y="348" font-size="15" fill="#8A8168">DECISIONS.md</text>
+    <path d="M360 318 H1136" stroke="#D9D3C8" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <path d="M452 232 V308" stroke="#D9D3C8" stroke-width="1.5"/>
+    <path d="M1046 232 V308" stroke="#D9D3C8" stroke-width="1.5"/>
+    <circle cx="452" cy="318" r="6.5" fill="#FBFAF8" stroke="#C86A4A" stroke-width="2"/>
+    <circle cx="1046" cy="318" r="6.5" fill="#FBFAF8" stroke="#C86A4A" stroke-width="2"/>
+    <text x="360" y="352" font-size="15" fill="#8A8168">Never on their own — a skill reads or writes them.</text>
+
+  </g>
+</svg>

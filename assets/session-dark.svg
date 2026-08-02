@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-label="A session runs start, shaping, build it, quiz, wrap-session. Interview, directions and blindspot are optional detours before committing. Catchup returns you to the start next session.">
+  <rect width="1200" height="340" fill="#121115"/>
+
+  <g font-family="ui-sans-serif, -apple-system, 'Segoe UI', Inter, Helvetica, Arial, sans-serif">
+
+    <!-- the detour: taken before committing, not instead of -->
+    <path d="M180 190 Q 325 60 470 190" fill="none" stroke="#2E2B33" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <text x="325" y="88" font-size="17" font-weight="600" fill="#F7F5F0" text-anchor="middle">interview · directions · blindspot</text>
+    <text x="325" y="110" font-size="15" fill="#B0A897" text-anchor="middle">when the ask is fuzzy, or the ground is new</text>
+
+    <!-- the spine -->
+    <path d="M140 190 H1090" stroke="#26242A" stroke-width="2"/>
+    <path d="M180 190 H1050" stroke="#E8845F" stroke-width="2.5" stroke-linecap="round"/>
+
+    <circle cx="180" cy="190" r="9" fill="#E8845F"/>
+    <circle cx="470" cy="190" r="7" fill="#121115" stroke="#E8845F" stroke-width="2.5"/>
+    <rect x="688" y="178" width="24" height="24" rx="5" fill="#F7F5F0"/>
+    <circle cx="880" cy="190" r="7" fill="#121115" stroke="#E8845F" stroke-width="2.5"/>
+    <circle cx="1050" cy="190" r="9" fill="#E8845F"/>
+
+    <text x="180" y="228" font-size="18" font-weight="700" fill="#F7F5F0" text-anchor="middle">start</text>
+    <text x="470" y="228" font-size="18" font-weight="700" fill="#F7F5F0" text-anchor="middle">shaping</text>
+    <text x="700" y="228" font-size="18" font-weight="700" fill="#F7F5F0" text-anchor="middle">build it</text>
+    <text x="880" y="228" font-size="18" font-weight="700" fill="#F7F5F0" text-anchor="middle">quiz</text>
+    <text x="1050" y="228" font-size="18" font-weight="700" fill="#F7F5F0" text-anchor="middle">wrap-session</text>
+
+    <!-- the return: the record is what makes it cheap -->
+    <path d="M1050 190 Q 615 332 204 200" fill="none" stroke="#2E2B33" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <path d="M216 206 L204 200 L214 192" fill="none" stroke="#3A3740" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="615" y="290" font-size="17" font-weight="600" fill="#F7F5F0" text-anchor="middle">catchup</text>
+    <text x="615" y="312" font-size="15" fill="#B0A897" text-anchor="middle">when you pick it up next session</text>
+
+  </g>
+</svg>

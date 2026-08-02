@@ -65,31 +65,12 @@ Everything else here supports that rule or cleans up after it.
 
 Four layers, separated by **when they load**. That distinction is what most setups get wrong, and getting it wrong is why instructions quietly stop working.
 
-```mermaid
-flowchart TB
-    subgraph always ["ALWAYS-ON — every message, forever"]
-        direction LR
-        A["CLAUDE.md · method block<br/><i>how to work with me</i>"] --> B["CLAUDE.md · your profile<br/><i>who you are</i>"]
-    end
-
-    subgraph demand ["ON-DEMAND — free until it fires"]
-        direction LR
-        D["start"]
-        E["shaping"]
-        F["interview"]
-        G["quiz"]
-        H["+ 6 more"]
-    end
-
-    subgraph state ["STATE — read and written by skills"]
-        direction LR
-        I["current-state.md"]
-        J["DECISIONS.md"]
-        K["TASKS.md"]
-    end
-
-    always --> demand --> state
-```
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/layers-dark.svg">
+    <img alt="Rules are present on every message. Skills appear only when one fires. Records are touched only by a skill." src="assets/layers-light.svg" width="100%">
+  </picture>
+</p>
 
 <table>
 <tr><th align="left" width="22%">Layer</th><th align="left" width="43%">What it is</th><th align="left">When it loads</th></tr>
@@ -171,24 +152,12 @@ The same file works per-project: a `./CLAUDE.md` holding this project's facts �
 
 ## A session, end to end
 
-```mermaid
-flowchart LR
-    S(["start"]):::entry --> Q{"Clear<br/>what to do?"}:::q
-    Q -->|"no"| I["interview<br/>or directions"]:::move
-    Q -->|"new area"| B["blindspot"]:::move
-    Q -->|"yes"| SH["shaping"]:::move
-    I --> SH
-    B --> SH
-    SH --> BUILD["build it"]:::build
-    BUILD --> QZ["quiz"]:::move
-    QZ --> W(["wrap-session"]):::entry
-    W -.->|"next time"| CU["catchup"]:::move
-
-    classDef entry fill:#C86A4A,stroke:none,color:#fff
-    classDef move fill:#EFEBE3,stroke:#D9D3C8,color:#3B3A36
-    classDef q fill:#fff,stroke:#8A8168,color:#3B3A36
-    classDef build fill:#3B3A36,stroke:none,color:#fff
-```
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/session-dark.svg">
+    <img alt="A session runs start, shaping, build it, quiz, wrap-session — with interview, directions and blindspot as detours before committing, and catchup returning you to the start next time." src="assets/session-light.svg" width="100%">
+  </picture>
+</p>
 
 <br>
 
