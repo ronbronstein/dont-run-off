@@ -25,6 +25,11 @@ a one-command install that didn't exist. This slice decided how it ships.
 | Method gains a "Working on code" section | The harness was all interaction discipline and said nothing about code — a hole, since that's where the damage happens. Six lines: stay in scope, reuse before creating, read before editing, verify before claiming, don't swallow errors, small commits. | Shipping engineering *opinions* (stack, coverage bar, error envelope, model routing) in the shared method. Those went to the profile's new `Conventions` field — true for one person, not for everyone. |
 | Ship as a Claude Code plugin, repo as its own marketplace | Two commands to install, and the only route with real auto-updates. Costs one small JSON file. | `npx skills add` (Vercel's cross-tool CLI) — ruled out by the Claude-Code-only call, though the repo layout stays compatible with it if that reverses. |
 | Marketplace named `ronbronstein`, not `dont-run-off` | Reads correctly at the install line (`dont-run-off@ronbronstein`) and lets a second plugin join later without a second marketplace. | Nothing meaningful. |
+| Document `npx skills add` as a second install path | A genuine one-liner for people who don't want the plugin system, at the cost of a few README lines and no structural change — the repo's `skills/<name>/SKILL.md` layout is already what that CLI expects. | Nothing. The plugin stays primary because it's the only path that auto-updates. |
+
+Note on the second install path: no mechanism can be *fully* one-command, because
+installing is two jobs — get the files, then write `CLAUDE.md`. Only the first
+compresses; the second is a conversation by design.
 
 ### Deviations
 
@@ -48,3 +53,8 @@ a one-command install that didn't exist. This slice decided how it ships.
   Decide when that repo is open.
 - **`setup` has never been run end-to-end.** It's a procedure written for an
   agent, not code with tests. The first real run is the verification.
+- **The `npx skills add` line is docs-verified, not run.** The CLI's documented
+  layout matches this repo's, but it fetches from GitHub, so it can't be tested
+  against a private repo. Run it for real immediately after the repo goes
+  public; if it fails, cut the section rather than leaving a broken command in
+  the README.

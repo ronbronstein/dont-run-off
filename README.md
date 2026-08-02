@@ -213,6 +213,16 @@ It checks what it can see for itself (your task tool, version control, whether r
 
 Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't, it didn't load, and nothing else you do matters. An install you haven't verified isn't finished.
 
+### Or one line, without the plugin system
+
+```bash
+npx skills add ronbronstein/dont-run-off -g
+```
+
+Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/setup`** (no plugin namespace on this path, so it's `/setup`, not `/dont-run-off:setup`).
+
+The plugin route above is still the one to prefer: it updates itself. This one you update by re-running `npx skills update`.
+
 ### Upgrading
 
 ```
