@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILLS = join(ROOT, "skills");
-const HARNESS = join(ROOT, "harness");
+const SETUP = join(SKILLS, "setup");
 const MAX_ALWAYS_ON_LINES = 200;
 
 const errors = [];
@@ -50,7 +50,11 @@ const privateBlocklist = existsSync(blocklistFile)
 
 // `profile.md` exists to hold personal detail, and package.json/LICENSE carry
 // the author's name and email by design.
-const LEAK_EXEMPT = new Set(["harness/profile.md", "package.json", "LICENSE"]);
+const LEAK_EXEMPT = new Set([
+  "skills/setup/profile.md",
+  "package.json",
+  "LICENSE",
+]);
 
 function checkLeaks(at, text) {
   if (LEAK_EXEMPT.has(at)) return;
@@ -138,14 +142,15 @@ for (const dir of dirs) {
 }
 
 // ---------- the always-on layer ----------
-// Claude Code loads these in full on every message, so size is correctness:
-// the docs put the ceiling at 200 lines, past which adherence drops.
+// The `setup` skill writes these two into the user's CLAUDE.md, which Claude
+// Code then loads in full on every message. Size is correctness: the docs put
+// the ceiling at 200 lines, past which adherence drops.
 
 let alwaysOnTotal = 0;
 
-for (const f of ["profile.md", "AGENTS.md", "CLAUDE.md"]) {
-  const at = `harness/${f}`;
-  const path = join(HARNESS, f);
+for (const f of ["method.md", "profile.md"]) {
+  const at = `skills/setup/${f}`;
+  const path = join(SETUP, f);
 
   if (!existsSync(path)) {
     errors.push(`${at}: missing — this is the always-on layer`);
@@ -177,20 +182,22 @@ else if (alwaysOnTotal > MAX_ALWAYS_ON_LINES * 0.8)
     `always-on layer is ${alwaysOnTotal} lines, approaching the ${MAX_ALWAYS_ON_LINES}-line budget`,
   );
 
-const claudeMd = existsSync(join(HARNESS, "CLAUDE.md"))
-  ? readFileSync(join(HARNESS, "CLAUDE.md"), "utf8")
+// The setup skill is what installs the always-on layer, so it has to be able to
+// name both halves it writes.
+const setupSkill = existsSync(join(SETUP, "SKILL.md"))
+  ? readFileSync(join(SETUP, "SKILL.md"), "utf8")
   : "";
-if (claudeMd && !claudeMd.includes("@AGENTS.md"))
-  errors.push(
-    "harness/CLAUDE.md: must import @AGENTS.md — Claude Code does not read AGENTS.md itself",
-  );
+if (!setupSkill)
+  errors.push("skills/setup/SKILL.md: missing — nothing installs the harness");
+for (const f of ["method.md", "profile.md"])
+  if (setupSkill && !setupSkill.includes(f))
+    errors.push(`skills/setup/SKILL.md: never references ${f}`);
 
-const agentsMd = existsSync(join(HARNESS, "AGENTS.md"))
-  ? readFileSync(join(HARNESS, "AGENTS.md"), "utf8")
-  : "";
-if (agentsMd && !agentsMd.includes("@profile.md"))
+// An upgrade replaces the marked block in place, so the marker the skill writes
+// has to match the one it looks for.
+if (setupSkill && !setupSkill.includes("<!-- dont-run-off:method"))
   errors.push(
-    "harness/AGENTS.md: must import @profile.md to pick up personalization",
+    "skills/setup/SKILL.md: missing the dont-run-off:method marker — upgrades need a target",
   );
 
 // ---------- docs and templates ----------

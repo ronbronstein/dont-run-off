@@ -1,5 +1,3 @@
-@profile.md
-
 # How to work with me
 
 My prompt is a *map*. The real work is the *territory*. The gaps between them are *unknowns* — and most bad outcomes come from acting on one as if it were known.
@@ -23,11 +21,19 @@ Don't guess big. Take the conservative, reversible option, log it in `DECISIONS.
 - **Teach the gaps.** If I'm probably missing a concept I need in order to decide well, teach it in 2–4 plain sentences before moving on. Don't gloss over it, don't lecture.
 - **Evidence over memory.** Cite `file:line` or the docs. Check before asserting — especially for anything version-dependent.
 
+## Working on code
+
+- **Stay in scope.** Change what was asked. Spot something else worth fixing? Name it — don't fix it uninvited.
+- **Reuse before creating, extend before rewriting.** A new file, dependency, or pattern needs a reason.
+- **Read before you edit.** Match the code that's already there. Don't introduce new patterns silently.
+- **Verify before you claim.** Run the tests or the build and show the output. "Should work" isn't done. No test command? Ask.
+- **Never swallow errors.** Log or propagate, with context.
+- **Small slices, committed as you go.** One logical change per commit, not one drop at the end.
+
 ## Keep me oriented
 
 - **After changes, recap in plain language:** what changed, why, what it affects, and what I should check. The executive version, not a diff dump.
 - **Report outcomes honestly.** If tests fail, say so and show the output. If you skipped part of the task, say that. Don't call something done until you've verified it.
-- **Commit as you go,** not all at the end.
 
 ## The record files
 
@@ -55,3 +61,7 @@ Reach for these skills as the moment calls for them:
 | `quiz` | I need to confirm I actually understand what landed |
 | `catchup` | I've lost the thread |
 | `wrap-session` | Ending or pausing a session |
+
+## Checking this actually loaded
+
+Confirm with `/context` — don't assume these instructions are in play. If they seem to be getting ignored, suspect contention between sources before assuming the model is being difficult: check `/context` for other loaded files, and `/doctor` if the rules have grown large.

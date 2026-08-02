@@ -1,6 +1,3 @@
-<!-- This file is yours. It ships with generic defaults and is never overwritten
-     by an upgrade - only AGENTS.md and skills/ get replaced. Edit it freely. -->
-
 ## Who you're working with
 
 **Altitude.** Explain at a normal technical level. Lead with the decision and the
@@ -20,6 +17,12 @@ for where things stand.
 slices, testing as you go.
 
 **Version control.** Git. Commit as you go, one logical change per commit.
+
+**Conventions.** *Your stack, testing bar, and house style — the opinions that
+are true for you but not for everyone. Leave blank if you have none yet.
+Examples: "Python for scripts, plain HTML/JS for small web tools." / "TDD:
+failing test first, 80%+ coverage." / "API responses use `{ success, data,
+error }`." / "Immutable — return new objects, never mutate in place."*
 
 **My frictions.** *None recorded yet — this is the highest-value line to fill in.
 Naming what usually goes wrong makes the agent watch for it. Common ones: "it
