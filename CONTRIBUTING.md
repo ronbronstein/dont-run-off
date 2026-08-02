@@ -43,7 +43,15 @@ Keep the body tight. Most skills here are 15–40 lines. If yours is much longer
 npm test
 ```
 
-Checks frontmatter validity, that each skill's `name` matches its directory, that cross-references resolve, that the always-on layer stays under its 200-line budget, and that no absolute home paths, email addresses, or leftover personalization markers made it in. This runs on every pull request.
+Checks frontmatter validity, that each skill's `name` matches its directory, that cross-references resolve, that the always-on layer stays under its 200-line budget, that both plugin manifests parse and agree with each other, and that no absolute home paths, email addresses, or leftover personalization markers made it in. This runs on every pull request.
+
+If you touched `.claude-plugin/`, also run the official manifest check — it validates against the current schema, which `npm test` can't:
+
+```bash
+claude plugin validate .
+```
+
+It isn't in CI because the `claude` CLI isn't available there.
 
 ### Behavioral
 

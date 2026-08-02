@@ -1,5 +1,6 @@
 {
   "name": "ronbronstein",
+  "description": "Context-engineering harnesses for people who direct AI agents and ship the result without reading every line.",
   "owner": {
     "name": "Ron Bronstein",
     "url": "https://github.com/ronbronstein"
