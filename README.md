@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="#install"><img alt="Install" src="https://img.shields.io/badge/install-one%20command-C86A4A?style=flat-square"></a>
-  <a href="#works-with"><img alt="Works with" src="https://img.shields.io/badge/Claude%20Code%20·%20Cursor%20·%20Codex-supported-3B3A36?style=flat-square"></a>
+  <a href="#install"><img alt="For Claude Code" src="https://img.shields.io/badge/for-Claude%20Code-3B3A36?style=flat-square"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-3B3A36?style=flat-square"></a>
 </p>
 
@@ -69,7 +69,7 @@ Four layers, separated by **when they load**. That distinction is what most setu
 flowchart TB
     subgraph always ["ALWAYS-ON — every message, forever"]
         direction LR
-        A["profile.md<br/><i>who you are</i>"] --> B["AGENTS.md<br/><i>the method</i>"] --> C["CLAUDE.md<br/><i>@AGENTS.md</i>"]
+        A["CLAUDE.md · method block<br/><i>how to work with me</i>"] --> B["CLAUDE.md · your profile<br/><i>who you are</i>"]
     end
 
     subgraph demand ["ON-DEMAND — free until it fires"]
@@ -78,7 +78,7 @@ flowchart TB
         E["shaping"]
         F["interview"]
         G["quiz"]
-        H["+ 5 more"]
+        H["+ 6 more"]
     end
 
     subgraph state ["STATE — read and written by skills"]
@@ -126,33 +126,28 @@ flowchart TB
 
 <br>
 
-## AGENTS.md and CLAUDE.md — why both
+## One file, two halves
 
-Short version: **Claude Code reads `CLAUDE.md` and does not read `AGENTS.md`.** Cursor, Codex and others read `AGENTS.md`.
-
-Writing your method into both means maintaining two copies, and two copies drift. So the method is written **once** in `AGENTS.md`, and `CLAUDE.md` is a one-line file that imports it:
+Everything always-on lives in a single `CLAUDE.md` — no imports, no stubs, nothing to chase. It has two parts, and the split is the only structural idea you need:
 
 ```markdown
-@AGENTS.md
+<!-- dont-run-off:method — managed, replaced on upgrade -->
+# How to work with me
+## The one rule: don't run off
+## How to talk to me
+## Working on code
+## Keep me oriented
+<!-- /dont-run-off:method -->
+
+## Who you're working with          ← yours, never touched
+Altitude · Task tool · Conventions · My frictions
 ```
 
-That import is expanded at session start, so Claude Code gets the full method while every other agent reads the same source file directly. One copy. Nothing drifts.
+The **method** is the rules of engagement — identical for everyone who installs this. Your **profile** is the handful of facts those rules refer to. Neither works alone: the method with no profile is generic advice with no idea who it's talking to; a profile with no method is a bio.
 
-```mermaid
-flowchart LR
-    P["profile.md<br/><i>your details</i>"]:::yours -->|"@import"| A["AGENTS.md<br/><i>the method</i>"]:::core
-    A -->|"@import"| C["CLAUDE.md"]:::stub
-    C --> CC["Claude Code"]:::agent
-    A --> CU["Cursor"]:::agent
-    A --> CX["Codex"]:::agent
+The markers exist so upgrading is surgical. A new version replaces the method block and leaves everything below it exactly as you wrote it.
 
-    classDef yours fill:#C86A4A,stroke:none,color:#fff
-    classDef core fill:#3B3A36,stroke:none,color:#fff
-    classDef stub fill:#8A8168,stroke:none,color:#fff
-    classDef agent fill:#EFEBE3,stroke:#D9D3C8,color:#3B3A36
-```
-
-The same pattern works per-project: a `./AGENTS.md` with your project's facts, and a `./CLAUDE.md` containing one line.
+The same file works per-project: a `./CLAUDE.md` holding this project's facts — stack, commands, gotchas — while the full method stays in your global one. Repeating the method per project just burns the budget twice.
 
 <br>
 
@@ -160,6 +155,7 @@ The same pattern works per-project: a `./AGENTS.md` with your project's facts, a
 
 <table>
 <tr><th align="left" width="20%">Skill</th><th align="left" width="34%">Use it when</th><th align="left">What you get</th></tr>
+<tr><td><code>setup</code></td><td>Installing, or upgrading later</td><td>Your <code>CLAUDE.md</code> written and personalized — detected where it can be, asked where it can't, merged with whatever was already there</td></tr>
 <tr><td><code>start</code></td><td>Beginning a session</td><td>Where things stand, what type of session this is, and the right next move — before anything gets built</td></tr>
 <tr><td><code>shaping</code></td><td>Deciding whether to build at all</td><td>Frame the real problem, size it, judge if it's worth it, phase it into slices</td></tr>
 <tr><td><code>blindspot</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
@@ -198,41 +194,58 @@ flowchart LR
 
 ## Install
 
-Coming as a single command. In the meantime the harness is three files and a folder:
+Two commands, then one conversation. In Claude Code:
 
-```bash
-git clone https://github.com/ronbronstein/dont-run-off
-cd dont-run-off
-
-cp harness/profile.md ~/.claude/profile.md   # your details — edit this one
-cp harness/AGENTS.md  ~/.claude/AGENTS.md    # the method
-cp harness/CLAUDE.md  ~/.claude/CLAUDE.md    # imports it
-cp -r skills/*        ~/.claude/skills/      # the moves
+```
+/plugin marketplace add ronbronstein/dont-run-off
+/plugin install dont-run-off@ronbronstein
 ```
 
-Then open a session and run **`/context`**. If your files aren't listed there, they didn't load, and nothing else you do matters. An install you haven't verified isn't finished.
+That installs the skills. A plugin can't write your `CLAUDE.md`, so the method arrives the same way everything else here does — by asking first:
 
-> **Already have a `~/.claude/CLAUDE.md`?** Don't overwrite it — add `@AGENTS.md` as its first line instead. If your instructions start feeling ignored afterwards, that's contention between sources rather than disobedience; [`docs/architecture.md`](docs/architecture.md) has the debug order.
+```
+/dont-run-off:setup
+```
+
+It checks what it can see for itself (your task tool, version control, whether record files already exist), asks about the two things it can't — how you want to be talked to, and what usually goes wrong when you work with an agent — and writes the result.
+
+> **Already have a `~/.claude/CLAUDE.md`?** It won't be overwritten. Setup reads it first, backs it up to `CLAUDE.md.bak`, names anything that duplicates the method, and proposes a merge before writing anything. Two sets of instructions saying the same thing differently is how rules start getting quietly ignored — [`docs/architecture.md`](docs/architecture.md) has the debug order if that ever happens.
+
+Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't, it didn't load, and nothing else you do matters. An install you haven't verified isn't finished.
+
+### Upgrading
+
+```
+/plugin update dont-run-off@ronbronstein
+/dont-run-off:setup
+```
+
+Setup sees the markers, replaces the method block, and leaves your profile exactly as you wrote it.
 
 ### Works with
 
-Any agent that reads `AGENTS.md` or supports the [Agent Skills](https://agentskills.io) format — including **Claude Code**, **Cursor**, and **Codex**. Claude Code additionally gets the `CLAUDE.md` import shown above.
+**Claude Code** — that's the target, and the whole harness is built around what it actually loads: `CLAUDE.md` every message, skills only when they fire, `/context` to prove it. The skills themselves follow the [Agent Skills](https://agentskills.io) format and will work anywhere that reads it, but the install path and the visibility commands here are Claude Code's.
 
 <br>
 
 ## Make it yours
 
-Everything personal lives in exactly one file: **`~/.claude/profile.md`**. Your altitude, your tools, your record files, and the frictions you want watched for.
+Everything personal lives below the method block in your `CLAUDE.md`. Setup fills it in for you, and you can edit it freely afterwards — upgrades only ever touch the marked block above it.
 
 ```markdown
 **Altitude.** Product director — I care about the decision and the
 trade-offs, not line-by-line mechanics.
 
+**Conventions.** Python for scripts, plain HTML/JS for small web tools.
+Failing test first. Never mutate in place.
+
 **My frictions.** It runs off before I've agreed to anything.
 I can't tell what it actually did. I lose the thread between sessions.
 ```
 
-Nothing else needs editing, and upgrading never touches it — new versions replace `AGENTS.md` and `skills/` only.
+**Frictions is the line that earns its keep.** Naming what usually goes wrong is what makes the agent watch for it, and it's the field people leave blank. Setup will push you on it.
+
+**Conventions is where your opinions go** — stack, testing bar, house style. Deliberately not in the method: those are true for you, not for everyone, and a shared harness full of one person's preferences is how it stops being usable by anyone else.
 
 Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
 

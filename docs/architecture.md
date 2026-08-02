@@ -16,15 +16,23 @@ Loaded at the start of every session, in full, forever. This is where the *metho
 
 | File | Scope |
 |---|---|
-| `~/.claude/profile.md` | Your details — never overwritten by upgrades |
-| `~/.claude/AGENTS.md` | The method, in every project. Imports `profile.md`. |
-| `~/.claude/CLAUDE.md` | A 4-line stub that imports the above |
-| `./AGENTS.md` | This project, for everyone |
-| `./CLAUDE.md` | A 1-line stub that imports the above |
+| `~/.claude/CLAUDE.md` | How you want to be worked with, everywhere |
+| `./CLAUDE.md` | Facts about this project, for everyone on it |
 
 **Budget: keep each under 200 lines.** This layer costs tokens on every message you ever send.
 
-**Why two files instead of one?** Claude Code reads `CLAUDE.md` and does *not* read `AGENTS.md`. But Cursor, Codex, and other agents read `AGENTS.md`. So the method is written once in `AGENTS.md`, and `CLAUDE.md` is a stub that just says `@AGENTS.md` — which imports it. One copy, every agent reads it, nothing drifts.
+Claude Code reads `CLAUDE.md` and nothing else at this layer, so that's the only file the harness writes. No imports, no stubs.
+
+**The global file has two halves**, separated by marker comments:
+
+- **The method block** — the rules of engagement. Identical for everyone. Replaced wholesale on upgrade, which is what the markers are for.
+- **Your profile** — altitude, task tool, conventions, frictions. Yours. Never touched by an upgrade.
+
+The split exists entirely so that shipping you a new method doesn't cost you your personalization. Nothing else depends on it.
+
+**The project file gets facts, not method** — stack, commands, gotchas. Repeating the method in every repo pays for it twice out of the same budget.
+
+**Nothing installs this layer automatically.** A Claude Code plugin can ship skills, agents, hooks and MCP servers, but it cannot write your `CLAUDE.md`. That's why the `setup` skill exists: it's the only path from an installed plugin to a working always-on layer, and it's why installing is a short conversation rather than a copy command.
 
 ### 2. On-demand — the skills
 
@@ -62,7 +70,7 @@ The layer people skip, and the one that matters most if you can't read the diff.
 | What instructions actually loaded? | `/context` |
 | Are my rules too big to be followed? | `/doctor` |
 | Which instruction files loaded, and when? | the `InstructionsLoaded` hook |
-| What did it just do? | the recap rule in `AGENTS.md` |
+| What did it just do? | the recap rule in the method block |
 | Do I actually understand the change? | the `quiz` skill |
 | Where are we, and why did we choose this? | `current-state.md`, `DECISIONS.md` |
 
