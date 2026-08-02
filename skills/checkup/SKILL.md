@@ -27,7 +27,21 @@ Read what's on disk. Don't infer it.
 
 Expand `@` imports and follow them. An import pointing at a directory pulls in every file inside it — count them all. Watch for imports that loop back on themselves, targets that don't exist, and the same file pulled in twice by different paths.
 
-## 2. Check
+## 2. Measure what actually gets used
+
+Run the script next to this skill:
+
+```bash
+node <path-to-this-skill>/usage.mjs --days 90
+```
+
+It counts real invocations from local data — `~/.claude/history.jsonl` for slash commands, session transcripts for `Skill` and MCP tool calls — and joins them against what's installed, so every skill, command and MCP server comes back with a use count and a last-used date. `--json` gives the same thing machine-readable. It reads names and counts only, never message content.
+
+This is what turns "probably dead" into a measurement. Nothing else here can tell you a skill has sat untouched for three months.
+
+Read the result with judgment. Zero uses is a prompt to look, not a verdict: a skill for a rare moment is doing its job by staying quiet, and something installed last week hasn't had a chance. What *is* damning is a skill that's been installed for months, covers something the person does constantly, and has never once fired — that's a description problem, not a taste problem.
+
+## 3. Check
 
 **Rules.** Total the lines actually loaded, imports included, against the 200-line ceiling — past it adherence drops. Flag unresolved imports: a broken `@path` loads nothing and says nothing. Flag two sources instructing differently on the same topic — the docs are explicit that Claude may pick one arbitrarily, and that is what "my instructions are being ignored" almost always is. Flag instructions that restate default behavior; they cost budget and change nothing.
 
@@ -43,7 +57,7 @@ The one people get wrong: a `CLAUDE.md` in a **subdirectory** doesn't load with 
 
 **Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in `DECISIONS.md` where they can be diffed.
 
-## 3. Report
+## 4. Report
 
 Lead with the gap between what they think is in force and what actually is. Group findings so the worst are first:
 
@@ -57,7 +71,7 @@ Every finding needs a path, the consequence in plain language, and a specific fi
 
 If nothing is wrong, say so plainly and give the counts. A clean report is a result.
 
-## 4. Fix
+## 5. Fix
 
 Offer the safe fixes as a numbered list and apply only what's picked. Back up anything you edit. Deleting a shadowing copy, removing a drifted duplicate command, and repairing a broken hook path are safe. Merging rules files or rewriting descriptions changes behavior — propose those, don't perform them.
 
