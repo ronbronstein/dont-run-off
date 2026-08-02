@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="#install"><img alt="Install" src="https://img.shields.io/badge/install-one%20command-C86A4A?style=flat-square"></a>
+  <a href="#install"><img alt="Install" src="https://img.shields.io/badge/install-%2Fplugin-C86A4A?style=flat-square"></a>
   <a href="#install"><img alt="For Claude Code" src="https://img.shields.io/badge/for-Claude%20Code-3B3A36?style=flat-square"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-3B3A36?style=flat-square"></a>
 </p>
