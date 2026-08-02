@@ -34,10 +34,31 @@ Note on the second install path: no mechanism can be *fully* one-command, becaus
 installing is two jobs — get the files, then write `CLAUDE.md`. Only the first
 compresses; the second is a conversation by design.
 
+### Decisions — second slice: measure the context, restyle the README
+
+| Decision | Why | What it rules out |
+|---|---|---|
+| Measure usage ourselves rather than consume `/doctor` | Investigated `/doctor` directly: the CLI reports installation health only, and the in-session version can't be inspected (the binary is a 245 MB compressed bundle). But the underlying data is local and readable — `history.jsonl` records typed commands, session transcripts record every `Skill`, `Agent` and MCP call. So `usage.mjs` counts it: programmatic counting, model judgment on top. | Depending on `/doctor` output we don't control, and guessing at "dead weight" instead of measuring it. |
+| Widen `checkup` to everything that loads | The always-on cost is not `CLAUDE.md` — every skill and agent description and every connected MCP server's tool schemas load on every request. MCP is usually the largest block, so an unused server is the most expensive item on the list. Auditing rules and skills while ignoring that misses the biggest number. | Nothing. This is the scope Ron asked for: "everything in the context." |
+| Add description tuning to `checkup` | Usage data makes "never fires" measurable, and a skill with a real audience and zero invocations is a description problem, not a value problem. | Batch-editing descriptions. Each rewrite changes when a skill fires, so each needs a yes. |
+| Custom SVG diagrams instead of mermaid | Mermaid reads as a default regardless of subject. The banner already established a motif — a dashed intended path against a solid drift — so both diagrams now carry it, and the README reads as one identity. | A second visual language. Consistency beat novelty here because the identity already existed. |
+
 ### Deviations
 
-- None. The slice ran as planned: manifests, setup skill, method relocation,
-  validator, docs.
+- **First slice:** none. Manifests, setup skill, method relocation, validator and
+  docs ran as planned.
+- **Second slice: a wrong claim, corrected.** The first usage report counted only
+  *typed* slash commands and concluded 5 of Ron's 7 were dead. A file in
+  `commands/` is also exposed as a user-invocable skill, so the model can invoke
+  it without anyone typing — the true figure was 2 of 7, and `interview` had
+  fired 7 times by model invocation against 1 typed. Fixed in `usage.mjs`, which
+  now reports typed and model-invoked separately. Recorded because the wrong
+  version was used to argue a product point, and the corrected data argues it
+  better: these moves fire through descriptions, not memory.
+- Two further bugs found only by running the script: plugin skills live under
+  `<market>/<plugin>/<version>/skills` and were missed entirely, and old version
+  directories would have double-counted every upgrade. A third apparent bug —
+  duplicate rows — was a flawed `sed` filter in the diagnostic, not the script.
 
 ### Open questions
 
@@ -54,6 +75,9 @@ compresses; the second is a conversation by design.
   `.claude/settings.json` (auto-prompts colleagues on folder trust) versus
   vendoring the skills into the repo (nothing to install, reviewed like code).
   Decide when that repo is open.
+- **Neither `setup` nor `checkup` has ever been executed.** Deferred by Ron on
+  2026-08-02 — he was on his phone and wants to install at his computer. Nothing
+  on his machine has been touched.
 - **`setup` has never been run end-to-end.** It's a procedure written for an
   agent, not code with tests. The first real run is the verification.
 - **The `npx skills add` line is docs-verified, not run.** The CLI's documented
