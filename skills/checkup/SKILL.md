@@ -5,7 +5,9 @@ description: Use to audit a Claude Code setup for context-engineering problems �
 
 # Checkup
 
-Audit the four surfaces that decide agent behavior: **rules, skills, commands, hooks.**
+Audit everything that loads: **rules, skills, commands, hooks, agents, MCP servers, plugins, memory.**
+
+The thing people miss is that the always-on cost is not just `CLAUDE.md`. Every skill's description, every agent's description, and every connected MCP server's full tool schemas ride along on *every request* so the model can decide what to reach for. MCP tools are usually the single largest block, and a server you never call is the most expensive dead weight you can own. `/context all` shows the breakdown by source — start there when the budget looks wrong.
 
 The built-ins each show one surface: `/doctor` finds installation and invalid-settings problems, `/context all` inventories what loaded this session, `/skills` lists skills by source, `/hooks` lists hooks by event, `/status` shows which settings files were read. Use them to gather — they're faster and more accurate than guessing.
 
@@ -23,6 +25,9 @@ Read what's on disk. Don't infer it.
 | Skills | `~/.claude/skills/`, `./.claude/skills/`, plugin skills under `~/.claude/plugins/` |
 | Commands | `~/.claude/commands/`, `./.claude/commands/` |
 | Hooks | `hooks` in `~/.claude/settings.json`, `./.claude/settings.json`, `./.claude/settings.local.json` |
+| Agents | `~/.claude/agents/`, `./.claude/agents/`, plus any shipped by plugins |
+| MCP servers | `mcpServers` in `~/.claude.json` (global and per-project) — **names only, these files hold tokens** — plus `/mcp` for account connectors, which live in your claude.ai settings and appear nowhere on disk |
+| Plugins | `enabledPlugins` in settings, and `/plugin` for what each one contributes |
 | Memory | `MEMORY.md` and the memory directory for this project |
 
 Expand `@` imports and follow them. An import pointing at a directory pulls in every file inside it — count them all. Watch for imports that loop back on themselves, targets that don't exist, and the same file pulled in twice by different paths.
@@ -56,6 +61,12 @@ The one people get wrong: a `CLAUDE.md` in a **subdirectory** doesn't load with 
 **Settings themselves.** A settings file with a JSON syntax error doesn't announce itself — it just doesn't load, taking its hooks and permissions with it. Parse every one you found. `/debug settings` and `/debug hooks` show the live resolution if something still doesn't add up.
 
 **Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in `DECISIONS.md` where they can be diffed.
+
+**MCP servers.** The expensive one. Every connected server's tool schemas load on every request whether or not you ever call them, so rank by cost-per-use: a server with a large tool surface and a handful of calls in three months is costing you context on every message you send. Say where each one lives, because that determines how to remove it — servers in `~/.claude.json` come out locally, but account connectors have to be disconnected in claude.ai settings and will otherwise reappear on every machine you log into.
+
+**Agents.** Subagent descriptions load so the model can route to them. An agent nobody routes to is paying rent. Check whether it's genuinely unused or just badly described — same diagnosis as skills, since routing works the same way.
+
+**Plugins.** Judge a plugin by everything it contributes: skills, agents, commands, hooks, MCP servers. A plugin whose every surface is unused is a clean uninstall. A plugin where one skill carries it and the rest never fire is worth keeping and worth saying so.
 
 ## 4. Report
 
