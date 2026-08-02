@@ -71,8 +71,20 @@ Every finding needs a path, the consequence in plain language, and a specific fi
 
 If nothing is wrong, say so plainly and give the counts. A clean report is a result.
 
-## 5. Fix
+## 5. Tune the descriptions that aren't firing
 
-Offer the safe fixes as a numbered list and apply only what's picked. Back up anything you edit. Deleting a shadowing copy, removing a drifted duplicate command, and repairing a broken hook path are safe. Merging rules files or rewriting descriptions changes behavior — propose those, don't perform them.
+A skill's `description` is the whole trigger mechanism — it's the only part the agent reads before deciding whether to load it. Usage data makes this measurable: a skill with a real audience and zero invocations almost always has a description problem, not a value problem.
+
+Compare a skill's invocation count against how often its *moment* actually came up in recent sessions. When something should have fired and didn't, rewrite the description to include:
+
+- **the phrases a person actually types** — "this is fuzzy," "I've lost the thread," "what should I build" — not the topic it covers
+- **the situation**, stated as a condition rather than a category: "when the ask is ambiguous and needs pinning down" beats "requirements gathering"
+- **a boundary**, if it's near a neighbour, so two skills stop competing for the same moment
+
+Rewriting a description changes when the skill fires, so show the before and after and get a yes on each one. Don't batch-edit descriptions.
+
+## 6. Fix
+
+Offer the safe fixes as a numbered list and apply only what's picked. Back up anything you edit. Deleting a shadowing copy, removing a drifted duplicate command, and repairing a broken hook path are safe. Merging rules files changes behavior — propose those, don't perform them.
 
 Finish by having them run `/context` to confirm the result, and recap what changed.
