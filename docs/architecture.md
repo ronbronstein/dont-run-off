@@ -67,14 +67,17 @@ The layer people skip, and the one that matters most if you can't read the diff.
 
 | Question | How to answer it |
 |---|---|
-| What instructions actually loaded? | `/context` |
-| Are my rules too big to be followed? | `/doctor` |
-| Which instruction files loaded, and when? | the `InstructionsLoaded` hook |
+| What actually loaded this session? | `/context all` |
+| Which of it *wins* where sources disagree? | the `checkup` skill |
+| Is my install healthy, and my settings valid? | `/doctor` |
+| What skills and hooks are active, from where? | `/skills`, `/hooks`, `/status` |
 | What did it just do? | the recap rule in the method block |
 | Do I actually understand the change? | the `quiz` skill |
 | Where are we, and why did we choose this? | `current-state.md`, `DECISIONS.md` |
 
-**Run `/context` after any setup change.** It's the difference between believing your rules are loaded and knowing it.
+**Run `/context all` after any setup change.** It's the difference between believing your rules are loaded and knowing it.
+
+The built-ins each show one surface honestly, but none of them answers the question that actually bites: when two sources say different things, which one is in force? Precedence runs personal → project → plugin → bundled, so a stale skill in `~/.claude/skills/` quietly outranks the plugin copy you just upgraded. A slash command sharing a skill's name wins when you type it. A `CLAUDE.md` in a subdirectory never loads at all unless something reads it. None of these produce an error — the instruction simply isn't in force. That gap is what `checkup` exists for.
 
 ## Auto memory — the other thing writing to your context
 

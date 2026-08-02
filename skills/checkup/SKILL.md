@@ -7,7 +7,9 @@ description: Use to audit a Claude Code setup for context-engineering problems �
 
 Audit the four surfaces that decide agent behavior: **rules, skills, commands, hooks.**
 
-`/doctor` checks whether Claude Code is healthy. `/context` shows what loaded this session. Neither tells you what *wins* when two sources disagree — which is the failure people actually hit, because it's silent. Nothing errors. A skill just never fires, or the wrong copy runs.
+The built-ins each show one surface: `/doctor` finds installation and invalid-settings problems, `/context all` inventories what loaded this session, `/skills` lists skills by source, `/hooks` lists hooks by event, `/status` shows which settings files were read. Use them to gather — they're faster and more accurate than guessing.
+
+What none of them answers is what *wins* when two sources disagree. That's the failure people actually hit, and it's silent: nothing errors, a skill just never fires, or a stale copy runs instead of the one you installed.
 
 Report first, fix second. Never delete or rewrite anything before showing the finding and getting a yes.
 
@@ -17,22 +19,29 @@ Read what's on disk. Don't infer it.
 
 | Surface | Where |
 |---|---|
-| Rules | `~/.claude/CLAUDE.md`, `./CLAUDE.md`, `./.claude/CLAUDE.md`, and any `CLAUDE.md` in parent directories |
+| Rules | `~/.claude/CLAUDE.md`, `./CLAUDE.md`, `./.claude/CLAUDE.md`, any `CLAUDE.md` in parent directories, plus `~/.claude/rules/` and `./.claude/rules/` |
 | Skills | `~/.claude/skills/`, `./.claude/skills/`, plugin skills under `~/.claude/plugins/` |
 | Commands | `~/.claude/commands/`, `./.claude/commands/` |
 | Hooks | `hooks` in `~/.claude/settings.json`, `./.claude/settings.json`, `./.claude/settings.local.json` |
+| Memory | `MEMORY.md` and the memory directory for this project |
 
-Expand `@` imports in rules files and follow them. An import pointing at a directory pulls in every file inside it — count them all.
+Expand `@` imports and follow them. An import pointing at a directory pulls in every file inside it — count them all. Watch for imports that loop back on themselves, targets that don't exist, and the same file pulled in twice by different paths.
 
 ## 2. Check
 
-**Rules.** Total the lines actually loaded, imports included, against the 200-line ceiling — past it adherence drops. Flag unresolved imports (a broken `@path` loads nothing and says nothing). Flag two sources instructing differently on the same topic: the docs are explicit that Claude may pick one arbitrarily, and that is what "my instructions are being ignored" almost always is. Flag instructions that restate default behavior — they cost budget and change nothing.
+**Rules.** Total the lines actually loaded, imports included, against the 200-line ceiling — past it adherence drops. Flag unresolved imports: a broken `@path` loads nothing and says nothing. Flag two sources instructing differently on the same topic — the docs are explicit that Claude may pick one arbitrarily, and that is what "my instructions are being ignored" almost always is. Flag instructions that restate default behavior; they cost budget and change nothing.
+
+The one people get wrong: a `CLAUDE.md` in a **subdirectory** doesn't load with the session. It's read on demand, if something opens it. Anyone who put project rules three levels down and assumed they were in force is running without them.
 
 **Skills.** For every name, list every scope it exists in. Precedence runs **personal → project → plugin → bundled**, so a stale `~/.claude/skills/x` silently beats the plugin's current `x`. That's the one people never catch: they install an upgrade and keep running the old copy. Then check each skill can actually fire — a `description` that lists topics instead of naming triggers and phrases means a skill that sits there forever. Flag two skills whose descriptions claim the same moment; that's contention with extra steps. Flag bodies over ~120 lines as probably two skills.
 
 **Commands.** A command and a skill sharing a name is the trap: typing `/x` runs the command, while the model invokes the skill. Two different instruction sets behind one name, usually because one was copied from the other and then drifted. Diff them and say which is stale.
 
-**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently in the worst direction. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag overlapping matchers on the same event, where firing order decides the outcome. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
+**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently in the worst direction. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. Flag anything slow enough to tax every tool call. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
+
+**Settings themselves.** A settings file with a JSON syntax error doesn't announce itself — it just doesn't load, taking its hooks and permissions with it. Parse every one you found. `/debug settings` and `/debug hooks` show the live resolution if something still doesn't add up.
+
+**Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in `DECISIONS.md` where they can be diffed.
 
 ## 3. Report
 

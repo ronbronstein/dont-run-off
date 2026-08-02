@@ -27,6 +27,9 @@ a one-command install that didn't exist. This slice decided how it ships.
 | Marketplace named `ronbronstein`, not `dont-run-off` | Reads correctly at the install line (`dont-run-off@ronbronstein`) and lets a second plugin join later without a second marketplace. | Nothing meaningful. |
 | Document `npx skills add` as a second install path | A genuine one-liner for people who don't want the plugin system, at the cost of a few README lines and no structural change — the repo's `skills/<name>/SKILL.md` layout is already what that CLI expects. | Nothing. The plugin stays primary because it's the only path that auto-updates. |
 
+| Add a `checkup` skill auditing rules, skills, commands and hooks | Install lands on top of whatever was already there and every collision is silent — nothing errors, the instruction just isn't in force. The README claimed a "visibility" layer that in practice was only "run `/context`." | A broader "Claude Code optimizer" (uninstall advice, description tuning, MCP config): useful, but a different product from *don't run off*. |
+| Named `checkup`, not `doctor` | `/doctor` is a built-in command. Shipping a skill by that name is exactly the collision this skill exists to detect. | Nothing. |
+
 Note on the second install path: no mechanism can be *fully* one-command, because
 installing is two jobs — get the files, then write `CLAUDE.md`. Only the first
 compresses; the second is a conversation by design.
