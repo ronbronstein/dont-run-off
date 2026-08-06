@@ -9,7 +9,7 @@ mislead the next session confidently. Rewrite it, don't just append.*
 
 ## Where we are
 
-The repo is publication-ready but still **private**, and **nothing is installed anywhere**. Eleven skills, a Claude Code plugin manifest, and a self-hosted marketplace. `npm test` and `claude plugin validate .` both pass. All work is committed and pushed to `main`.
+The repo is **public** as of 2026-08-06, and **nothing is installed anywhere**. Eleven skills, a Claude Code plugin manifest, and a self-hosted marketplace. `npm test` and `claude plugin validate .` both pass. All work is committed and pushed to `main`.
 
 The harness targets Claude Code only. `AGENTS.md` and its one-line `CLAUDE.md` stub are gone; the method lives in `skills/setup/method.md` and is written into the user's `CLAUDE.md` by the `setup` skill, inside markers so an upgrade replaces the method and leaves personalization alone. The always-on layer is 100 of its 200-line budget.
 
@@ -21,10 +21,13 @@ Nothing mid-flight. The tree is clean.
 
 ## Not started
 
-1. **Install and run it** — the first real execution of `setup` and `checkup`. Expect to find bugs in the procedures; that is the point. Deferred because Ron was on his phone.
-2. **Flip the repo public** — Ron's call, the one irreversible step.
-3. **Verify the `npx skills add` line** — documented in the README but never executed, because the CLI fetches from GitHub and the repo is private. Run it once public; cut the section if it fails rather than leave a broken command in the README.
-4. **Decide how the work project consumes it** — pinned marketplace in that repo's `.claude/settings.json`, or vendored skills. Leaning vendored for a work codebase.
+1. **Install and run it** — the first real execution of `setup` and `checkup`. Expect to find bugs in the procedures; that is the point.
+2. **Verify the `npx skills add` line** — documented in the README but never executed. Now unblocked by the repo going public. Run it once; cut the section if it fails rather than leave a broken command in the README.
+3. **Decide how the work project consumes it** — pinned marketplace in that repo's `.claude/settings.json`, or vendored skills. Leaning vendored for a work codebase.
+
+**Done:** the repo is public (2026-08-06). Pre-publish sweep of the full history
+found no secrets and no private-blocklist terms; `blocklist.local.txt` was never
+committed, and the deleted `harness/profile.md` held only generic template text.
 
 ## Explicitly not doing
 

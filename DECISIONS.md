@@ -62,9 +62,17 @@ compresses; the second is a conversation by design.
 
 ### Open questions
 
-- **The repo is still private.** Flipping it public is Ron's call and the one
-  genuinely irreversible step — assume anything published is cached the moment
-  it lands.
+- ~~**The repo is still private.**~~ **Resolved 2026-08-06 — the repo is public.**
+  Ron made the call. Trigger was a real symptom: the README graphics showed as
+  broken images. Diagnosis was that they weren't broken at all — the SVGs are
+  valid, committed, and render correctly on github.com for an authenticated
+  session, but a *private* repo's assets 404 for everyone else, so any logged-out
+  view, shared link or crawler got the broken-image icon. Note the trap this
+  ruled out: switching to absolute `raw.githubusercontent.com` URLs is the
+  instinctive fix and is backwards — those 404 while private too, so it would
+  have broken the images for Ron as well and only started working once public,
+  by which point the relative paths already worked. Going public was the fix;
+  the markup was correct all along.
 - **Not yet dogfooded.** Ron's own `~/.claude/CLAUDE.md` is the *ancestor* of
   this harness, not this harness: no method block, the moves live as slash
   commands in `~/.claude/commands/`, and every shared skill has drifted from the
