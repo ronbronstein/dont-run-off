@@ -18,7 +18,7 @@ Get the answers the work needs, with the least effort for the user, in a form yo
 | Situation | Medium |
 |---|---|
 | 1–3 questions, each answerable in a line, no pictures or files | **Chat.** |
-| The goal itself is fuzzy | **Chat, one question at a time.** Each answer changes the next question, so they cannot be batched. Start with the question that changes the most (usually: what problem, for whom, and how you will know it worked). Then scope in and out, hard limits, edge cases, and examples they like. After about 5–8 answers in total, write a short spec for a nod, and move any remaining concrete choices to a page. |
+| The goal itself is fuzzy | **Chat, one question at a time.** Each answer changes the next question, so they cannot be batched. Start with the question that changes the most, usually the problem behind the request. Then, one per message: for whom, how you will know it worked, scope in and out, hard limits, edge cases, and examples they like. After about 5–8 answers in total, write a short spec for a nod, and move any remaining concrete choices to a page. |
 | 4 or more questions ready at once; options whose effects need spelling out, a picture, or a file; or the user asks for a page | **Review page** (steps 3–5). |
 
 In chat, send one question per message and wait for the answer. A question tool may show up to 4 short questions at once. Never send a numbered list of questions as text: if you are about to, you have a page's worth, so build the page.
