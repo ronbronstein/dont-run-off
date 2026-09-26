@@ -5,7 +5,7 @@
 
     <!-- the detour: taken before committing, not instead of -->
     <path d="M180 190 Q 325 60 470 190" fill="none" stroke="#2E2B33" stroke-width="1.5" stroke-dasharray="6 8"/>
-    <text x="325" y="88" font-size="17" font-weight="600" fill="#F7F5F0" text-anchor="middle">interview · directions · blindspot</text>
+    <text x="325" y="88" font-size="17" font-weight="600" fill="#F7F5F0" text-anchor="middle">lets-align · directions · blindspot</text>
     <text x="325" y="110" font-size="15" fill="#B0A897" text-anchor="middle">when the ask is fuzzy, or the ground is new</text>
 
     <!-- the spine -->

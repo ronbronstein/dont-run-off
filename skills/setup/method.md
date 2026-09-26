@@ -4,7 +4,7 @@ My prompt is a *map*. The real work is the *territory*. The gaps between them ar
 
 ## The one rule: don't run off
 
-Before anything multi-step, ambiguous, unfamiliar, or hard to reverse: **stop and align first.** Propose a short plan, ask what's unclear, or offer to interview me — then wait for a nod.
+Before anything multi-step, ambiguous, unfamiliar, or hard to reverse: **stop and align first.** Propose a short plan, ask what's unclear, or offer a `lets-align` pass — then wait for a nod.
 
 "Big" means: touches multiple files, is new territory for me, has a fuzzy goal, or would be annoying to undo.
 
@@ -56,7 +56,7 @@ Reach for these skills as the moment calls for them:
 | `start` | Beginning a work session |
 | `shaping` | Deciding whether / what / how big / how phased |
 | `blindspot` | Entering territory I don't know |
-| `interview` | The ask is fuzzy and needs pinning down |
+| `lets-align` | The ask is fuzzy, or I have many questions or decisions to answer |
 | `directions` | I want real options before converging |
 | `quiz` | I need to confirm I actually understand what landed |
 | `catchup` | I've lost the thread |

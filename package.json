@@ -1,6 +1,6 @@
 {
   "name": "dont-run-off",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A context-engineering harness for AI coding agents — make the agent stop and align before it builds the wrong thing, then keep you oriented while it works. For people who ship software without reading every line of it.",
   "keywords": [
     "agent-skill",

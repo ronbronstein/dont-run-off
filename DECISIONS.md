@@ -93,3 +93,23 @@ compresses; the second is a conversation by design.
   against a private repo. Run it for real immediately after the repo goes
   public; if it fails, cut the section rather than leaving a broken command in
   the README.
+
+---
+
+## 2026-09-27 — `lets-align` replaces `interview`
+
+The agent asked well only one question at a time, in chat. That breaks down when a plan has many
+open decisions: twenty questions in one message get no real answers, and one at a time takes an
+afternoon. This slice gives the agent a second medium and one skill that picks between them.
+
+### Decisions
+
+| Decision | Why | What it rules out |
+|---|---|---|
+| Merge `interview` into a new skill, `lets-align` | Both jobs are "get the answers the work needs from the user". One skill can choose the medium; two skills would compete for the same trigger. The name follows the method's one rule: "stop and align first". | Keeping `interview` beside a separate page skill. Users who typed `/dont-run-off:interview` must use the new name. |
+| Chat for 1–3 quick questions or a fuzzy goal; a local review page for more | A page is worth building only when it saves the user effort: many questions, options whose effects need spelling out, pictures, or files. | A page for every question (heavy), or chat for everything (the old failure). |
+| One fixed page (`assets/review.html`) plus a per-project data file | The page is what makes every project get the same quality. The agent writes only content, so each review costs a small data file, not a new page. | Agents writing a new page each time, which drifts in quality and costs tokens. |
+| A checker script (`scripts/check.mjs`) enforces the limits | Rules in prose get skipped; a failing check does not. It enforces at most 7 user questions per open round, a pro or con on every option, a pick in every defaults item, stable unique ids, and no scripts in pictures. | Trusting the agent to remember the limits. |
+| Rounds by deadline, plus a "defaults" group accepted in one click | The user answers only what is needed now; safe choices cost one click; later questions wait, visible but closed. | Asking everything at once. |
+| Paper background, the project's brand color as the accent, violet when there is none | One look everywhere, tuned to each project. The page derives a text shade and button text that keep 4.5:1 contrast for any accent. | A per-project page design. |
+| Files: pasted full paths, or chosen/dropped names marked "name only" | Browsers never give a page the full path of a chosen file. Marking each file tells the agent whether to search. | A promise of full paths from the file picker. |
