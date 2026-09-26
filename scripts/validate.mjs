@@ -10,6 +10,7 @@
 //      blocklist naming your private projects is itself a leak.
 
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -251,6 +252,31 @@ if (marketplace) {
 for (const rel of ["README.md", "CONTRIBUTING.md", "docs/architecture.md"]) {
   const path = join(ROOT, rel);
   if (existsSync(path)) checkLeaks(rel, readFileSync(path, "utf8"));
+}
+
+// ---------- private paths ----------
+// These are gitignored on purpose. A forced `git add` would still publish them,
+// so fail if git tracks any of them.
+
+const PRIVATE_PATHS = [
+  /^workshop\//,
+  /^CLAUDE\.local\.md$/,
+  /^\.taskproject$/,
+  /^blocklist\.local\.txt$/,
+];
+
+try {
+  const tracked = execFileSync("git", ["ls-files"], {
+    cwd: ROOT,
+    encoding: "utf8",
+  });
+  for (const f of tracked.split("\n"))
+    if (PRIVATE_PATHS.some((re) => re.test(f)))
+      errors.push(
+        `${f}: private file is tracked by git — untrack it with \`git rm --cached\``,
+      );
+} catch {
+  warnings.push("git is not available — skipped the private-path check");
 }
 
 // ---------- report ----------
