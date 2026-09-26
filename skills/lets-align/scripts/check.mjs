@@ -44,6 +44,18 @@ if (R.id && !/^[\w-]+$/.test(R.id))
 if (R.accent && !/^#[0-9a-f]{6}$/i.test(R.accent))
   err("REVIEW.accent", "use a #RRGGBB color");
 
+// Builder words the person who decides may not know. REVIEW.terms lists words the user
+// already uses; those are not flagged.
+const JARGON =
+  /\b(APIs?|webhooks?|endpoints?|schemas?|data models?|back-?ends?|front-?ends?|components?|deploy(?:s|ed|ment)?|repos?|repositories|cron|SDKs?|OAuth|JWTs?|migrations?|payloads?|middleware|env vars?|cach(?:e|ing))\b/gi;
+const known = new Set((R.terms ?? []).map((t) => String(t).toLowerCase()));
+const jargonIn = (text) =>
+  [
+    ...new Set(
+      (String(text ?? "").match(JARGON) ?? []).map((w) => w.toLowerCase()),
+    ),
+  ].filter((w) => !known.has(w));
+
 const rounds = Array.isArray(R.rounds) ? R.rounds : [];
 if (!rounds.length) err("REVIEW", "'rounds' must be a non-empty list");
 
@@ -122,6 +134,19 @@ rounds.forEach((rd, ri) => {
         warn(iat, `q is ${q.length} characters; keep it to one short sentence`);
       if ((it.why ?? "").length > 240)
         warn(iat, "why is long; keep it to one or two lines");
+      const words = jargonIn(
+        [
+          q,
+          it.why,
+          it.example,
+          ...opts.flatMap((o) => [o.label, o.pro, o.con]),
+        ].join(" "),
+      );
+      if (words.length)
+        warn(
+          iat,
+          `builder words (${words.join(", ")}): say what the user will notice instead, or list the word in REVIEW.terms if the user uses it`,
+        );
       const visuals = [it.visual, ...opts.map((o) => o.visual)].filter(Boolean);
       if (visuals.some((v) => /<script|\son\w+=/i.test(v)))
         err(iat, "a visual may not contain scripts or event handlers");
@@ -140,8 +165,13 @@ rounds.forEach((rd, ri) => {
     );
 });
 
-if (rounds.length && !openRounds && !rounds.every((r) => r.status === "done"))
-  warn("REVIEW", "no open round: the page has nothing to answer");
+// No open round is normal between rounds: the page then lists only what comes later.
+if (rounds.length && !openRounds)
+  console.log(
+    rounds.some((r) => r.status === "closed")
+      ? "note   no open round: the page shows only the later rounds until one opens"
+      : "note   every round is done: keep this file as the record, or archive it as data/<id>.js",
+  );
 
 for (const w of warns) console.warn(`warn   ${w}`);
 for (const e of errors) console.error(`ERROR  ${e}`);

@@ -18,6 +18,8 @@ REVIEW
   agent?    the name in "<agent>’s pick" (default "Claude")
   accent?   #RRGGBB, the project's brand color (default violet). The page derives a readable
             text shade and a button text color from it.
+  terms?    technical words the user already uses (["API", "webhook"]); the checker then
+            does not flag them as builder words
   rounds    Round[]
 
 Round
@@ -87,9 +89,12 @@ Markdown or JSON, only for open rounds, with a `how_to_read` line for you. Per i
 ## Round lifecycle
 
 1. The open round holds what is needed now. Closed rounds hold later questions, by deadline.
-2. When the answers come back, set the round to `done`, move the `not_sure` items into the next round,
-   and keep their ids.
-3. When the next round is due, fill in its items and set it to `open`. The user reloads the same page.
+2. When the answers come back, set the round to `done`. Move each `not_sure` item into the next round
+   with its full content and the same id, inside a group of that round. Group ids are unique across
+   the whole review, so a moved item may need a new group (for example `session-2`).
+3. Between rounds there is no open round; the checker notes it, and the page lists only what comes
+   later. When the next round is due, fill in its items and set it to `open`. The user reloads the
+   same page.
 4. To keep a finished review, rename `data/current.js` to `data/<id>.js`. Open it again with
    `index.html?r=<id>`.
 
