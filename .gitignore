@@ -5,3 +5,8 @@ node_modules/
 
 # private leak blocklist — never commit
 blocklist.local.txt
+
+# private workshop (own local git) and private session instructions — never commit
+workshop/
+CLAUDE.local.md
+.taskproject
