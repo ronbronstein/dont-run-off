@@ -17,7 +17,7 @@ Orient first, then route — don't dive into building.
 - **New** — no north star yet → shape it first (the `shaping` skill), or go straight to design if the goal is already clear.
 - **Existing · pick work** → rank candidates, recommend one + the runner-up.
 - **Existing · resume** → a slice is mid-flight → catch up: where we are, what's in progress, next step.
-- **Fuzzy · explore** → offer `blindspot`, `interview`, or `directions`.
+- **Fuzzy · explore** → offer `blindspot`, `lets-align`, or `directions`.
 
 ## 3. State the frame and wait
 One tight paragraph: the project, the session type, the current slice/goal, what "done" looks like, and what's NOT in scope. Propose the first move and **wait for a nod** before executing.
