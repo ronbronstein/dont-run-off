@@ -1,6 +1,6 @@
 # Current state
 
-**Next session starts here → install it on Ron's machine and run it for real: `/plugin marketplace add ./`, `/plugin install dont-run-off@ronbronstein`, then `/dont-run-off:setup`.**
+**Next session starts here → install it on Ron's machine and run it for real: `/plugin marketplace add ./`, `/plugin install dont-run-off@kidamti`, then `/dont-run-off:setup`.**
 
 *Keep this file true. If it describes a plan rather than reality, it will
 mislead the next session confidently. Rewrite it, don't just append.*

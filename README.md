@@ -168,8 +168,18 @@ Two commands, then one conversation. In Claude Code:
 
 ```
 /plugin marketplace add ronbronstein/dont-run-off
-/plugin install dont-run-off@ronbronstein
+/plugin install dont-run-off@kidamti
 ```
+
+> **Installed before 2026-09-27?** The marketplace was renamed from `ronbronstein` to `kidamti`, and Claude Code knows a marketplace by its name. Re-add it once, in your shell:
+>
+> ```bash
+> claude plugin marketplace remove ronbronstein
+> claude plugin marketplace add ronbronstein/dont-run-off
+> claude plugin install dont-run-off@kidamti
+> ```
+>
+> Then turn auto-update back on: `/plugin` → **Marketplaces** → `kidamti` → **Enable auto-update**.
 
 That installs the skills. A plugin can't write your `CLAUDE.md`, so the method arrives the same way everything else here does — by asking first:
 
@@ -196,7 +206,7 @@ The plugin route above is still the one to prefer: it updates itself. This one y
 ### Upgrading
 
 ```
-/plugin update dont-run-off@ronbronstein
+/plugin update dont-run-off@kidamti
 /dont-run-off:setup
 ```
 
