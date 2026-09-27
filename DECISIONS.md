@@ -113,3 +113,14 @@ afternoon. This slice gives the agent a second medium and one skill that picks b
 | Rounds by deadline, plus a "defaults" group accepted in one click | The user answers only what is needed now; safe choices cost one click; later questions wait, visible but closed. | Asking everything at once. |
 | Paper background, the project's brand color as the accent, violet when there is none | One look everywhere, tuned to each project. The page derives a text shade and button text that keep 4.5:1 contrast for any accent. | A per-project page design. |
 | Files: pasted full paths, or chosen/dropped names marked "name only" | Browsers never give a page the full path of a chosen file. Marking each file tells the agent whether to search. | A promise of full paths from the file picker. |
+
+---
+
+## 2026-09-27 — Marketplace renamed `ronbronstein` → `kidamti`
+
+| Decision | Why | What it rules out |
+|---|---|---|
+| The marketplace is named `kidamti`; the install id is `dont-run-off@kidamti` | The plugin is published under the kidamti brand, and the install line is where every user sees the publisher. Done now because few people have it installed: the cost of the change grows with each install. Replaces the 2026-08-02 "named `ronbronstein`" decision. | Existing installs keep working without action. Claude Code knows a marketplace by its `name`, and the `renames` map covers plugin names only, so each existing user re-adds the marketplace once (README has the three commands). |
+| `kidamti`, not `kidamti.ai` | `kidamti.ai` passes validation, but `dont-run-off@kidamti.ai` has the exact form of an email address: people and GitHub read it as one, and this repo's own leak check flags it. | The domain in the install id. |
+| The GitHub repository stays at `ronbronstein/dont-run-off` | The `marketplace add` path is the repository path, not the marketplace name, so nothing forces a move. | A kidamti GitHub organization, for now. |
+| `lets-align`'s description is cut from 709 to about 320 characters | In a crowded skill list it showed as a name only, which stops it from starting by itself. | The long list of trigger phrases; the four that matter most stay. |

@@ -1,6 +1,6 @@
 ---
 name: lets-align
-description: Use whenever you need answers or decisions from the user before or during work — pinning down a fuzzy ask, collecting the open decisions of a plan or spec, or confirming many small choices at once. It asks in chat when there are only a few quick questions; otherwise it builds a small local review page (plain questions, options with pros and cons, your recommended pick, notes and files, saved in the browser) and reads the pasted answers back. Trigger on "interview me", "what do you need from me", "give me all the decisions", "open questions", "let's align", "too many questions at once", "make me a page to answer", or before any plan that has open decisions, even when the user does not name this skill.
+description: Use when you need answers or decisions from the user — a fuzzy ask, a plan's open decisions, or many choices at once. Asks up to 3 questions in chat, one at a time; for more, builds a local review page and reads the answers back. Triggers: "interview me", "what do you need from me", "give me the decisions", "let's align".
 ---
 
 # Let's align
