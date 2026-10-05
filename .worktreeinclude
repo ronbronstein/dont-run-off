@@ -1,0 +1,7 @@
+# Ignored files that Orca copies into each new worktree.
+# Exact paths only: no globs. Each path must exist here and be gitignored.
+# workshop/ is not listed: it is its own git repo, and a copy would split it.
+.claude/settings.local.json
+CLAUDE.local.md
+.taskproject
+blocklist.local.txt
