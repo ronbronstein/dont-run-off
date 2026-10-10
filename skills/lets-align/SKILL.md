@@ -35,7 +35,7 @@ In chat, send one question per message and wait for the answer. A question tool 
 
 ## 4. Build the page
 
-- Put the page in a folder that git does not track. The page holds the user's private answers, and the repo can be public, so one commit can publish them. Use a folder that git already ignores (`git check-ignore -q <folder>` succeeds). If none fits, use `.review/<review id>/` and add `.review/` to `.git/info/exclude`: that keeps it out of git on this machine and changes no file that others see. Outside a git repo, use `review/`. Never commit the page or its data.
+- Put the page in a folder that git does not track. The page holds the user's private answers, and the repo can be public, so one commit can publish them. Use a folder that git already ignores (`git check-ignore -q <folder>` succeeds). If none fits, use `.review/<review id>/`: first add `.review/` to `.git/info/exclude` and check it with `git check-ignore -q .review/`, then write the page. That keeps it out of git on this machine and changes no file that others see. A page written before the ignore entry exists is one `git add .` away from a commit. Outside a git repo, use `review/`. Never commit the page or its data.
 - Copy `assets/review.html` from this skill into that folder as `index.html`. Put everything project-specific in `data/current.js` next to it; never edit the page per project. Start from `assets/example-data.js`. The schema is in `references/schema.md`.
 - Set `project` to the project's name as the user says it, and `title` to what this review decides ("sign-in review"). The browser tab then reads "project | title", the same pattern in every project, so the user can tell review tabs apart.
 - Group the questions into rounds by deadline:
