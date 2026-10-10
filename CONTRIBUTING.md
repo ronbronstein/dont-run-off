@@ -53,6 +53,12 @@ claude plugin validate .
 
 It isn't in CI because the `claude` CLI isn't available there.
 
+If you touched the `lets-align` review page (`skills/lets-align/assets/review.html`), run its browser test. It needs Playwright: installed, or a `PLAYWRIGHT` variable that points to a `playwright` package folder.
+
+```bash
+npm run test:page
+```
+
 ### Behavioral
 
 The automated check can't tell you whether a skill *works*. Before proposing:
