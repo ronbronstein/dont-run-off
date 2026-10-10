@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "test": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs && node --test test/*.test.mjs",
     "test:page": "node scripts/test-review-page.mjs",
     "evals:sync": "node scripts/sync-eval-method.mjs",
     "evals": "node scripts/sync-eval-method.mjs && claude plugin eval . --scaffold --allow-tools Bash Write Edit --model claude-opus-5-5 --no-publish"
