@@ -35,7 +35,9 @@ In chat, send one question per message and wait for the answer. A question tool 
 
 ## 4. Build the page
 
-- Copy `assets/review.html` from this skill into the project as `<folder>/index.html`: `docs/review/` when the project has a `docs/` folder, otherwise a folder you and the user agree on. Put everything project-specific in `<folder>/data/current.js`; never edit the page per project. Start from `assets/example-data.js`. The schema is in `references/schema.md`.
+- Put the page in a folder that git does not track. The page holds the user's private answers, and the repo can be public, so one commit can publish them. Use a folder that git already ignores (`git check-ignore -q <folder>` succeeds). If none fits, use `.review/<review id>/` and add `.review/` to `.git/info/exclude`: that keeps it out of git on this machine and changes no file that others see. Outside a git repo, use `review/`. Never commit the page or its data.
+- Copy `assets/review.html` from this skill into that folder as `index.html`. Put everything project-specific in `data/current.js` next to it; never edit the page per project. Start from `assets/example-data.js`. The schema is in `references/schema.md`.
+- Set `project` to the project's name as the user says it, and `title` to what this review decides ("sign-in review"). The browser tab then reads "project | title", the same pattern in every project, so the user can tell review tabs apart.
 - Group the questions into rounds by deadline:
   - The open round holds only what is needed now: at most 7 questions that need the user.
   - Choices with a safe default go into one `defaults` group: collapsed rows, accepted with one click. A default is safe when it is cheap to change later and you would pick it for almost any user in this situation. A choice that changes money, stored data, legal duties, or what people see first is not a default.
@@ -50,7 +52,7 @@ In chat, send one question per message and wait for the answer. A question tool 
 - The export says how to read it. Act on `answered` items; for a note-only item, the note is the answer. Ask again about `open` items. When `matches_recommendation` is false, read the note before you act. Search the project for `name_only` files.
 - Move each `not_sure` item into the next round with its full content and the same id, in a group of that round (a new group id if needed: group ids are unique across the review).
 - Record each decision and its reason in the project's decision log, if it has one.
-- Set the answered round to `done`, run the checker again, and keep the page: the user reloads it when the next round opens.
+- Set the answered round to `done`, run the checker again, and keep the page: the user reloads it when the next round opens, and the page starts that round clear.
 - Reply with a short summary of what you recorded and what you propose next. Then continue under the project's normal rules: a plan still needs its nod.
 
 ## Limits
