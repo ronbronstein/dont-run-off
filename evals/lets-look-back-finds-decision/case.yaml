@@ -94,12 +94,14 @@ graders:
     criteria: >-
       Two earlier sessions of this project hold the answer. On 2026-09-20 the
       user chose an email link as the sign-up method (no passwords to reset).
-      On 2026-10-05 they kept the email link and planned Google sign-in after
-      the launch. PASS only if the agent's last message says that the decision
-      is an email link, says when it was made (2026-09-20, in any date format),
-      and mentions the 2026-10-05 follow-up. FAIL if it states a different
-      decision, invents details that the sessions do not hold, or says it
-      cannot find the decision.
+      On 2026-10-05 the user asked whether to revisit it, and the agent replied
+      that they keep the email link for now and add Google sign-in after the
+      launch; the user did not reply to that. PASS only if the agent's last
+      message says that the decision is an email link, says when it was made
+      (2026-09-20, in any date format), and mentions the 2026-10-05 follow-up.
+      Saying that the user never confirmed the Google sign-in plan is correct,
+      not an invention. FAIL if it states a different decision, invents details
+      that the sessions do not hold, or says it cannot find the decision.
   - name: gives-the-resume-command
     type: regex
     pattern: 'claude --resume aaaaaaaa-0000-4000-8000-000000000001'
