@@ -144,6 +144,7 @@ The same file works per-project: a `./CLAUDE.md` holding this project's facts �
 <tr><td><code>directions</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
 <tr><td><code>quiz</code></td><td>A change just landed</td><td>Plain-language explanation, then questions until you actually understand it</td></tr>
 <tr><td><code>catchup</code></td><td>You've lost the thread</td><td>Where we are, what was decided and why, the single next step</td></tr>
+<tr><td><code>lets-look-back</code></td><td>You need something from an earlier session</td><td>The sessions that discussed it, with dates, short quotes and the command that reopens each one — searched in full, not only by title</td></tr>
 <tr><td><code>wrap-session</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>
 <tr><td><code>checkup</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>
 <tr><td><code>taskwarrior</code></td><td>You want local task tracking</td><td>Safe, explicitly-scoped task management across every project in one store</td></tr>
