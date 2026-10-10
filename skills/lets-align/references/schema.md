@@ -9,9 +9,11 @@ every feature; copy it and replace the content.
 
 ```
 REVIEW
-  id        letters, digits, - and _. The browser saves answers under this id: keep it the same
-            for the whole review; a new review gets a new id.
-  title     shown at the top: "<project> · <topic> review"
+  id        letters, digits, - and _. The browser saves answers under this id and the open round:
+            keep it the same for the whole review; a new review gets a new id.
+  project   the project's name, as the user says it ("Notes app")
+  title     what this review decides ("sign-in review"). The browser tab and the top of the page
+            read "<project> | <title>", the same pattern in every project.
   context   2–3 sentences for the agent that reads the export: the project, the work, why now
   source?   the files the questions come from (plans, specs, issues)
   page?     the page's path in the repo, repeated in the export (default: the browser's path)
@@ -89,7 +91,8 @@ Markdown or JSON, only for open rounds, with a `how_to_read` line for you. Per i
 ## Round lifecycle
 
 1. The open round holds what is needed now. Closed rounds hold later questions, by deadline.
-2. When the answers come back, set the round to `done`. Move each `not_sure` item into the next round
+2. When the answers come back, set the round to `done`. The page saves answers per open round, so the
+   next round starts with a clear page. Move each `not_sure` item into the next round
    with its full content and the same id, inside a group of that round. Group ids are unique across
    the whole review, so a moved item may need a new group (for example `session-2`).
 3. Between rounds there is no open round; the checker notes it, and the page lists only what comes

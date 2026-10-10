@@ -7,7 +7,8 @@
 
   window.REVIEW = {
     id: "notes-app-sign-in",
-    title: "Notes app · sign-in review",
+    project: "Notes app",
+    title: "sign-in review",
     source: "PLAN.md (open decisions 1–6)",
     context:
       "A small notes web app. The plan is written. These are the choices the sign-in work needs from the owner before the build starts.",

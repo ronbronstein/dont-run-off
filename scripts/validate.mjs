@@ -9,8 +9,17 @@
 //      `blocklist.local.txt`. That file is gitignored and never ships: a
 //      blocklist naming your private projects is itself a leak.
 
-import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
+import {
+  readdirSync,
+  readFileSync,
+  statSync,
+  existsSync,
+  mkdtempSync,
+  writeFileSync,
+  rmSync,
+} from "node:fs";
 import { execFileSync } from "node:child_process";
+import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { EVALS, caseFiles, withMethod } from "./eval-method.mjs";
@@ -287,6 +296,42 @@ if (existsSync(EVALS)) {
         `${rel}: its copy of the method is stale — run \`npm run evals:sync\``,
       );
   }
+}
+
+// ---------- lets-align data checker ----------
+// Agents run this checker before a user sees a review page. The shipped example
+// must pass it, and a data file with no `project` must fail it: the tab title
+// "<project> | <title>" depends on that field.
+
+const LA = join(SKILLS, "lets-align");
+const CHECK = join(LA, "scripts", "check.mjs");
+const EXAMPLE = join(LA, "assets", "example-data.js");
+
+function checkerExit(file) {
+  try {
+    execFileSync(process.execPath, [CHECK, file], { stdio: "pipe" });
+    return 0;
+  } catch (e) {
+    return e.status ?? 1;
+  }
+}
+
+if (existsSync(CHECK) && existsSync(EXAMPLE)) {
+  if (checkerExit(EXAMPLE) !== 0)
+    errors.push(
+      "skills/lets-align/assets/example-data.js fails skills/lets-align/scripts/check.mjs",
+    );
+  const tmp = mkdtempSync(join(tmpdir(), "lets-align-check-"));
+  const noProject = join(tmp, "no-project.js");
+  writeFileSync(
+    noProject,
+    readFileSync(EXAMPLE, "utf8").replace(/^\s*project:.*\n/m, ""),
+  );
+  if (checkerExit(noProject) !== 1)
+    errors.push(
+      "skills/lets-align/scripts/check.mjs accepts a data file with no 'project'",
+    );
+  rmSync(tmp, { recursive: true, force: true });
 }
 
 // ---------- private paths ----------

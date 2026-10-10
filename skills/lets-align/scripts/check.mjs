@@ -39,6 +39,17 @@ const warn = (at, msg) => warns.push(`${at}: ${msg}`);
 
 for (const k of ["id", "title", "context"])
   if (!R[k]) err("REVIEW", `missing '${k}'`);
+// The browser tab and the page read "<project> | <title>", the same in every project.
+if (!R.project)
+  err("REVIEW", "missing 'project': the tab title is '<project> | <title>'");
+else if (
+  R.title &&
+  String(R.title).toLowerCase().startsWith(String(R.project).toLowerCase())
+)
+  warn(
+    "REVIEW.title",
+    "starts with the project name; the page adds it, so say only what this review decides",
+  );
 if (R.id && !/^[\w-]+$/.test(R.id))
   err("REVIEW.id", "use letters, digits, - and _ only (it is the storage key)");
 if (R.accent && !/^#[0-9a-f]{6}$/i.test(R.accent))
