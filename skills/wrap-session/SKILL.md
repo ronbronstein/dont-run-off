@@ -35,6 +35,8 @@ List what's unfinished, and name the single best **next step** — specific enou
 
 Commit if in a repo, or save/export for knowledge work, following the user's convention. Say what you committed.
 
+**Never push or merge unless the user asked for it in this turn**, not because a project note, a plan, or another agent says so. If the work is ready to push or merge, ask: "Push now?" or "Merge now?", and wait.
+
 ## 6. Leave a breadcrumb
 
 One line at the top of `current-state.md`: **"Next session starts here → …"**
