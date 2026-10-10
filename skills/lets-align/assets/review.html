@@ -169,19 +169,23 @@ function setAccent(hex){if(!/^#[0-9a-f]{6}$/i.test(hex))return;const rgb=hex.sli
   st.setProperty("--on-accent",ratio([255,255,255],rgb)>=4.5?"#fff":"#0A0A0B")}
 
 function init(){
-const R=window.REVIEW,KEY="review:"+R.id,AG=R.agent||"Claude";
+const R=window.REVIEW,AG=R.agent||"Claude",NAME=R.project?`${R.project} | ${R.title}`:R.title;
+document.title=NAME;
 if(R.accent)setAccent(R.accent);
 const plat=navigator.userAgentData?.platform||navigator.platform||"";
 const HINT=(/mac/i.test(plat)?"For the full path: select the file in Finder and press ⌥⌘C.":/win/i.test(plat)?"For the full path: hold Shift, right-click the file, and choose “Copy as path”.":"For the full path: copy it from your file manager.")+" Chosen or dropped files give only the name.";
 const tm=iso=>new Date(iso).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
 const open=R.rounds.filter(x=>x.status==="open"),later=R.rounds.filter(x=>x.status==="closed");
+// Answers are saved per open round, so a new round starts with a clear page. Older pages saved the whole
+// review under one key; those answers count only while no round is done, because then they are this round's.
+const KEY=`review:${R.id}:${open.map(rd=>rd.id).join("+")}`,OLD="review:"+R.id,FIRST=!R.rounds.some(x=>x.status==="done");
 const GEN={id:"general",title:"Anything else?",items:[{id:"NOTE",title:"Anything else",q:"Is there anything else you want to tell me, or a file you want me to see?",options:[]}]};
 const groupsOf=rd=>rd===open[open.length-1]?[...rd.groups,GEN]:rd.groups;
 const by={};open.forEach(rd=>groupsOf(rd).forEach(g=>g.items.forEach(it=>{by[it.id]={...it,g,rd}})));
 const items=Object.values(by),counted=items.filter(it=>it.id!=="NOTE");
 
-let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch{}
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)??(FIRST?localStorage.getItem(OLD):null))||{}}catch{}
 // Older page versions stored "not sure" as the index after the last option.
 S=Object.fromEntries(Object.entries(S).map(([id,s])=>{const n=by[id]?.options.length??-1,p=s.pick||[];return[id,{files:[],note:"",...s,pick:p.filter(i=>i!==n),unsure:!!s.unsure||p.includes(n)}]}));
 const status=it=>{const s=S[it.id];if(!s)return"open";if(s.unsure)return"not_sure";return s.pick.length||(!it.options.length&&(s.note||s.files.length))?"answered":"open"};
@@ -203,12 +207,12 @@ const group=g=>`<section id="g-${g.id}"><h2>${g.title}<span data-gc="${g.id}"></
   :g.intro?`<p class="why">${g.intro}</p>`:""}${g.items.map(it=>card(it,g)).join("")}</section>`;
 const allGroups=open.flatMap(groupsOf),need=counted.filter(it=>!it.g.defaults).length,def=counted.length-need;
 const nLater=later.reduce((n,rd)=>n+rd.groups.reduce((m,g)=>m+g.items.length,0),0);
-main.innerHTML=`<p class="kick">${R.title}</p><h1>${open.map(rd=>rd.title).join(" · ")||"No open round"}</h1>
+main.innerHTML=`<p class="kick">${NAME}</p><h1>${open.map(rd=>rd.title).join(" · ")||"No open round"}</h1>
 <p class="lead">${open.length?`Needed by ${open.map(rd=>rd.needed_by).join(", ")}. ${need} questions need you${def?`, and ${def} have a safe default`:""}. Later questions wait for their round.`:"Nothing to answer right now."}</p>
 <nav class="chips" aria-label="Groups">${allGroups.map(g=>`<a href="#g-${g.id}" data-g="${g.id}">${g.title}<small data-tc="${g.id}"></small></a>`).join("")}</nav>
 ${allGroups.map(group).join("")}
 ${later.length?`<section class="laterlist"><h2>Later rounds<span>${nLater} questions</span></h2><details class="card"><summary><b>What I will ask later</b><span class="cur">${later.length} rounds</span><span class="chev" aria-hidden="true">›</span></summary><div class="in">${later.map(rd=>`<p class="why"><b>${rd.title}</b> · opens at ${rd.needed_by}</p><ul>${rd.groups.flatMap(g=>g.items).map(it=>`<li>${it.title}: ${it.q}</li>`).join("")}</ul>`).join("")}</div></details></section>`:""}`;
-side.innerHTML=`<p class="kick">Review</p><p class="ttl">${R.title}</p>${open.map(rd=>`<p class="kick">${rd.title.split(":")[0]}</p><nav aria-label="Groups">${groupsOf(rd).map(g=>`<a href="#g-${g.id}" data-g="${g.id}">${g.title}<small data-tc="${g.id}"></small><i></i></a>`).join("")}</nav>`).join("")}
+side.innerHTML=`<p class="kick">${R.project||"Review"}</p><p class="ttl">${R.title}</p>${open.map(rd=>`<p class="kick">${rd.title.split(":")[0]}</p><nav aria-label="Groups">${groupsOf(rd).map(g=>`<a href="#g-${g.id}" data-g="${g.id}">${g.title}<small data-tc="${g.id}"></small><i></i></a>`).join("")}</nav>`).join("")}
 ${later.length?`<p class="kick">Later</p>${later.map(rd=>`<p class="later"><b>${rd.title.split(": ").pop()}</b>opens at ${rd.needed_by} · ${rd.groups.reduce((n,g)=>n+g.items.length,0)} questions</p>`).join("")}`:""}`;
 
 const cardOf=id=>$(`.card[data-id="${id}"]`);
@@ -282,7 +286,7 @@ function rows(){return items.map(it=>{const s=S[it.id]||{pick:[],note:"",files:[
     matches_recommendation:st==="answered"&&it.rec!=null?s.pick.length===1&&s.pick[0]===it.rec:null,
     note:s.note||null,files:s.files.map(f=>({name:f.name,path:f.path,kind:f.path?"path":"name_only"})),saved_at:s.at||null}}).filter(x=>x.id!=="NOTE"||x.status!=="open")}
 function meta(x){const c={answered:0,not_sure:0,open:0};x.filter(r=>r.id!=="NOTE").forEach(r=>{c[r.status]++});
-  return{kind:"review-answers",review:R.id,title:R.title,page:R.page||decodeURIComponent(location.pathname),source:R.source,context:R.context,
+  return{kind:"review-answers",review:R.id,project:R.project||null,title:NAME,page:R.page||decodeURIComponent(location.pathname),source:R.source,context:R.context,
     rounds:open.map(rd=>({id:rd.id,title:rd.title,needed_by:rd.needed_by})),exported_at:new Date().toISOString(),
     progress:{total:counted.length,...c},how_to_read:GUIDE}}
 const out={
