@@ -3,6 +3,9 @@ node_modules/
 *.bak
 *.tgz
 
+# eval run results (prompts, answers, scores) — local only
+evals/results/
+
 # private leak blocklist — never commit
 blocklist.local.txt
 

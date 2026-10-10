@@ -13,6 +13,7 @@ import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { EVALS, caseFiles, withMethod } from "./eval-method.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILLS = join(ROOT, "skills");
@@ -254,6 +255,40 @@ for (const rel of ["README.md", "CONTRIBUTING.md", "docs/architecture.md"]) {
   if (existsSync(path)) checkLeaks(rel, readFileSync(path, "utf8"));
 }
 
+// ---------- eval cases ----------
+// The eval runs load no CLAUDE.md, so each case carries a copy of the method
+// (see scripts/eval-method.mjs). A stale copy tests old rules. The cases are
+// public, so every file under evals/ also gets the leak check; run results
+// (evals/results/) are gitignored and skipped.
+
+function filesUnder(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
+    const path = join(dir, d.name);
+    if (d.isDirectory()) return d.name === "results" ? [] : filesUnder(path);
+    return [path];
+  });
+}
+
+const evalCases = caseFiles();
+
+if (existsSync(EVALS)) {
+  for (const path of filesUnder(EVALS))
+    checkLeaks(path.slice(ROOT.length + 1), readFileSync(path, "utf8"));
+
+  const method = existsSync(join(SETUP, "method.md"))
+    ? readFileSync(join(SETUP, "method.md"), "utf8")
+    : null;
+  for (const { rel, path } of method ? evalCases : []) {
+    const text = readFileSync(path, "utf8");
+    const result = withMethod(text, method);
+    if (result.error) errors.push(`${rel}: ${result.error}`);
+    else if (result.found && result.text !== text)
+      errors.push(
+        `${rel}: its copy of the method is stale — run \`npm run evals:sync\``,
+      );
+  }
+}
+
 // ---------- private paths ----------
 // These are gitignored on purpose. A forced `git add` would still publish them,
 // so fail if git tracks any of them.
@@ -289,7 +324,7 @@ const blocklistNote = privateBlocklist.length
   : "no local blocklist (structural + generic checks only)";
 
 console.log(
-  `\n${dirs.length} skills · always-on ${alwaysOnTotal}/${MAX_ALWAYS_ON_LINES} lines · ${blocklistNote}` +
+  `\n${dirs.length} skills · ${evalCases.length} eval cases · always-on ${alwaysOnTotal}/${MAX_ALWAYS_ON_LINES} lines · ${blocklistNote}` +
     `\n${errors.length} errors · ${warnings.length} warnings`,
 );
 
