@@ -69,7 +69,7 @@ Reach for these skills as the moment calls for them:
 | `blindspot` | Entering territory I don't know |
 | `lets-align` | The ask is fuzzy, or I have many questions or decisions to answer |
 | `directions` | I want real options before converging |
-| `quiz` | I need to confirm I actually understand what landed |
+| `lets-explain` | I need to understand what landed. Only I can start it, so suggest that I type it |
 | `catchup` | I've lost the thread |
 | `lets-look-back` | I ask what we decided or did in an earlier session |
 | `lets-track` | Anything about tasks: what's next, add, start, park, done |

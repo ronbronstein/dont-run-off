@@ -81,7 +81,7 @@ Four layers, separated by **when they load**. That distinction is what most setu
 </tr>
 <tr>
 <td valign="top"><b>Skills</b></td>
-<td valign="top">The moves — orient, align, shape, quiz, wrap up.</td>
+<td valign="top">The moves — orient, align, shape, explain, wrap up.</td>
 <td valign="top">Only when the moment matches. Free until they fire.</td>
 </tr>
 <tr>
@@ -91,7 +91,7 @@ Four layers, separated by **when they load**. That distinction is what most setu
 </tr>
 <tr>
 <td valign="top"><b>Visibility</b></td>
-<td valign="top"><code>/context</code>, <code>/doctor</code>, the <code>quiz</code> skill.</td>
+<td valign="top"><code>/context</code>, <code>/doctor</code>, the <code>lets-explain</code> skill.</td>
 <td valign="top">When you want to check the harness is actually working.</td>
 </tr>
 </table>
@@ -142,7 +142,7 @@ The same file works per-project: a `./CLAUDE.md` holding this project's facts �
 <tr><td><code>blindspot</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
 <tr><td><code>lets-align</code></td><td>The agent needs answers or decisions from you</td><td>A few questions in chat, or a local review page for many: plain questions, options with pros and cons, its recommended pick, notes and files. You paste the answers back.</td></tr>
 <tr><td><code>directions</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
-<tr><td><code>quiz</code></td><td>A change just landed</td><td>Plain-language explanation, then questions until you actually understand it</td></tr>
+<tr><td><code>lets-explain</code></td><td>A change just landed (you type it)</td><td>The change explained at your level, with a diagram or a local page when that helps, then a short quiz until you actually understand it</td></tr>
 <tr><td><code>catchup</code></td><td>You've lost the thread</td><td>Where we are, what was decided and why, the single next step</td></tr>
 <tr><td><code>lets-look-back</code></td><td>You need something from an earlier session</td><td>The sessions that discussed it, with dates, short quotes and the command that reopens each one — searched in full, not only by title</td></tr>
 <tr><td><code>wrap-session</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>

@@ -72,7 +72,7 @@ The layer people skip, and the one that matters most if you can't read the diff.
 | Is my install healthy, and my settings valid? | `/doctor` |
 | What skills and hooks are active, from where? | `/skills`, `/hooks`, `/status` |
 | What did it just do? | the recap rule in the method block |
-| Do I actually understand the change? | the `quiz` skill |
+| Do I actually understand the change? | the `lets-explain` skill (you type it) |
 | Where are we, and why did we choose this? | `current-state.md`, `DECISIONS.md` |
 
 **Run `/context all` after any setup change.** It's the difference between believing your rules are loaded and knowing it.
