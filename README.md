@@ -245,11 +245,12 @@ I can't tell what it actually did. I lose the thread between sessions.
 - Status file: `docs/STATUS.md`
 - Decision log: none. Decisions go in the status file, under "Decided".
 - Tasks: GitHub Issues in this repo
+- Language: plain
 - Stop level: fast — stop only before steps that are hard to undo or that others see
 - Work branch: `staging`. Parallel copies: off.
 ```
 
-Every move reads these lines, so nothing assumes a file name, a task tool, or how careful you want the agent to be. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
+Every move reads these lines, so nothing assumes a file name, a task tool, how careful you want the agent to be, or how it should write to you. The default language is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
 
 Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
 
