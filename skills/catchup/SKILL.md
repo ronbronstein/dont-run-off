@@ -8,7 +8,7 @@ description: Use to get the user back up to speed mid-project — where we are, 
 Re-orient fast.
 
 1. What's been done so far on this task/session.
-2. Key decisions and the reasoning — check the decisions log / notes if present.
+2. Key decisions and the reasoning — check the decision log (My setup names it) if there is one.
 3. What's still open or undecided.
 4. The single best next step.
 

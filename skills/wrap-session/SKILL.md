@@ -13,11 +13,13 @@ In plain language: what got done this session, and the key decisions made — wi
 
 ## 2. Leave the record true
 
-This is the part that matters most, and the part most often skipped. **A session that ends with a stale `current-state.md` breaks the next session before it starts.**
+This is the part that matters most, and the part most often skipped. **A session that ends with a stale status file breaks the next session before it starts.**
 
-- **`DECISIONS.md`** — append what was decided and why, any deviations from the plan (with the reason), and any open questions. Deviations especially: an undocumented deviation is how a project quietly becomes something nobody chose.
-- **`current-state.md`** — rewrite it so it describes reality *now*, not the plan from three sessions ago. If a phase finished, say so. If something was abandoned, remove it rather than leaving it looking active.
-- **Task tool** — close what's done, add what surfaced.
+Use the record files that My setup names; a project's `CLAUDE.md` can name others. The defaults are `current-state.md` and `DECISIONS.md`. When My setup says a file is "none", do not create it: put its content where My setup says.
+
+- **The decision log** — append what was decided and why, any deviations from the plan (with the reason), and any open questions. Deviations especially: an undocumented deviation is how a project quietly becomes something nobody chose.
+- **The status file** — rewrite it so it describes reality *now*, not the plan from three sessions ago. If a phase finished, say so. If something was abandoned, remove it rather than leaving it looking active.
+- **The task tool** (My setup names it) — close what's done, add what surfaced.
 
 Don't just append. Read what's there and correct anything that's now false.
 
@@ -39,6 +41,6 @@ Commit if in a repo, or save/export for knowledge work, following the user's con
 
 ## 6. Leave a breadcrumb
 
-One line at the top of `current-state.md`: **"Next session starts here → …"**
+One line at the top of the status file: **"Next session starts here → …"**
 
 Keep the whole thing tight. The user should be able to walk away and come back in two weeks without losing the thread.

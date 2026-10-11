@@ -10,8 +10,8 @@ Orient first, then route — don't dive into building.
 ## 1. Orient
 - **Project state:** established or new/empty? Look for version control, a task list, and a status / "current state" doc.
 - **History:** recent changes, current branch, anything in flight.
-- **Tasks:** what's queued / "next," using the user's task tool.
-- **Status doc:** the live north star / "what's next."
+- **Tasks:** what's queued / "next," using the task tool that My setup names.
+- **Status file** (My setup names it; default `current-state.md`): the live north star / "what's next."
 
 ## 2. Name the session type
 - **New** — no north star yet → shape it first (the `shaping` skill), or go straight to design if the goal is already clear.
