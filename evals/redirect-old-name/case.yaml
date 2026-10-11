@@ -2,8 +2,8 @@ schema_version: "1.1"
 name: redirect-old-name
 description: >-
   Renamed moves. The user types an old name, /dont-run-off:wrap-session. The
-  redirect says the new name and hands over to lets-wrap, which runs. Run it
-  with --ablation none: the old name exists only in the plugin.
+  redirect hands over to lets-wrap, which runs, and the reply ends with the new
+  name. Run it with --ablation none: the old name exists only in the plugin.
 tags: [redirect, naming, lets-wrap]
 context:
   scaffold_script: scaffold.sh

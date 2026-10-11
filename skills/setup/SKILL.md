@@ -6,4 +6,4 @@ disable-model-invocation: true
 
 # Renamed: `setup` is now `lets-set-up`
 
-Tell the user in one line: "`/dont-run-off:setup` is now `/dont-run-off:lets-set-up`. The old name goes away in the next release." Then ask them to type `/dont-run-off:lets-set-up` (with the same words, if any: $ARGUMENTS). That move runs only when the user starts it, so you cannot start it for them.
+Ask them to type `/dont-run-off:lets-set-up` (with the same words, if any: $ARGUMENTS). That move runs only when the user starts it, so you cannot start it for them. End your reply with this line, after everything else: "`/dont-run-off:setup` is now `/dont-run-off:lets-set-up`. The old name goes away in the next release."

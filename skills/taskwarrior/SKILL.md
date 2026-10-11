@@ -6,4 +6,6 @@ disable-model-invocation: true
 
 # Renamed: `taskwarrior` is now `lets-track`
 
-Tell the user in one line: "`/dont-run-off:taskwarrior` is now `/dont-run-off:lets-track`. The old name goes away in the next release." Then do what they asked with the `lets-track` skill, with the same words: $ARGUMENTS
+Do what they asked with the `lets-track` skill, with their words below. End your reply with this line, after everything else: "`/dont-run-off:taskwarrior` is now `/dont-run-off:lets-track`. The old name goes away in the next release."
+
+Their words: $ARGUMENTS

@@ -6,4 +6,6 @@ disable-model-invocation: true
 
 # Renamed: `wrap-session` is now `lets-wrap`
 
-Tell the user in one line: "`/dont-run-off:wrap-session` is now `/dont-run-off:lets-wrap`. The old name goes away in the next release." Then do what they asked with the `lets-wrap` skill, with the same words: $ARGUMENTS
+Do what they asked with the `lets-wrap` skill, with their words below. End your reply with this line, after everything else: "`/dont-run-off:wrap-session` is now `/dont-run-off:lets-wrap`. The old name goes away in the next release."
+
+Their words: $ARGUMENTS

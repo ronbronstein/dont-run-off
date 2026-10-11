@@ -6,4 +6,6 @@ disable-model-invocation: true
 
 # Renamed: `shaping` is now `lets-shape`
 
-Tell the user in one line: "`/dont-run-off:shaping` is now `/dont-run-off:lets-shape`. The old name goes away in the next release." Then do what they asked with the `lets-shape` skill, with the same words: $ARGUMENTS
+Do what they asked with the `lets-shape` skill, with their words below. End your reply with this line, after everything else: "`/dont-run-off:shaping` is now `/dont-run-off:lets-shape`. The old name goes away in the next release."
+
+Their words: $ARGUMENTS

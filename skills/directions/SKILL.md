@@ -6,4 +6,6 @@ disable-model-invocation: true
 
 # Renamed: `directions` is now `lets-explore`
 
-Tell the user in one line: "`/dont-run-off:directions` is now `/dont-run-off:lets-explore`. The old name goes away in the next release." Then do what they asked with the `lets-explore` skill, with the same words: $ARGUMENTS
+Do what they asked with the `lets-explore` skill, with their words below. End your reply with this line, after everything else: "`/dont-run-off:directions` is now `/dont-run-off:lets-explore`. The old name goes away in the next release."
+
+Their words: $ARGUMENTS
