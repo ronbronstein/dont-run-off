@@ -108,17 +108,27 @@ execution:
     - Work branch: `main`. Parallel copies: off.
   # END method
 graders:
-  - name: follows-ste-rules
+  # STE: no sentence over 25 words. A run of 26 or more words with no sentence
+  # end (. ! ? : ;), outside table cells and code spans, fails.
+  - name: no-long-sentences
+    type: regex
+    pattern: '(?:[^\s.!?:;|`]+[ \t,]+){25,}[^\s.!?:;|`]+'
+    match: not_contains
+  # STE: no idioms. A short list of common ones; the judge below sees the rest.
+  - name: no-common-idioms
+    type: regex
+    pattern: '\b(under the hood|in a nutshell|out of the box|on the fly|at the end of the day|bottom line|rule of thumb|piece of cake|boils? down to|game[- ]changer|silver bullet|low[- ]hanging fruit|heavy lifting|deep dive|a ton of|tons of|in the weeds|moving parts|the gist|bread and butter)\b'
+    flags: i
+    match: not_contains
+  - name: no-clear-ste-breaks
     type: llm
     criteria: >-
       The user's setup says to write replies in strict ASD-STE100 Simplified
-      Technical English. Judge only the prose of the agent's last message (not
-      code, commands, or quoted text). PASS only if it follows these rules,
-      with at most two small slips in total. (1) Sentences are short:
-      instructions 20 words or fewer, descriptions 25 words or fewer. (2) Active
-      voice. (3) Simple tenses: simple present, simple past, simple future.
-      (4) No idioms, slang, or metaphors (for example "under the hood", "in a
-      nutshell", "rewrites history" used as a figure of speech). (5) One word
-      for one meaning: it does not switch between synonyms for the same thing.
-      (6) A vertical list for more than three related items. FAIL if it breaks
-      these rules more than twice, or uses long, complex sentences.
+      Technical English. Sentence length and a list of common idioms are
+      checked elsewhere. Judge only the prose of the agent's last message (not
+      code, commands, table cells, or quoted text), and only these rules:
+      active voice; simple tenses (simple present, simple past, simple future);
+      no idioms, slang, or metaphors; one word for one meaning (no switching
+      between synonyms for the same thing). Do not judge word choice against
+      the official STE word list. PASS unless the prose clearly breaks these
+      rules three or more times. FAIL if it does.
