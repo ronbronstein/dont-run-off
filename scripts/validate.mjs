@@ -287,9 +287,9 @@ if (existsSync(EVALS)) {
   const method = existsSync(join(SETUP, "method.md"))
     ? readFileSync(join(SETUP, "method.md"), "utf8")
     : null;
-  for (const { rel, path } of method ? evalCases : []) {
+  for (const { rel, path, profile } of method ? evalCases : []) {
     const text = readFileSync(path, "utf8");
-    const result = withMethod(text, method);
+    const result = withMethod(text, method, profile);
     if (result.error) errors.push(`${rel}: ${result.error}`);
     else if (result.found && result.text !== text)
       errors.push(

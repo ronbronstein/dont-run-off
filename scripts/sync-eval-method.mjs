@@ -11,9 +11,9 @@ const errors = [];
 let updated = 0;
 let skipped = 0;
 
-for (const { rel, path } of cases) {
+for (const { rel, path, profile } of cases) {
   const text = readFileSync(path, "utf8");
-  const result = withMethod(text, method);
+  const result = withMethod(text, method, profile);
   if (!result.found) {
     skipped++;
     continue;
