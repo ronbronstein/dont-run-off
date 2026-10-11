@@ -27,10 +27,9 @@ A new or empty project has none of these: say so, and route to "New".
 - **New** — no north star yet → shape it first (the `shaping` skill), or go straight to design if the goal is already clear.
 - **Existing · pick work** → recommend one next move, with its reason, and name the runner-up and why it lost. Show only those two; the user can ask for the rest.
 - **Existing · resume** → a slice is mid-flight → catch up: where we are, what's in progress, next step.
+- **Rush** — the user says they are short of time and names a target → skip the frame. Reply in 5 lines or fewer: your assumptions (1–3 lines), the first move, and "Go?". No runner-up, no options, no teaching, and no other questions: a decision that can wait comes after the first move. A list of questions costs the time they do not have.
 - **Fuzzy · explore** → offer `blindspot`, `lets-align`, or `directions`.
 
 ## 3. State the frame and wait
 
-One tight paragraph: the project, the session type, the current slice/goal, what "done" looks like, and what's NOT in scope. Propose the first move and **wait for a nod** before executing.
-
-**In a rush:** when the user says they are short of time and names a target, do not interview them. State your assumptions in 1–3 lines, propose the first move, and ask only for a yes. A list of questions costs the time they do not have.
+Not for a rush (above). One tight paragraph: the project, the session type, the current slice/goal, what "done" looks like, and what's NOT in scope. Propose the first move and **wait for a nod** before executing.

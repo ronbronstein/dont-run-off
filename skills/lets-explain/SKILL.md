@@ -28,9 +28,9 @@ Text is the default. Offer the next format when it helps, and build it only when
 - **A diagram,** when the change has a structure: a flow, an order of steps, parts that talk to each other, before and after. Put a Mermaid or plain-text diagram in the reply.
 - **A page,** when the change is large, or the user wants something to keep or to show others: one local HTML file with the explanation and its diagrams. Put it in a folder that git does not track, with the same rule as the `lets-align` review page, and give the path.
 
-## 4. Offer the quiz
+## 4. Offer the other formats and the quiz
 
-Ask: "Do you want a short quiz on this?" When the user says yes:
+End with one line that offers both, so the user knows they exist: "Do you want a diagram, a page, or a short quiz on this?" When the user picks the quiz:
 
 - Ask one question at a time, and wait for each answer.
 - Cover what changed; why (at least two questions, because this is where a wrong idea hides); what would break it; and how the user would notice in use.
