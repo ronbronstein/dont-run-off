@@ -7,16 +7,8 @@ trade-offs, then the detail if asked.
 'so what,' not line-by-line mechanics." / "staff engineer — go deep, skip the
 hand-holding." / "learning as I go — teach me the concept before using it."*
 
-**Task tool.** A `TASKS.md` in the project root, or the project's issue tracker
-if one is obvious. *(Alternatives: Taskwarrior, Jira, Linear, GitHub Issues.)*
-
-**Record files.** `DECISIONS.md` for decisions and reasoning, `current-state.md`
-for where things stand.
-
 **Build pipeline.** Shape the work, design it, then implement in small demoable
 slices, testing as you go.
-
-**Version control.** Git. Commit as you go, one logical change per commit.
 
 **Conventions.** *Your stack, testing bar, and house style — the opinions that
 are true for you but not for everyone. Leave blank if you have none yet.
@@ -28,3 +20,20 @@ error }`." / "Immutable — return new objects, never mutate in place."*
 Naming what usually goes wrong makes the agent watch for it. Common ones: "it
 runs off before I've agreed to anything" / "I can't tell what it actually did" /
 "I lose the thread between sessions."*
+
+## My setup
+
+The moves read these lines. Change any of them in plain words. A project's
+`CLAUDE.md` can repeat a line to change it for that project.
+
+- Status file: `current-state.md`
+- Decision log: `DECISIONS.md`
+- Tasks: *the tool and where. For example: "Taskwarrior; each repo names its
+  project in `TASKS.md`" / "GitHub Issues in this repo" / "none: the status
+  file lists what is next."*
+- Stop level: standard — stop before anything multi-step, unclear, or hard to
+  undo. *(Or "careful — stop and show the plan before any change to files, even
+  a small one." Or "fast — stop only before steps that are hard to undo or that
+  other people see, or when the goal is unclear.")*
+- Version control: Git. Commit as you go, one logical change per commit.
+- Work branch: the repo's default branch. Parallel copies: off.

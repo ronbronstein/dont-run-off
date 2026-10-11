@@ -32,18 +32,23 @@ Detect from the machine — don't ask what you can check:
 |---|---|
 | Task tool | `task` on PATH → Taskwarrior. A connected Jira/Linear MCP. `TASKS.md` in the repo. Else GitHub Issues if it's a GitHub remote. |
 | Version control | `git rev-parse` succeeds → Git. |
-| Record files | `DECISIONS.md` / `current-state.md` already present in the repo. |
+| Work branch | `git symbolic-ref --short refs/remotes/origin/HEAD` (strip `origin/`), else the current branch. |
+| Status file | The name the project already uses: `current-state.md`, `STATUS.md`, `docs/status.md`, `PROGRESS.md`, or a similar file that says where things stand. |
+| Decision log | The name the project already uses: `DECISIONS.md`, `docs/decisions/`, `docs/adr/`, or similar. |
 | Conventions | For a project target: the actual stack, test command, and lint setup. |
 
-Report what you found and let them correct it: *"I see Taskwarrior and git, and no record files yet. Right?"*
+Use the names the project already has. A user who keeps `STATUS.md` should not get a second status file because the default is `current-state.md`.
+
+Report what you found and let them correct it: *"I see Taskwarrior, git with `main` as the work branch, a status file at `docs/STATUS.md`, and no decision log. Right?"*
 
 Then ask what detection can't answer — **one question at a time**, not a form:
 
 1. **Altitude.** How do they want to be talked to? Offer the examples from `profile.md` as concrete choices rather than asking an open question.
 2. **Frictions.** What usually goes wrong when they work with an agent? This is the highest-value line in the whole harness and the one people skip. Don't accept a blank — offer the common ones ("it runs off before I've agreed to anything," "I can't tell what it actually did," "I lose the thread between sessions") and let them pick or add their own.
-3. **Conventions.** Only if detection left it empty and they seem to have opinions. Blank is a fine answer.
+3. **Stop level.** When should the agent stop and ask? Offer the three levels from `profile.md` — careful, standard, fast — with one line each on what changes. Standard is the default; it is today's rule.
+4. **Conventions.** Only if detection left it empty and they seem to have opinions. Blank is a fine answer.
 
-Fill the `profile.md` template with their answers. Delete the italic guidance text as you go — none of it should survive into the final file.
+Fill the `profile.md` template with their answers, and write the **My setup** block from what you detected and what they confirmed. A record file they do not want is "none", with where its content goes instead (for example: "Decision log: none. Decisions go in the status file, under 'Decided'."). Delete the italic guidance text as you go — none of it should survive into the final file.
 
 ## 4. Reconcile, don't append
 
@@ -69,7 +74,7 @@ Then write the target as:
 ...anything of theirs you kept...
 ```
 
-For a **project** target, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain.
+For a **project** target, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain. When this project differs from the global My setup (another status file, another task tool, another work branch), add a `## My setup` section with only the lines that differ.
 
 ## 6. Check what you just installed into
 

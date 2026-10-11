@@ -25,6 +25,12 @@
 <Rules specific to this project that differ from the language or framework
 default. Skip anything a competent reader would assume.>
 
+## My setup
+
+<Only the lines that differ from your global My setup, for example
+"- Status file: `docs/STATUS.md`" or "- Work branch: `staging`". Delete this
+section when nothing differs.>
+
 ## Gotchas
 
 <The things that have already bitten someone. This is the highest-value
