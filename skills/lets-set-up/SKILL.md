@@ -22,6 +22,8 @@ Ask which, unless it's obvious from what they said:
 
 Read the target file if it exists. Then check for `<!-- dont-run-off:method` — if present this is an **upgrade**: replace only the text between that marker and `<!-- /dont-run-off:method -->`, leave everything else exactly as it is, and skip to step 5.
 
+An upgrade of a file with no `## My setup` section (set up before My setup existed) adds it first, because the new method would otherwise switch the replies to strict STE without asking. Detect every My setup line with the table in step 3 and confirm them in one message. Then ask only the Language and Stop level questions from step 3, one at a time; if their file already has a rule about how to write replies, propose the Language line that matches it. Write the My setup block from `profile.md` directly below the method block, then go to step 5.
+
 Otherwise it's a fresh install. Read their existing content properly and note anything that overlaps the method — a section on how they want to be talked to, rules about planning, testing, or commits. You'll reconcile these in step 4, not silently duplicate them.
 
 ## 3. Detect, then ask only what's left

@@ -23,7 +23,8 @@ The old names still work in this release. Each one runs the new move and tells y
 The old names go away in the next release.
 
 **After you update,** run `/dont-run-off:lets-set-up` once. It refreshes the method block in your
-`CLAUDE.md`, which still names the old moves.
+`CLAUDE.md`, which still names the old moves. If you have no My setup block yet, it asks two
+questions first (the language level and the stop level) and adds the block.
 
 ### New
 
