@@ -238,6 +238,19 @@ I can't tell what it actually did. I lose the thread between sessions.
 
 **Conventions is where your opinions go** — stack, testing bar, house style. Deliberately not in the method: those are true for you, not for everyone, and a shared harness full of one person's preferences is how it stops being usable by anyone else.
 
+**My setup is how the harness fits your workflow** — in plain words, not a config file:
+
+```markdown
+## My setup
+- Status file: `docs/STATUS.md`
+- Decision log: none. Decisions go in the status file, under "Decided".
+- Tasks: GitHub Issues in this repo
+- Stop level: fast — stop only before steps that are hard to undo or that others see
+- Work branch: `staging`. Parallel copies: off.
+```
+
+Every move reads these lines, so nothing assumes a file name, a task tool, or how careful you want the agent to be. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
+
 Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
 
 <br>
