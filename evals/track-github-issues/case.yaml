@@ -105,10 +105,12 @@ execution:
     - Work branch: `main`. Parallel copies: off.
   # END method
 graders:
-  - name: uses-gh-issue
+  # It goes to GitHub: it tries to create the issue, or it checks the login
+  # first (the guide's first step) and stops there when there is none.
+  - name: routes-to-github
     type: tool_used
     tool: Bash
-    input_match: '\bgh\s+issue\s+create\b'
+    input_match: '\bgh\s+(issue\s+create|auth\s+status)\b'
     min: 1
     arm: both
   - name: no-taskwarrior
@@ -128,9 +130,10 @@ graders:
     criteria: >-
       The user asked to add a task, and their setup says tasks live in GitHub
       Issues. The test has no network and no GitHub login, so a gh command
-      fails. PASS only if the agent tried to create the issue with gh, and its
-      last message says plainly whether the issue was created; when it was
-      not, it says why and gives the user the command or the issue text to use.
+      fails. PASS only if the agent went to GitHub with gh (it tried to create
+      the issue, or it checked the login first and stopped), and its last
+      message says plainly whether the issue was created; when it was not, it
+      says why and gives the user the command or the issue text to use.
       FAIL if it claims the issue exists when the command failed, or if it put
       the task somewhere else without saying so.
   # An indicator only (not scored): did the lets-track skill run?
