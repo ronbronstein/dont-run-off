@@ -44,9 +44,10 @@ Report what you found and let them correct it: *"I see Taskwarrior, git with `ma
 Then ask what detection can't answer — **one question at a time**, not a form:
 
 1. **Altitude.** How do they want to be talked to? Offer the examples from `profile.md` as concrete choices rather than asking an open question.
-2. **Frictions.** What usually goes wrong when they work with an agent? This is the highest-value line in the whole harness and the one people skip. Don't accept a blank — offer the common ones ("it runs off before I've agreed to anything," "I can't tell what it actually did," "I lose the thread between sessions") and let them pick or add their own.
-3. **Stop level.** When should the agent stop and ask? Offer the three levels from `profile.md` — careful, standard, fast — with one line each on what changes. Standard is the default; it is today's rule.
-4. **Conventions.** Only if detection left it empty and they seem to have opinions. Blank is a fine answer.
+2. **Language.** Which language level should the agent's replies use? Offer the four levels from the method — strict STE (the default), 80% STE, plain, technical — with one line each and a short example sentence. Strict STE is the default because its short, single-meaning sentences are the easiest to check; a user who finds it stiff picks 80% STE. When their file already has a rule about how to write replies, reconcile it in step 4 instead of adding a second one.
+3. **Frictions.** What usually goes wrong when they work with an agent? This is the highest-value line in the whole harness and the one people skip. Don't accept a blank — offer the common ones ("it runs off before I've agreed to anything," "I can't tell what it actually did," "I lose the thread between sessions") and let them pick or add their own.
+4. **Stop level.** When should the agent stop and ask? Offer the three levels from `profile.md` — careful, standard, fast — with one line each on what changes. Standard is the default; it is today's rule.
+5. **Conventions.** Only if detection left it empty and they seem to have opinions. Blank is a fine answer.
 
 Fill the `profile.md` template with their answers, and write the **My setup** block from what you detected and what they confirmed. A record file they do not want is "none", with where its content goes instead (for example: "Decision log: none. Decisions go in the status file, under 'Decided'."). Delete the italic guidance text as you go — none of it should survive into the final file.
 

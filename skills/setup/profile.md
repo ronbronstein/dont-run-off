@@ -31,6 +31,9 @@ The moves read these lines. Change any of them in plain words. A project's
 - Tasks: *the tool and where. For example: "Taskwarrior; each repo names its
   project in `TASKS.md`" / "GitHub Issues in this repo" / "none: the status
   file lists what is next."*
+- Language: strict STE. *(Or "80% STE", "plain", or "technical". The method
+  says what each one means. STE is ASD-STE100 Simplified Technical English: short,
+  plain sentences with one meaning each.)*
 - Stop level: standard — stop before anything multi-step, unclear, or hard to
   undo. *(Or "careful — stop and show the plan before any change to files, even
   a small one." Or "fast — stop only before steps that are hard to undo or that
