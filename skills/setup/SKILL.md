@@ -30,7 +30,7 @@ Detect from the machine — don't ask what you can check:
 
 | Field | How to detect |
 |---|---|
-| Task tool | `task` on PATH → Taskwarrior. A connected Jira/Linear MCP. `TASKS.md` in the repo. Else GitHub Issues if it's a GitHub remote. |
+| Task tool | `TASKS.md` in the repo says. Else `task` on PATH → Taskwarrior; Linear or Jira tools in your tool list → that tool; a GitHub remote → GitHub Issues. A tool that the `lets-track` skill has no guide for: follow its "your tool" guide with the user. |
 | Version control | `git rev-parse` succeeds → Git. |
 | Work branch | `git symbolic-ref --short refs/remotes/origin/HEAD` (strip `origin/`), else the current branch. |
 | Status file | The name the project already uses: `current-state.md`, `STATUS.md`, `docs/status.md`, `PROGRESS.md`, or a similar file that says where things stand. |

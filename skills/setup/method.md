@@ -67,6 +67,7 @@ Reach for these skills as the moment calls for them:
 | `quiz` | I need to confirm I actually understand what landed |
 | `catchup` | I've lost the thread |
 | `lets-look-back` | I ask what we decided or did in an earlier session |
+| `lets-track` | Anything about tasks: what's next, add, start, park, done |
 | `wrap-session` | Ending or pausing a session |
 | `checkup` | Something isn't firing, or my setup needs auditing |
 

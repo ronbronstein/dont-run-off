@@ -147,7 +147,7 @@ The same file works per-project: a `./CLAUDE.md` holding this project's facts �
 <tr><td><code>lets-look-back</code></td><td>You need something from an earlier session</td><td>The sessions that discussed it, with dates, short quotes and the command that reopens each one — searched in full, not only by title</td></tr>
 <tr><td><code>wrap-session</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>
 <tr><td><code>checkup</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>
-<tr><td><code>taskwarrior</code></td><td>You want local task tracking</td><td>Safe, explicitly-scoped task management across every project in one store</td></tr>
+<tr><td><code>lets-track</code></td><td>Anything about tasks</td><td>Your own task tool — Taskwarrior, GitHub Issues, Linear, Jira, a to-do file, or none — through the same seven steps, acting on stable IDs so the wrong task never changes</td></tr>
 </table>
 
 <br>
