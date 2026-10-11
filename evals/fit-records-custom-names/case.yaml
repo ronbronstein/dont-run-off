@@ -123,9 +123,9 @@ graders:
       "Working on: search. Next: tests for search." and listed one decision
       (a simple text filter, 2026-10-01). In this session the user added tests
       for search and decided to keep search case-insensitive. PASS only if the
-      file now records that the search tests were added (or that this step is
-      done), and lists the decision to keep search case-insensitive. FAIL if
-      the file is unchanged, or misses either fact.
+      file now says, in any words, that a test for search exists (it may also
+      say that the test needs more work), and lists the decision to keep search
+      case-insensitive. FAIL if the file is unchanged, or misses either fact.
   # An indicator only (not scored): did the wrap-session skill run?
   - name: wrap-session-ran
     type: tool_used
