@@ -110,6 +110,28 @@ const round2Open = {
   ],
 };
 const { project: _drop, ...noProject } = round1Open;
+// The schema lets a note-only item leave out `options`.
+const noteOnly = {
+  ...base,
+  rounds: [
+    {
+      id: "r1",
+      title: "Round 1: now",
+      needed_by: "the build",
+      status: "open",
+      groups: [
+        {
+          id: "g1",
+          title: "Now",
+          items: [
+            Q1,
+            { id: "Q4", title: "Anything to avoid", q: "What must we avoid?" },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 // ---------- server ----------
 const dir = mkdtempSync(join(tmpdir(), "review-page-test-"));
@@ -282,6 +304,18 @@ await test("Copy Markdown names the project and the title", async () => {
     "# Review answers: Notes app | sign-in review",
     "first line of the export",
   );
+});
+
+await test("a note-only item with no options key shows as an open card", async () => {
+  const page = await freshPage();
+  await show(page, noteOnly);
+  expectEqual(
+    await page.locator('.card[data-id="Q4"]').count(),
+    1,
+    "cards for Q4",
+  );
+  expectEqual(await pill(page, "Q4"), "Open", "Q4 status");
+  expectEqual(await progress(page), "0 of 2 answered", "progress");
 });
 
 await test("no console errors", async () => {

@@ -169,7 +169,9 @@ function setAccent(hex){if(!/^#[0-9a-f]{6}$/i.test(hex))return;const rgb=hex.sli
   st.setProperty("--on-accent",ratio([255,255,255],rgb)>=4.5?"#fff":"#0A0A0B")}
 
 function init(){
-const R=window.REVIEW,AG=R.agent||"Claude",NAME=R.project?`${R.project} | ${R.title}`:R.title;
+// A note-only item may leave out options (references/schema.md); give it an empty list once, here.
+const withOptions=rv=>({...rv,rounds:rv.rounds.map(rd=>({...rd,groups:rd.groups.map(g=>({...g,items:g.items.map(it=>({...it,options:it.options??[]}))}))}))});
+const R=withOptions(window.REVIEW),AG=R.agent||"Claude",NAME=R.project?`${R.project} | ${R.title}`:R.title;
 document.title=NAME;
 if(R.accent)setAccent(R.accent);
 const plat=navigator.userAgentData?.platform||navigator.platform||"";
