@@ -1,15 +1,9 @@
 ---
 name: catchup
-description: Use to get the user back up to speed mid-project — where we are, what was decided, what's next — so they don't lose the thread. Trigger when the user returns to a task, seems lost, or asks to be caught up or re-oriented.
+description: Old name of lets-catch-up. Kept for one release so that typed habits still work; it points to the new name.
+disable-model-invocation: true
 ---
 
-# Catch Up
+# Renamed: `catchup` is now `lets-catch-up`
 
-Re-orient fast.
-
-1. What's been done so far on this task/session.
-2. Key decisions and the reasoning — check the decision log (My setup names it) if there is one.
-3. What's still open or undecided.
-4. The single best next step.
-
-Keep it short and plain — brief the user, don't replay a transcript.
+Tell the user in one line: "`/dont-run-off:catchup` is now `/dont-run-off:lets-catch-up`. The old name goes away in the next release." Then do what they asked with the `lets-catch-up` skill, with the same words: $ARGUMENTS

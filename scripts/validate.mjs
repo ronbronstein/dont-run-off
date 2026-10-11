@@ -26,7 +26,7 @@ import { EVALS, caseFiles, withMethod } from "./eval-method.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SKILLS = join(ROOT, "skills");
-const SETUP = join(SKILLS, "setup");
+const SETUP = join(SKILLS, "lets-set-up");
 const MAX_ALWAYS_ON_LINES = 200;
 
 const errors = [];
@@ -62,7 +62,7 @@ const privateBlocklist = existsSync(blocklistFile)
 // `profile.md` exists to hold personal detail, and package.json/LICENSE carry
 // the author's name and email by design.
 const LEAK_EXEMPT = new Set([
-  "skills/setup/profile.md",
+  "skills/lets-set-up/profile.md",
   "package.json",
   "LICENSE",
 ]);
@@ -138,6 +138,23 @@ for (const dir of dirs) {
     );
 }
 
+// Redirects: a renamed skill keeps its old name for one release as a skill
+// whose description starts with "Old name of <new>". It must run only when
+// typed (no always-on cost) and point to a skill that exists.
+for (const dir of dirs) {
+  const file = join(SKILLS, dir, "SKILL.md");
+  if (!existsSync(file)) continue;
+  const text = readFileSync(file, "utf8");
+  const target = text.match(/^description:\s*Old name of ([a-z0-9-]+)\b/m)?.[1];
+  if (!target) continue;
+  if (!/^disable-model-invocation:\s*true\s*$/m.test(text))
+    errors.push(
+      `skills/${dir}/SKILL.md: a redirect must set disable-model-invocation: true, or its description costs context in every session`,
+    );
+  if (!names.has(target))
+    errors.push(`skills/${dir}/SKILL.md: redirects to '${target}', which does not exist`);
+}
+
 // Cross-references between skills must resolve.
 for (const dir of dirs) {
   const file = join(SKILLS, dir, "SKILL.md");
@@ -153,14 +170,14 @@ for (const dir of dirs) {
 }
 
 // ---------- the always-on layer ----------
-// The `setup` skill writes these two into the user's CLAUDE.md, which Claude
+// The `lets-set-up` skill writes these two into the user's CLAUDE.md, which Claude
 // Code then loads in full on every message. Size is correctness: the docs put
 // the ceiling at 200 lines, past which adherence drops.
 
 let alwaysOnTotal = 0;
 
 for (const f of ["method.md", "profile.md"]) {
-  const at = `skills/setup/${f}`;
+  const at = `skills/lets-set-up/${f}`;
   const path = join(SETUP, f);
 
   if (!existsSync(path)) {
@@ -199,16 +216,16 @@ const setupSkill = existsSync(join(SETUP, "SKILL.md"))
   ? readFileSync(join(SETUP, "SKILL.md"), "utf8")
   : "";
 if (!setupSkill)
-  errors.push("skills/setup/SKILL.md: missing — nothing installs the harness");
+  errors.push("skills/lets-set-up/SKILL.md: missing — nothing installs the harness");
 for (const f of ["method.md", "profile.md"])
   if (setupSkill && !setupSkill.includes(f))
-    errors.push(`skills/setup/SKILL.md: never references ${f}`);
+    errors.push(`skills/lets-set-up/SKILL.md: never references ${f}`);
 
 // An upgrade replaces the marked block in place, so the marker the skill writes
 // has to match the one it looks for.
 if (setupSkill && !setupSkill.includes("<!-- dont-run-off:method"))
   errors.push(
-    "skills/setup/SKILL.md: missing the dont-run-off:method marker — upgrades need a target",
+    "skills/lets-set-up/SKILL.md: missing the dont-run-off:method marker — upgrades need a target",
   );
 
 // ---------- plugin + marketplace manifests ----------

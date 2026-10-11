@@ -76,21 +76,22 @@ execution:
 
     ## The moves
 
-    Reach for these skills as the moment calls for them:
+    Reach for these skills as the moment calls for them. `lets-explain` runs only when I start it, so suggest that I type it.
 
-    | Skill | When |
-    |---|---|
-    | `start` | Beginning a work session |
-    | `shaping` | Deciding whether / what / how big / how phased |
-    | `blindspot` | Entering territory I don't know |
-    | `lets-align` | The ask is fuzzy, or I have many questions or decisions to answer |
-    | `directions` | I want real options before converging |
-    | `lets-explain` | I need to understand what landed. Only I can start it, so suggest that I type it |
-    | `catchup` | I've lost the thread |
-    | `lets-look-back` | I ask what we decided or did in an earlier session |
-    | `lets-track` | Anything about tasks: what's next, add, start, park, done |
-    | `wrap-session` | Ending or pausing a session |
-    | `checkup` | Something isn't firing, or my setup needs auditing |
+    | Group | Skill | When |
+    |---|---|---|
+    | Session | `lets-start` | Beginning a work session |
+    | | `lets-catch-up` | I've lost the thread |
+    | | `lets-look-back` | I ask what we decided or did in an earlier session |
+    | | `lets-wrap` | Ending or pausing a session |
+    | Decide | `lets-align` | The ask is fuzzy, or I have many questions or decisions to answer |
+    | | `lets-shape` | Deciding whether / what / how big / how phased |
+    | | `lets-explore` | I want real options before converging |
+    | | `lets-find-gaps` | Entering territory I don't know |
+    | Check | `lets-explain` | I need to understand what landed |
+    | | `lets-check` | Something isn't firing, or my setup needs auditing |
+    | Set up | `lets-set-up` | Installing, personalizing, or upgrading this harness |
+    | | `lets-track` | Anything about tasks: what's next, add, start, park, done |
 
     ## Checking this actually loaded
 
@@ -132,8 +133,8 @@ graders:
       with a reason, names one runner-up, and then waits for the user's nod.
       FAIL if it starts the work, gives all three as an equal menu, or gives no
       single pick.
-  - name: start-ran
+  - name: lets-start-ran
     type: tool_used
     tool: Skill
-    input_match: '"start"|:start'
+    input_match: 'lets-start'
     min: 1

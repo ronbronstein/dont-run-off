@@ -62,8 +62,8 @@ In chat, send one question per message and wait for the answer. A question tool 
 - The page is local and private, and it saves only in that one browser. Put no secrets in the data file.
 - Change the page itself only here, in this skill's `assets/review.html`, never in a project. That is what makes every project get the same result.
 
-## Hand-offs
+## Next move
 
-- The user wants to see options before any questions: `directions`.
-- The decisions are in and the work needs sizing: `shaping`.
-- The area is new to the user: `blindspot` first.
+- The user wants to see options before any questions: `lets-explore`.
+- The decisions are in and the work needs sizing: `lets-shape`.
+- The area is new to the user: `lets-find-gaps` first.

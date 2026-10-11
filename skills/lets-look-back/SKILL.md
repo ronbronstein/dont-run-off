@@ -48,4 +48,4 @@ A later session can change an earlier decision, so always read the newest match 
 
 When the answer is a decision that the project's decision log does not hold, offer to add it, with its date and the session id. Then the next person who asks finds it without a search.
 
-The user wants where things stand now, not history: the `catchup` skill.
+**Next move:** `lets-catch-up` when the user wants where things stand now, not history.

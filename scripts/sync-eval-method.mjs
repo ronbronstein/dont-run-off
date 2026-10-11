@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copies the current method (skills/setup/method.md) into every eval case.
+// Copies the current method (skills/lets-set-up/method.md) into every eval case.
 // Run: npm run evals:sync (npm run evals runs it first).
 
 import { readFileSync, writeFileSync } from "node:fs";

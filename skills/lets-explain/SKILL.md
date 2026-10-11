@@ -44,4 +44,4 @@ A pass means real understanding. That is the bar before the user accepts the wor
 - The explanation was not clear: explain again in another way, or in the next format.
 - A concept is missing: teach it in 2–4 plain sentences, then ask again.
 
-The user wants to know where the whole project stands, not one change: the `catchup` skill.
+**Next move:** accept or merge the change on the user's word; `lets-wrap` at the end of the session. For where the whole project stands, not one change: `lets-catch-up`.

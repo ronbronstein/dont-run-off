@@ -134,19 +134,25 @@ The same file works per-project: a `./CLAUDE.md` holding this project's facts �
 
 ## The moves
 
+Every move starts with `lets-`, so typing `/lets` in Claude Code finds them. Four groups:
+
 <table>
 <tr><th align="left" width="20%">Skill</th><th align="left" width="34%">Use it when</th><th align="left">What you get</th></tr>
-<tr><td><code>setup</code></td><td>Installing, or upgrading later</td><td>Your <code>CLAUDE.md</code> written and personalized — detected where it can be, asked where it can't, merged with whatever was already there</td></tr>
-<tr><td><code>start</code></td><td>Beginning a session</td><td>Where things stand, what type of session this is, and the right next move — before anything gets built</td></tr>
-<tr><td><code>shaping</code></td><td>Deciding whether to build at all</td><td>Frame the real problem, size it, judge if it's worth it, phase it into slices</td></tr>
-<tr><td><code>blindspot</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
-<tr><td><code>lets-align</code></td><td>The agent needs answers or decisions from you</td><td>A few questions in chat, or a local review page for many: plain questions, options with pros and cons, its recommended pick, notes and files. You paste the answers back.</td></tr>
-<tr><td><code>directions</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
-<tr><td><code>lets-explain</code></td><td>A change just landed (you type it)</td><td>The change explained at your level, with a diagram or a local page when that helps, then a short quiz until you actually understand it</td></tr>
-<tr><td><code>catchup</code></td><td>You've lost the thread</td><td>Where we are, what was decided and why, the single next step</td></tr>
+<tr><th align="left" colspan="3">Session <sub>— Orient, keep the thread, close cleanly</sub></th></tr>
+<tr><td><code>lets-start</code></td><td>Beginning a session</td><td>Where things stand, what type of session this is, and the right next move — before anything gets built</td></tr>
+<tr><td><code>lets-catch-up</code></td><td>You've lost the thread</td><td>Where we are, what was decided and why, the single next step</td></tr>
 <tr><td><code>lets-look-back</code></td><td>You need something from an earlier session</td><td>The sessions that discussed it, with dates, short quotes and the command that reopens each one — searched in full, not only by title</td></tr>
-<tr><td><code>wrap-session</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>
-<tr><td><code>checkup</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>
+<tr><td><code>lets-wrap</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>
+<tr><th align="left" colspan="3">Decide <sub>— Before anything gets built</sub></th></tr>
+<tr><td><code>lets-align</code></td><td>The agent needs answers or decisions from you</td><td>A few questions in chat, or a local review page for many: plain questions, options with pros and cons, its recommended pick, notes and files. You paste the answers back.</td></tr>
+<tr><td><code>lets-shape</code></td><td>Deciding whether to build at all</td><td>Frame the real problem, size it, judge if it's worth it, phase it into slices</td></tr>
+<tr><td><code>lets-explore</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
+<tr><td><code>lets-find-gaps</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
+<tr><th align="left" colspan="3">Check <sub>— Know what landed and what is in force</sub></th></tr>
+<tr><td><code>lets-explain</code></td><td>A change just landed (you type it)</td><td>The change explained at your level, with a diagram or a local page when that helps, then a short quiz until you actually understand it</td></tr>
+<tr><td><code>lets-check</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>
+<tr><th align="left" colspan="3">Set up <sub>— Fit the harness to you</sub></th></tr>
+<tr><td><code>lets-set-up</code></td><td>Installing, or upgrading later</td><td>Your <code>CLAUDE.md</code> written and personalized — detected where it can be, asked where it can't, merged with whatever was already there</td></tr>
 <tr><td><code>lets-track</code></td><td>Anything about tasks</td><td>Your own task tool — Taskwarrior, GitHub Issues, Linear, Jira, a to-do file, or none — through the same seven steps, acting on stable IDs so the wrong task never changes</td></tr>
 </table>
 
@@ -185,7 +191,7 @@ Two commands, then one conversation. In Claude Code:
 That installs the skills. A plugin can't write your `CLAUDE.md`, so the method arrives the same way everything else here does — by asking first:
 
 ```
-/dont-run-off:setup
+/dont-run-off:lets-set-up
 ```
 
 It checks what it can see for itself (your task tool, version control, whether record files already exist), asks about the two things it can't — how you want to be talked to, and what usually goes wrong when you work with an agent — and writes the result.
@@ -200,7 +206,7 @@ Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't,
 npx skills add ronbronstein/dont-run-off -g
 ```
 
-Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/setup`** (no plugin namespace on this path, so it's `/setup`, not `/dont-run-off:setup`).
+Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/lets-set-up`** (no plugin namespace on this path, so it's `/setup`, not `/dont-run-off:lets-set-up`).
 
 The plugin route above is still the one to prefer: it updates itself. This one you update by re-running `npx skills update`.
 
@@ -208,7 +214,7 @@ The plugin route above is still the one to prefer: it updates itself. This one y
 
 ```
 /plugin update dont-run-off@kidamti
-/dont-run-off:setup
+/dont-run-off:lets-set-up
 ```
 
 Setup sees the markers, replaces the method block, and leaves your profile exactly as you wrote it.

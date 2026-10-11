@@ -49,4 +49,4 @@ Use the user's words for titles. One task is one outcome that someone can check.
 
 To connect a repo, follow the guide's "Connect" section, and record it in the repo's `TASKS.md`: which tool, where the tasks live, and any local tags or labels. That file has one job: how this repo tracks tasks.
 
-The user wants to decide what to work on, not to manage tasks: the `shaping` skill.
+**Next move:** `lets-shape` when the user must decide what to work on, not manage tasks.

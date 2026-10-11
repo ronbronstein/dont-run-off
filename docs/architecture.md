@@ -32,7 +32,7 @@ The split exists entirely so that shipping you a new method doesn't cost you you
 
 **The project file gets facts, not method** — stack, commands, gotchas. Repeating the method in every repo pays for it twice out of the same budget.
 
-**Nothing installs this layer automatically.** A Claude Code plugin can ship skills, agents, hooks and MCP servers, but it cannot write your `CLAUDE.md`. That's why the `setup` skill exists: it's the only path from an installed plugin to a working always-on layer, and it's why installing is a short conversation rather than a copy command.
+**Nothing installs this layer automatically.** A Claude Code plugin can ship skills, agents, hooks and MCP servers, but it cannot write your `CLAUDE.md`. That's why the `lets-set-up` skill exists: it's the only path from an installed plugin to a working always-on layer, and it's why installing is a short conversation rather than a copy command.
 
 ### 2. On-demand — the skills
 
@@ -68,7 +68,7 @@ The layer people skip, and the one that matters most if you can't read the diff.
 | Question | How to answer it |
 |---|---|
 | What actually loaded this session? | `/context all` |
-| Which of it *wins* where sources disagree? | the `checkup` skill |
+| Which of it *wins* where sources disagree? | the `lets-check` skill |
 | Is my install healthy, and my settings valid? | `/doctor` |
 | What skills and hooks are active, from where? | `/skills`, `/hooks`, `/status` |
 | What did it just do? | the recap rule in the method block |
@@ -77,7 +77,7 @@ The layer people skip, and the one that matters most if you can't read the diff.
 
 **Run `/context all` after any setup change.** It's the difference between believing your rules are loaded and knowing it.
 
-The built-ins each show one surface honestly, but none of them answers the question that actually bites: when two sources say different things, which one is in force? Precedence runs personal → project → plugin → bundled, so a stale skill in `~/.claude/skills/` quietly outranks the plugin copy you just upgraded. A slash command sharing a skill's name wins when you type it. A `CLAUDE.md` in a subdirectory never loads at all unless something reads it. None of these produce an error — the instruction simply isn't in force. That gap is what `checkup` exists for.
+The built-ins each show one surface honestly, but none of them answers the question that actually bites: when two sources say different things, which one is in force? Precedence runs personal → project → plugin → bundled, so a stale skill in `~/.claude/skills/` quietly outranks the plugin copy you just upgraded. A slash command sharing a skill's name wins when you type it. A `CLAUDE.md` in a subdirectory never loads at all unless something reads it. None of these produce an error — the instruction simply isn't in force. That gap is what `lets-check` exists for.
 
 ## Auto memory — the other thing writing to your context
 

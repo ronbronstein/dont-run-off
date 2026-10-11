@@ -6,7 +6,7 @@ The toolkit is meant to grow *and shrink*. A skill that isn't pulling its weight
 
 A skill has to clear all five:
 
-1. **Agnostic.** No personal names, no specific employers or clients, no one person's workflow. Anything personal belongs in the user's own profile block — the `setup` skill collects it, and skills refer to it rather than embedding it. If you can tell whose setup a skill came from, it isn't ready.
+1. **Agnostic.** No personal names, no specific employers or clients, no one person's workflow. Anything personal belongs in the user's own profile block — the `lets-set-up` skill collects it, and skills refer to it rather than embedding it. If you can tell whose setup a skill came from, it isn't ready.
 2. **Earns its keep.** It changes what the agent actually does. Restating good intentions ("be careful," "think it through") is not a skill — those get ignored. Every line should alter behavior or be cut.
 3. **Small and single-purpose.** One job per skill. If it needs section headers to hold two unrelated jobs, it's two skills.
 4. **Triggerable.** The `description` frontmatter is how an agent decides to load it. Write it for that job: say when to use it and include the natural phrases a user would actually type. A vague description means a skill that never fires.
