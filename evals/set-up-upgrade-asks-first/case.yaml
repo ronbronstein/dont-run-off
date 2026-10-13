@@ -1,0 +1,51 @@
+schema_version: "1.1"
+name: set-up-upgrade-asks-first
+description: >-
+  lets-set-up, upgrade path. CLAUDE.md has the old method block and no My
+  setup section. The agent must not write yet: it confirms what it detected and
+  asks only the language (and later the stop level) question, one at a time.
+  It does not ask the fresh-install questions (altitude, frictions). Run it with
+  --ablation none: no method in the system prompt, the skill drives it.
+tags: [set-up, upgrade, my-setup]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 25
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Bash, Write, Edit]
+graders:
+  - name: no-edit
+    type: tool_used
+    tool: Edit
+    min: 0
+    max: 0
+  - name: no-write
+    type: tool_used
+    tool: Write
+    min: 0
+    max: 0
+  - name: method-block-unchanged
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: 'offer to interview me'
+  - name: confirms-then-asks-one
+    type: llm
+    criteria: >-
+      The user asked to upgrade the harness in a CLAUDE.md that has an old
+      method block and no "My setup" section. The skill says: confirm the
+      detected My setup lines (status file, decision log, tasks, version
+      control, work branch) in one message, then ask only the Language and the
+      Stop level questions, one at a time. PASS only if the last message shows
+      the detected setup for the user to confirm, and asks at most one
+      preference question (the language level, or the stop level), and does
+      not claim the upgrade is done. It is also a PASS if it only asks the user
+      to confirm the detected lines and says the language question comes next.
+      FAIL if it asks about altitude or frictions, asks several preference
+      questions at once (a numbered list of questions), or says it wrote the
+      file.
+  # An indicator only (not scored): did the lets-set-up skill run?
+  - name: lets-set-up-ran
+    type: tool_used
+    tool: Skill
+    input_match: 'lets-set-up'
+    min: 1

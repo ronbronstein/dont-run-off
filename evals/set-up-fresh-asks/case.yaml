@@ -1,0 +1,48 @@
+schema_version: "1.1"
+name: set-up-fresh-asks
+description: >-
+  lets-set-up, fresh install into a project CLAUDE.md that has the user's own
+  lines. The agent detects first, reports what it found, and asks one question
+  at a time. It writes nothing before the answers. Run it with --ablation none.
+tags: [set-up, fresh-install]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 25
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Bash, Write, Edit]
+graders:
+  - name: no-edit
+    type: tool_used
+    tool: Edit
+    min: 0
+    max: 0
+  - name: no-write
+    type: tool_used
+    tool: Write
+    min: 0
+    max: 0
+  - name: claude-md-unchanged
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: 'dont-run-off:method'
+    match: not_contains
+  - name: detects-then-asks-one
+    type: llm
+    criteria: >-
+      The user asked to set up the harness in this project's CLAUDE.md, which
+      has their own lines (stack, and a planning rule) and no method yet. The
+      skill says: detect from the machine (git, the work branch main, the
+      status file current-state.md, the decision log DECISIONS.md), report it
+      for the user to confirm, then ask what detection cannot answer, one
+      question at a time. PASS only if the last message reports what it
+      detected, asks at most one question that needs the user's preference or
+      confirmation (a confirmation of the detected setup counts as one), and
+      does not claim the setup is done. FAIL if it asks a numbered list of
+      several questions at once, or says it wrote the file.
+  # An indicator only (not scored): did the lets-set-up skill run?
+  - name: lets-set-up-ran
+    type: tool_used
+    tool: Skill
+    input_match: 'lets-set-up'
+    min: 1

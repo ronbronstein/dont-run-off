@@ -1,0 +1,57 @@
+schema_version: "1.1"
+name: set-up-upgrade-writes
+description: >-
+  lets-set-up, upgrade path, with the answers given up front. The new method
+  replaces the old block, a My setup block goes directly below it with the
+  given language (plain) and stop level (standard), the user's own sections
+  stay, and a backup exists. Run it with --ablation none.
+tags: [set-up, upgrade, my-setup]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  max_turns: 40
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Bash, Write, Edit]
+graders:
+  - name: new-method-in
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: 'One pick and the runner-up'
+  - name: old-method-gone
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: 'offer to interview me'
+    match: not_contains
+  - name: one-method-block
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: 'dont-run-off:method — managed[\s\S]*dont-run-off:method — managed'
+    match: not_contains
+  - name: my-setup-below-method
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: '<!-- /dont-run-off:method -->[\s\S]*## My setup[\s\S]*[Ll]anguage[^\n]*[Pp]lain'
+  - name: stop-level-standard
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: '[Ss]top level[^\n]*[Ss]tandard'
+  - name: user-sections-kept
+    type: regex
+    target: { source: file, path: CLAUDE.md }
+    pattern: '## About this project[\s\S]*node app\.js'
+  - name: backup-made
+    type: regex
+    target: { source: file, path: CLAUDE.md.bak }
+    pattern: 'offer to interview me'
+  - name: no-push
+    type: tool_used
+    tool: Bash
+    input_match: '"command":\s*"[^"]*\bgit\b[^"]*\bpush\b'
+    min: 0
+    max: 0
+  # An indicator only (not scored): did the lets-set-up skill run?
+  - name: lets-set-up-ran
+    type: tool_used
+    tool: Skill
+    input_match: 'lets-set-up'
+    min: 1
