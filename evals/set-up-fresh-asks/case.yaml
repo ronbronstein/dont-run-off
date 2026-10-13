@@ -36,10 +36,11 @@ graders:
       status file current-state.md, the decision log DECISIONS.md), report it
       for the user to confirm, then ask what detection cannot answer, one
       question at a time. PASS only if the last message reports what it
-      detected, asks at most one question that needs the user's preference or
-      confirmation (a confirmation of the detected setup counts as one), and
-      does not claim the setup is done. FAIL if it asks a numbered list of
-      several questions at once, or says it wrote the file.
+      detected, asks the user to confirm it, asks at most one other question
+      (for example where the method should go, or the first preference
+      question), and does not claim the setup is done. FAIL if it asks a
+      numbered list of three or more questions at once, or says it wrote the
+      file.
   # An indicator only (not scored): did the lets-set-up skill run?
   - name: lets-set-up-ran
     type: tool_used
