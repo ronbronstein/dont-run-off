@@ -128,8 +128,8 @@ graders:
       tags are free text because users asked for their own words; open
       question: should tags be case-insensitive. PASS only if the last message
       says what is done, names the free-text decision with its reason, names
-      the open case question or the uncommitted filter work, and ends with one
-      recommended next step. It must be a brief (about 400 words or
+      the open case question or the uncommitted filter work, and recommends one
+      next step (the message may end with a question to the user). It must be a brief (about 400 words or
       fewer), not a replay of the files. FAIL if any of these is missing, if
       it gives a menu of next steps with no pick, or if it is much longer.
   # An indicator only (not scored): did the lets-catch-up skill run?
