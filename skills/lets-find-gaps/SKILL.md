@@ -1,18 +1,11 @@
 ---
 name: lets-find-gaps
-description: Use before starting in an unfamiliar area to surface the user's unknown unknowns and teach the essentials. Trigger when the user is entering new territory, says they don't know much about something, or asks for a "blindspot pass" or help finding what they don't know they don't know.
+description: Old name of lets-blindspot. Kept for one release so that typed habits still work; it points to the new name.
+disable-model-invocation: true
 ---
 
-# Blindspot Pass
+# Renamed: `lets-find-gaps` is now `lets-blindspot`
 
-The user may know little here. Help them find their *unknown unknowns* before they start. Brief them first; explore deeply only after they answer, because a long survey before the brief keeps the user waiting and buries the questions that matter.
+Do what they asked with the `lets-blindspot` skill, with their words below. End your reply with this line, after everything else: "`/dont-run-off:lets-find-gaps` is now `/dont-run-off:lets-blindspot`. The old name goes away in the next release."
 
-1. **Orient lightly.** Read only what you need to place the topic: the README and the one or two files closest to it, at most a few. Do not survey the codebase yet.
-2. **Surface what they probably don't know they don't know:** key concepts, how this is usually done, prior art or patterns already present, common pitfalls, and what "good" looks like here.
-3. **Teach the essentials** in plain language, at the user's altitude — enough to decide well, not a full tutorial.
-4. **End with the 3–5 questions** they should be able to answer before anything is built, and how they can prompt you better for this.
-5. **After they answer,** explore further where the answers point.
-
-Don't build yet — the goal is understanding, not output.
-
-**Next move:** `lets-align` to collect the user's answers, then `lets-shape`.
+Their words: $ARGUMENTS

@@ -66,4 +66,4 @@ In chat, send one question per message and wait for the answer. A question tool 
 
 - The user wants to see options before any questions: `lets-explore`.
 - The decisions are in and the work needs sizing: `lets-shape`.
-- The area is new to the user: `lets-find-gaps` first.
+- The area is new to the user: `lets-blindspot` first.

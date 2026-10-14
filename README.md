@@ -147,7 +147,7 @@ Every move starts with `lets-`, so typing `/lets` in Claude Code finds them. Fou
 <tr><td><code>lets-align</code></td><td>The agent needs answers or decisions from you</td><td>A few questions in chat, or a local review page for many: plain questions, options with pros and cons, its recommended pick, notes and files. You paste the answers back.</td></tr>
 <tr><td><code>lets-shape</code></td><td>Deciding whether to build at all</td><td>Frame the real problem, size it, judge if it's worth it, phase it into slices</td></tr>
 <tr><td><code>lets-explore</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
-<tr><td><code>lets-find-gaps</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
+<tr><td><code>lets-blindspot</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
 <tr><th align="left" colspan="3">Check <sub>— Know what landed and what is in force</sub></th></tr>
 <tr><td><code>lets-explain</code></td><td>A change just landed (you type it)</td><td>The change explained at your level, with a diagram or a local page when that helps, then a short quiz until you actually understand it</td></tr>
 <tr><td><code>lets-check</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>

@@ -71,7 +71,7 @@ Reach for these skills as the moment calls for them. `lets-explain` runs only wh
 | Decide | `lets-align` | The ask is fuzzy, or I have many questions or decisions to answer |
 | | `lets-shape` | Deciding whether / what / how big / how phased |
 | | `lets-explore` | I want real options before converging |
-| | `lets-find-gaps` | Entering territory I don't know |
+| | `lets-blindspot` | Entering territory I don't know |
 | Check | `lets-explain` | I need to understand what landed |
 | | `lets-check` | Something isn't firing, or my setup needs auditing |
 | Set up | `lets-set-up` | Installing, personalizing, or upgrading this harness |

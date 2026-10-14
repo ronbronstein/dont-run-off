@@ -28,10 +28,10 @@ A new or empty project has none of these: say so, and route to "New".
 - **Existing · pick work** → recommend one next move, with its reason, and name the runner-up and why it lost. Show only those two; the user can ask for the rest.
 - **Existing · resume** → a slice is mid-flight → catch up: where we are, what's in progress, next step.
 - **Rush** — the user says they are short of time and names a target → skip the frame. Reply in 5 lines or fewer: your assumptions (1–3 lines), the first move, and "Go?". No runner-up, no options, no teaching, and no other questions: a decision that can wait comes after the first move. A list of questions costs the time they do not have.
-- **Fuzzy · explore** → offer `lets-find-gaps`, `lets-align`, or `lets-explore`.
+- **Fuzzy · explore** → offer `lets-blindspot`, `lets-align`, or `lets-explore`.
 
 ## 3. State the frame and wait
 
 Not for a rush (above). One tight paragraph: the project, the session type, the current slice/goal, what "done" looks like, and what's NOT in scope. Propose the first move and **wait for a nod** before executing.
 
-**Next move:** the one the frame names: `lets-shape` for new work, `lets-catch-up` to resume, `lets-find-gaps`, `lets-align` or `lets-explore` when the ask is fuzzy.
+**Next move:** the one the frame names: `lets-shape` for new work, `lets-catch-up` to resume, `lets-blindspot`, `lets-align` or `lets-explore` when the ask is fuzzy.
