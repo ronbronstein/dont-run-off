@@ -142,7 +142,7 @@ graders:
       says why and gives the user the command or the issue text to use.
       FAIL if it claims the issue exists when the command failed, or if it put
       the task somewhere else without saying so.
-  # An indicator only (not scored): did the lets-track skill run?
+  # Did the lets-track skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-track-ran
     type: tool_used
     tool: Skill

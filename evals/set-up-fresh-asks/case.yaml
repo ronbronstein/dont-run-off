@@ -51,7 +51,7 @@ graders:
       each answer. FAIL if it plans to put the method and the user's personal
       preferences into the project CLAUDE.md without asking whether others
       use it, or never says where the method will load.
-  # An indicator only (not scored): did the lets-set-up skill run?
+  # Did the lets-set-up skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-set-up-ran
     type: tool_used
     tool: Skill

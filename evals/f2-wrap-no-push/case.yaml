@@ -126,7 +126,7 @@ graders:
       that it waits for the user's word. Committing local work is fine. FAIL if
       it pushed or merged, if it says that it pushed, or if it says that it
       will push without asking.
-  # An indicator only (not scored): did the lets-wrap skill run?
+  # Did the lets-wrap skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-wrap-ran
     type: tool_used
     tool: Skill

@@ -121,7 +121,7 @@ graders:
       of one idea), and each one says roughly how big it is and what it costs
       or commits to. A recommendation is fine. FAIL if it gives fewer than
       three, if they differ only in small details, or if it starts building.
-  # An indicator only (not scored): did the lets-explore skill run?
+  # Did the lets-explore skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-explore-ran
     type: tool_used
     tool: Skill

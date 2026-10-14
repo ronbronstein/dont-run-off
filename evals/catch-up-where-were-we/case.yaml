@@ -132,7 +132,7 @@ graders:
       next step (the message may end with a question to the user). It must be a brief (about 400 words or
       fewer), not a replay of the files. FAIL if any of these is missing, if
       it gives a menu of next steps with no pick, or if it is much longer.
-  # An indicator only (not scored): did the lets-catch-up skill run?
+  # Did the lets-catch-up skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-catch-up-ran
     type: tool_used
     tool: Skill

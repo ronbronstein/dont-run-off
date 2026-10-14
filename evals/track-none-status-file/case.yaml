@@ -128,7 +128,7 @@ graders:
     target: { source: file, path: current-state.md }
     pattern: '## Next[\s\S]*crash[\s\S]*empty'
     flags: i
-  # An indicator only (not scored): did the lets-track skill run?
+  # Did the lets-track skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-track-ran
     type: tool_used
     tool: Skill

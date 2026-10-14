@@ -138,7 +138,7 @@ graders:
       fix (remove or rename the copy, or type the full plugin name) while
       asking before it changes anything. FAIL if it misses both copies, or
       changes or deletes a file.
-  # An indicator only (not scored): did the lets-check skill run?
+  # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used
     tool: Skill

@@ -46,15 +46,18 @@ The redirect and set-up cases test what only the plugin has: run them with `--ab
 ## Run
 
 ```sh
-npm run evals                    # all cases, 3 runs each, with and without the plugin
-npm run evals -- --runs 1        # a quick check
+npm run evals                    # all cases, 1 run each, with the plugin only (32 sessions)
 npm run evals -- --case 'f1-*'   # some cases only
+npm run evals:full               # 3 runs each, with and without the plugin (about 190 sessions)
 ```
 
 ## Know before you run
 
-- Each run is a full Claude Code session on your own account. On a Claude subscription it uses your plan's usage; with an API key it costs money. The report shows an estimated cost.
+- Count before you run: cases × runs × arms (2 with `evals:full`). Each run is a full Claude Code session on your own account. On a Claude subscription it uses your plan's usage; with an API key it costs money. The report shows an estimated cost.
 - `--scaffold` runs each case's `scaffold.sh` as you, outside the sandbox. The scripts only make a small git repo or folder in the run's empty workspace.
 - The runs load no `CLAUDE.md`, so each case carries a copy of the method (`skills/lets-set-up/method.md`) in its `case.yaml`. `npm run evals:sync` updates the copies, and `npm test` fails when one is stale.
+- Sonnet grades the `llm` checks (`--judge-model claude-sonnet-5-5`). The default judge, Haiku, failed good replies in our checks. A judge call is short, not a full session.
+- A `tool_used: Skill` check ("did the skill start") counts in the score with `--ablation none`. With `with-without`, it is only an indicator.
+- On macOS, `/usr/bin/git` can fail inside a run (`xcrun_db ... Operation not permitted`). The agent then works without git history, or uses another git on the PATH. That is the sandbox, not the agent getting around a rule.
 - The report stays on your machine (`--no-publish`). Results go to `evals/results/`, which git ignores.
 - The sandbox can deny a command that copies a file out of the plugin folder. For a skill that copies its own files, grade the place the agent picks (its commands, denied or not), not whether the copy worked.

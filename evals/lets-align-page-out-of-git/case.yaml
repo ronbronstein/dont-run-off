@@ -140,7 +140,7 @@ graders:
       (2) It never wrote, or tried to write, the page into a folder that git
       tracks, such as docs/review/ or a new folder with no ignore entry.
       (3) It did not commit the page. FAIL otherwise.
-  # An indicator only (not scored): did the lets-align skill run?
+  # Did the lets-align skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-align-ran
     type: tool_used
     tool: Skill

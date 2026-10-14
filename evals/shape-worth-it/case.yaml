@@ -123,7 +123,7 @@ graders:
       with the reason, and (3) names a small first step or slice, or the one
       thing to check first. FAIL if any of the three is missing, or if it
       starts building.
-  # An indicator only (not scored): did the lets-shape skill run?
+  # Did the lets-shape skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-shape-ran
     type: tool_used
     tool: Skill

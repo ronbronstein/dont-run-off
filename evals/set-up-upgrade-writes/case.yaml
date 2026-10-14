@@ -49,7 +49,7 @@ graders:
     input_match: '"command":\s*"[^"]*\bgit\b[^"]*\bpush\b'
     min: 0
     max: 0
-  # An indicator only (not scored): did the lets-set-up skill run?
+  # Did the lets-set-up skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-set-up-ran
     type: tool_used
     tool: Skill

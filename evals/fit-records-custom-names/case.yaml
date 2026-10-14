@@ -133,7 +133,7 @@ graders:
       file now says, in any words, that a test for search exists (it may also
       say that the test needs more work), and lists the decision to keep search
       case-insensitive. FAIL if the file is unchanged, or misses either fact.
-  # An indicator only (not scored): did the lets-wrap skill run?
+  # Did the lets-wrap skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-wrap-ran
     type: tool_used
     tool: Skill

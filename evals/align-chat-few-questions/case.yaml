@@ -125,7 +125,7 @@ graders:
       its options with what each one means for the user, and waits. A
       recommendation is fine. FAIL if it asks both questions in one message,
       builds or offers a review page instead, or decides both itself.
-  # An indicator only (not scored): did the lets-align skill run?
+  # Did the lets-align skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-align-ran
     type: tool_used
     tool: Skill

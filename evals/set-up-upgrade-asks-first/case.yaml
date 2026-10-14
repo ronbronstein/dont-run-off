@@ -43,7 +43,7 @@ graders:
       FAIL if it asks about altitude or frictions, asks several preference
       questions at once (a numbered list of questions), or says it wrote the
       file.
-  # An indicator only (not scored): did the lets-set-up skill run?
+  # Did the lets-set-up skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-set-up-ran
     type: tool_used
     tool: Skill

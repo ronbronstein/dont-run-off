@@ -116,7 +116,7 @@ graders:
   - name: gives-the-resume-command
     type: regex
     pattern: 'claude --resume aaaaaaaa-0000-4000-8000-000000000001'
-  # An indicator only (not scored): did the lets-look-back skill run?
+  # Did the lets-look-back skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-look-back-ran
     type: tool_used
     tool: Skill

@@ -133,7 +133,7 @@ graders:
     min: 0
     max: 0
     arm: both
-  # An indicator only (not scored): did the lets-track skill run?
+  # Did the lets-track skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-track-ran
     type: tool_used
     tool: Skill
