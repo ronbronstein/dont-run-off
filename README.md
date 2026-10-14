@@ -121,7 +121,8 @@ Everything always-on lives in a single `CLAUDE.md` — no imports, no stubs, not
 <!-- /dont-run-off:method -->
 
 ## Who you're working with          ← yours, never touched
-Altitude · Task tool · Conventions · My frictions
+Altitude · Build pipeline · Conventions · My frictions
+## My setup                         ← yours: files, tasks, language, stop level
 ```
 
 The **method** is the rules of engagement — identical for everyone who installs this. Your **profile** is the handful of facts those rules refer to. Neither works alone: the method with no profile is generic advice with no idea who it's talking to; a profile with no method is a bio.
@@ -194,9 +195,9 @@ That installs the skills. A plugin can't write your `CLAUDE.md`, so the method a
 /dont-run-off:lets-set-up
 ```
 
-It checks what it can see for itself (your task tool, version control, whether record files already exist), asks about the two things it can't — how you want to be talked to, and what usually goes wrong when you work with an agent — and writes the result.
+It checks what it can see for itself (your task tool, version control, whether record files already exist), asks about what it can't see, one question at a time — how you want to be talked to, the language level of its replies, what usually goes wrong when you work with an agent, and when it should stop and ask — and writes the result.
 
-> **Already have a `~/.claude/CLAUDE.md`?** It won't be overwritten. Setup reads it first, backs it up to `CLAUDE.md.bak`, names anything that duplicates the method, and proposes a merge before writing anything. Two sets of instructions saying the same thing differently is how rules start getting quietly ignored — [`docs/architecture.md`](docs/architecture.md) has the debug order if that ever happens.
+> **Already have a `~/.claude/CLAUDE.md`?** It won't be overwritten. Setup reads it first, backs it up to `CLAUDE.md.bak` (never over an earlier backup), names anything that duplicates the method, and proposes a merge before writing anything. Two sets of instructions saying the same thing differently is how rules start getting quietly ignored — [`docs/architecture.md`](docs/architecture.md) has the debug order if that ever happens.
 
 Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't, it didn't load, and nothing else you do matters. An install you haven't verified isn't finished.
 
@@ -206,7 +207,7 @@ Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't,
 npx skills add ronbronstein/dont-run-off -g
 ```
 
-Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/lets-set-up`** (no plugin namespace on this path, so it's `/setup`, not `/dont-run-off:lets-set-up`).
+Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/lets-set-up`** (no plugin namespace on this path, so it's `/lets-set-up`, not `/dont-run-off:lets-set-up`).
 
 The plugin route above is still the one to prefer: it updates itself. This one you update by re-running `npx skills update`.
 
@@ -222,6 +223,8 @@ Setup sees the markers, replaces the method block, and leaves your profile exact
 ### Works with
 
 **Claude Code** — that's the target, and the whole harness is built around what it actually loads: `CLAUDE.md` every message, skills only when they fire, `/context` to prove it. The skills themselves follow the [Agent Skills](https://agentskills.io) format and will work anywhere that reads it, but the install path and the visibility commands here are Claude Code's.
+
+**Needs:** Claude Code. Three moves also use [Node.js](https://nodejs.org): `lets-look-back` (its search), `lets-check` (its usage count) and `lets-align` (its page checker). Without Node.js they still run, and say what they skipped.
 
 <br>
 
@@ -256,7 +259,7 @@ I can't tell what it actually did. I lose the thread between sessions.
 - Work branch: `staging`. Parallel copies: off.
 ```
 
-Every move reads these lines, so nothing assumes a file name, a task tool, how careful you want the agent to be, or how it should write to you. The default language is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
+Every move reads these lines instead of assuming a file name, a task tool, how careful you want the agent to be, or how it should write to you. The default language is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
 
 Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
 
