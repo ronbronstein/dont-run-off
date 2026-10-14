@@ -1,1 +1,1 @@
-Rename the function getNotes to listNotes everywhere.
+Add a way to sort the notes.
