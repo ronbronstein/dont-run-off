@@ -3,7 +3,7 @@ name: lets-shape
 description: Use when deciding whether or what to build or do, sizing or scoping work, shaping an idea into phased slices, or prioritizing. This is the judgment that comes before execution — is this worth doing, how big is it really, how should it be phased. Trigger on "what should I build/do next," "is this worth it," "how big is this," "scope this," "plan this," "prioritize," "phase this," or before committing to any non-trivial piece of work.
 ---
 
-# Shaping — judgment before execution
+# Shape — judgment before execution
 
 Decide *whether and what* before diving into *how*. Scale the effort to the stakes (adaptive rigor): a sentence or two for a small, reversible task; the full pass for a real bet (multi-step, hard to undo, touches users/data, or genuinely uncertain). When you're unsure which it is, say so and ask — that judgment is itself a shaping output.
 

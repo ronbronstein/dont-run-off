@@ -3,7 +3,7 @@ name: lets-check
 description: Use to audit a Claude Code setup for context-engineering problems — what actually loads, what shadows what, what silently never fires, and what contradicts what. Covers rules (CLAUDE.md), skills, slash commands, and hooks. Trigger on "check my setup," "audit my config," "what's actually loaded," "why isn't my skill firing," "checkup," or right after installing or upgrading the harness.
 ---
 
-# Checkup
+# Check the Setup
 
 Audit everything that loads: **rules, skills, commands, hooks, agents, MCP servers, plugins, memory.**
 
