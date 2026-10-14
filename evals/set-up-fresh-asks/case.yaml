@@ -46,10 +46,11 @@ graders:
     criteria: >-
       The test home has no ~/.claude/CLAUDE.md, so a project install that
       holds only project facts leaves the method loaded nowhere. PASS only if
-      the last message notes that there is no global method and recommends
-      the full method in this project's CLAUDE.md (the global file may be
-      named as the other choice). FAIL if it does not say where the method
-      will load, or plans only project facts for this file.
+      the last message notes that there is no global method and says where
+      the method will go: the global file (recommended, because the method
+      and My setup describe one person) or CLAUDE.local.md. FAIL if it does
+      not say where the method will load, or plans to put the user's
+      personal method and preferences into the shared CLAUDE.md as the pick.
   # An indicator only (not scored): did the lets-set-up skill run?
   - name: lets-set-up-ran
     type: tool_used
