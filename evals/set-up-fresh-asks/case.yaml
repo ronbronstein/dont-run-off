@@ -41,6 +41,15 @@ graders:
       question), and does not claim the setup is done. FAIL if it asks a
       numbered list of three or more questions at once, or says it wrote the
       file.
+  - name: method-has-a-home
+    type: llm
+    criteria: >-
+      The test home has no ~/.claude/CLAUDE.md, so a project install that
+      holds only project facts leaves the method loaded nowhere. PASS only if
+      the last message notes that there is no global method and recommends
+      the full method in this project's CLAUDE.md (the global file may be
+      named as the other choice). FAIL if it does not say where the method
+      will load, or plans only project facts for this file.
   # An indicator only (not scored): did the lets-set-up skill run?
   - name: lets-set-up-ran
     type: tool_used

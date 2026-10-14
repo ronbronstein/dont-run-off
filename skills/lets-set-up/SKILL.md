@@ -18,6 +18,8 @@ Ask which, unless it's obvious from what they said:
 - **Global** — `~/.claude/CLAUDE.md`. How they want to be worked with everywhere. The default.
 - **Project** — `./CLAUDE.md` in the current repo. Facts about *this* codebase, for everyone on it.
 
+A project target needs the method somewhere. If they pick Project and `~/.claude/CLAUDE.md` has no `<!-- dont-run-off:method` block (or does not exist), the method would load nowhere. Recommend the full method in the project file, and name the global file as the runner-up (one install that covers every project). Say it once, with the other step 3 facts; do not stop only for this.
+
 ## 2. Read what's already there
 
 Read the target file if it exists. Then check for `<!-- dont-run-off:method` — if present this is an **upgrade**: replace only the text between that marker and `<!-- /dont-run-off:method -->`, leave everything else exactly as it is, and skip to step 5.
@@ -77,7 +79,7 @@ Then write the target as:
 ...anything of theirs you kept...
 ```
 
-For a **project** target, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain. When this project differs from the global My setup (another status file, another task tool, another work branch), add a `## My setup` section with only the lines that differ.
+For a **project** target whose user has the method in the global file, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain. When this project differs from the global My setup (another status file, another task tool, another work branch), add a `## My setup` section with only the lines that differ.
 
 ## 6. Check what you just installed into
 
