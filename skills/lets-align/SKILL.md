@@ -43,7 +43,7 @@ In chat, send one question per message and wait for the answer. A question tool 
   - Choices with a safe default go into one `defaults` group: collapsed rows, accepted with one click. A default is safe when it is cheap to change later and you would pick it for almost any user in this situation. A choice that changes money, stored data, legal duties, or what people see first is not a default.
   - Later questions go into closed rounds, by the milestone that needs them, with a title and the question only.
 - Set `accent` to the project's brand color if it has one (look in its styles or tokens). Otherwise leave it out: the page uses violet on paper.
-- Run `node scripts/check.mjs <folder>/data/current.js` from this skill. Fix every error and read every warning.
+- Run `node scripts/check.mjs <folder>/data/current.js` from this skill. Fix every error and read every warning. Without Node.js (`command -v node` finds nothing), check the data file by hand against `references/schema.md`: unique ids, a `pro` or `con` on every option, a `rec` in every defaults row, and at most 7 open questions. Tell the user that the checker did not run.
 - Open the page and use it yourself before you hand it over: it loads with no console errors, a pick saves, and Copy Markdown copies. If your preview opens local files as `data:` URLs, serve the folder over http instead. If you cannot open a browser, say so.
 - Hand it over in a few lines: the path and the command to open it, how many questions there are and when they are needed, and "click Copy Markdown and paste it here when you are done". Say what you will do with the answers (record them, then propose the next step), not that you will start building. Do not publish, upload, or share the page.
 

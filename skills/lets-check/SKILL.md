@@ -34,13 +34,13 @@ Expand `@` imports and follow them. An import pointing at a directory pulls in e
 
 ## 2. Measure what actually gets used
 
-Run the script next to this skill:
+Run the script next to this skill. It needs Node.js: check with `command -v node` first. Without Node.js, skip this step and say in the report that use was not measured.
 
 ```bash
-node <path-to-this-skill>/usage.mjs --days 90
+node "${CLAUDE_SKILL_DIR}/usage.mjs" --days 90
 ```
 
-It counts real invocations from local data — `~/.claude/history.jsonl` for slash commands, session transcripts for `Skill` and MCP tool calls — and joins them against what's installed, so every skill, command and MCP server comes back with a use count and a last-used date. `--json` gives the same thing machine-readable. It reads names and counts only, never message content.
+It counts real invocations from local data — `history.jsonl` in the config folder (`$CLAUDE_CONFIG_DIR`, else `~/.claude`) for slash commands, session transcripts for `Skill` and MCP tool calls — and joins them against what's installed, so every skill, command and MCP server comes back with a use count and a last-used date. `--json` gives the same thing machine-readable. It reads names and counts only, never message content.
 
 This is what turns "probably dead" into a measurement. Nothing else here can tell you a skill has sat untouched for three months.
 

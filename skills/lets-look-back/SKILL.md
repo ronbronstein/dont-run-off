@@ -10,7 +10,7 @@ Find what happened in earlier sessions, and answer from what was actually said. 
 
 ## 1. Search
 
-Run the search script that sits next to this file, with 2–4 words that matter. Use the user's own words first.
+Run the search script that sits next to this file, with 2–4 words that matter. Use the user's own words first. The script needs Node.js: check with `command -v node` first.
 
 ```bash
 node "${CLAUDE_SKILL_DIR}/scripts/search.mjs" <words> --exclude ${CLAUDE_SESSION_ID}
@@ -19,6 +19,7 @@ node "${CLAUDE_SKILL_DIR}/scripts/search.mjs" <words> --exclude ${CLAUDE_SESSION
 - `--exclude` skips this session, because it holds the question itself.
 - Add `--days N` when the user names a time ("last week"). Add `--all` when the user asks about another project, or when this project has no match and the topic can live elsewhere.
 - No match: try a synonym or fewer words once or twice before you say that it is not there.
+- No Node.js: search the session files with `grep -l -i '<word>'` instead. They are in `projects/<folder>/*.jsonl` under the config folder (`$CLAUDE_CONFIG_DIR`, else `~/.claude`); `<folder>` is the project path with every character that is not a letter or digit changed to `-`. Tell the user that this search is weaker: it matches raw lines, and it cannot skip this session or show the context.
 
 ## 2. Read before you answer
 
