@@ -83,7 +83,7 @@ in two ways, and the export marks each one:
 
 ## The export
 
-Markdown or JSON, only for open rounds, with a `how_to_read` line for you. Per item: `id`, `group`,
+Markdown or JSON, only for open rounds, with a `how_to_read` line for you that names this skill, so a pasted export starts the read-back. Per item: `id`, `group`,
 `title`, `question`, `context`, `status` (`answered` | `not_sure` | `open`), `note_only`, `answer`
 (`[{label, pro, con}]`), `recommended`, `matches_recommendation`, `note`, `files`
 (`[{name, path, kind}]`), `saved_at`.

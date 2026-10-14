@@ -306,6 +306,20 @@ await test("Copy Markdown names the project and the title", async () => {
   );
 });
 
+await test("the export names the lets-align skill, so a paste starts the read-back", async () => {
+  const page = await freshPage();
+  await show(page, round1Open);
+  await page.locator('.card[data-id="Q1"] .opt').first().click();
+  await page.locator('footer [data-f="md"]').click();
+  const md = await page.evaluate(() => navigator.clipboard.readText());
+  const guide = md.split("\n").find((l) => l.startsWith("- how to read:")) ?? "";
+  expectEqual(
+    guide.includes("`lets-align` skill"),
+    true,
+    "the how-to-read line names the skill",
+  );
+});
+
 await test("a note-only item with no options key shows as an open card", async () => {
   const page = await freshPage();
   await show(page, noteOnly);

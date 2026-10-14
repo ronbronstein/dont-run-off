@@ -280,7 +280,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
 $$("main section[id]").forEach(s=>io.observe(s));
 
 // ---------- export (for the agent) ----------
-const GUIDE=`status: answered = act on the answer. not_sure = move the item to the next round. open = no answer yet; ask again. matches_recommendation false = the user changed ${AG}'s pick; read the note first. files: kind path = full path; kind name_only = the browser hid the folder, so search for the name.`;
+const GUIDE=`read these with the \`lets-align\` skill, step 5 (Read the answers back). status: answered = act on the answer. not_sure = move the item to the next round. open = no answer yet; ask again. matches_recommendation false = the user changed ${AG}'s pick; read the note first. files: kind path = full path; kind name_only = the browser hid the folder, so search for the name.`;
 function rows(){return items.map(it=>{const s=S[it.id]||{pick:[],note:"",files:[]},st=status(it);
   return{id:it.id,round:it.rd.id,group:it.g.title,title:it.title,question:it.q,context:it.why||null,status:st,note_only:!it.options.length,
     answer:s.pick.map(i=>({label:it.options[i].label,pro:it.options[i].pro||null,con:it.options[i].con||null})),

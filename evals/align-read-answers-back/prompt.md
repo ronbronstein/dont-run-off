@@ -7,7 +7,7 @@ Done on the review page. Here are my answers:
 - source: PLAN.md (open decisions 1–4)
 - context: A small notes app. Users asked to download their notes. These are the choices the export work needs before the build starts.
 - progress: 2/4 answered · 1 not sure · 1 open
-- how to read: status: answered = act on the answer. not_sure = move the item to the next round. open = no answer yet; ask again. matches_recommendation false = the user changed Claude's pick; read the note first. files: kind path = full path; kind name_only = the browser hid the folder, so search for the name.
+- how to read: read these with the `lets-align` skill, step 5 (Read the answers back). status: answered = act on the answer. not_sure = move the item to the next round. open = no answer yet; ask again. matches_recommendation false = the user changed Claude's pick; read the note first. files: kind path = full path; kind name_only = the browser hid the folder, so search for the name.
 
 ## The downloaded file
 
