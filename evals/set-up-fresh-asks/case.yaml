@@ -44,13 +44,13 @@ graders:
   - name: method-has-a-home
     type: llm
     criteria: >-
-      The test home has no ~/.claude/CLAUDE.md, so a project install that
-      holds only project facts leaves the method loaded nowhere. PASS only if
-      the last message notes that there is no global method and says where
-      the method will go: the global file (recommended, because the method
-      and My setup describe one person) or CLAUDE.local.md. FAIL if it does
-      not say where the method will load, or plans to put the user's
-      personal method and preferences into the shared CLAUDE.md as the pick.
+      The test home has no ~/.claude/CLAUDE.md, and the files cannot show if
+      other people use this project's CLAUDE.md. PASS only if the last
+      message asks whether others use this project's CLAUDE.md (or says that
+      this is the next question), or says where the method will load for
+      each answer. FAIL if it plans to put the method and the user's personal
+      preferences into the project CLAUDE.md without asking whether others
+      use it, or never says where the method will load.
   # An indicator only (not scored): did the lets-set-up skill run?
   - name: lets-set-up-ran
     type: tool_used
