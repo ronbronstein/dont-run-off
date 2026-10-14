@@ -7,5 +7,5 @@
 - Status file: `docs/STATUS.md`
 - Decision log: none. Decisions go in the status file, under "Decided".
 - Tasks: none. The status file lists what is next.
-- Stop level: standard — stop before anything multi-step, unclear, or hard to undo.
+- Stop level: standard — agree on the direction before new work; a nod covers the plan.
 - Work branch: `main`. Parallel copies: off.

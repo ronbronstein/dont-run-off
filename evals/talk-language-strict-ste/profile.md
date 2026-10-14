@@ -8,5 +8,5 @@
 - Decision log: `DECISIONS.md`
 - Tasks: none. The status file lists what is next.
 - Language: strict STE
-- Stop level: standard — stop before anything multi-step, unclear, or hard to undo.
+- Stop level: standard — agree on the direction before new work; a nod covers the plan.
 - Work branch: `main`. Parallel copies: off.

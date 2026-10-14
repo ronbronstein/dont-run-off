@@ -1,10 +1,11 @@
 schema_version: "1.1"
-name: redirect-old-name
+name: redirect-find-gaps
 description: >-
-  Renamed moves. The user types an old name, /dont-run-off:wrap-session. The
-  redirect hands over to lets-wrap, which runs, and the reply ends with the new
-  name. Run it with --ablation none: the old name exists only in the plugin.
-tags: [redirect, naming, lets-wrap]
+  Renamed moves. The user types the old name /dont-run-off:lets-find-gaps,
+  which stays for 0.4.0. The redirect hands over to lets-blindspot, which
+  runs, and the reply ends with the new name. Run it with --ablation none: the
+  old name exists only in the plugin.
+tags: [redirect, naming, lets-blindspot]
 context:
   scaffold_script: scaffold.sh
 execution:
@@ -99,17 +100,25 @@ execution:
     <!-- /dont-run-off:method -->
   # END method
 graders:
-  - name: lets-wrap-ran
+  - name: no-write
+    type: tool_used
+    tool: Write
+    min: 0
+    max: 0
+  - name: lets-blindspot-ran
     type: tool_used
     tool: Skill
-    input_match: "lets-wrap"
+    input_match: "lets-blindspot"
     min: 1
   - name: names-the-new-move
     type: regex
-    pattern: 'lets-wrap'
-  - name: no-push
-    type: tool_used
-    tool: Bash
-    input_match: '"command":\s*"[^"]*\bgit\b[^"]*\bpush\b'
-    min: 0
-    max: 0
+    pattern: 'dont-run-off:lets-blindspot'
+  - name: briefs-then-asks
+    type: llm
+    criteria: >-
+      The user typed the old name of the blindspot move and said they know
+      nothing about payments. PASS only if the last message briefly teaches
+      the essentials of payments for a small web app (for example: a payment
+      provider holds the card data; confirmations; refunds; test mode) and
+      asks 3 to 5 questions to answer before building. FAIL if it only says
+      the command was renamed, builds anything, or asks more than 5 questions.

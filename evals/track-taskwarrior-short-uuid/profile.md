@@ -7,5 +7,5 @@
 - Status file: `current-state.md`
 - Decision log: `DECISIONS.md`
 - Tasks: Taskwarrior; each repo names its project in `TASKS.md`.
-- Stop level: standard — stop before anything multi-step, unclear, or hard to undo.
+- Stop level: standard — agree on the direction before new work; a nod covers the plan.
 - Work branch: `main`. Parallel copies: off.
