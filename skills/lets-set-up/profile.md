@@ -35,10 +35,10 @@ The moves read these lines. Change any of them in plain words. A project's
   "plain", or "technical". The two STE levels are for English only. The method
   says what each one means. STE is ASD-STE100 Simplified Technical English: short,
   plain sentences with one meaning each.)*
-- Stop level: standard — stop before anything multi-step, unclear, or hard to
-  undo. *(Or "careful — stop and show the plan before any change to files, even
-  a small one." Or "fast — stop only before steps that are hard to undo or that
-  other people see, or when the goal is unclear.")*
+- Stop level: standard — agree on the direction before new work; a nod covers
+  the plan. *(Or "careful — show the plan and wait before any change to files,
+  even a small one." Or "fast — make the choices that are easy to change
+  yourself, and stop only before hard-to-undo steps or when the goal is unclear.")*
 - Version control: Git. Commit as you go, one logical change per commit. *(Or "none":
-  then the agent stops before file changes even at the fast level, because nothing can undo them.)*
+  then the fast level works like standard, because nothing can undo the changes.)*
 - Work branch: the repo's default branch. Parallel copies: off.

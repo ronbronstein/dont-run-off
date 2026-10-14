@@ -9,7 +9,7 @@ Install the always-on method into `CLAUDE.md` and personalize it. A plugin can s
 
 Two files sit next to this one: `method.md` (the method, same for everyone) and `profile.md` (the personalization template).
 
-**Never overwrite a `CLAUDE.md` wholesale.** Someone's existing instructions are the most expensive thing in the room.
+**Never overwrite a `CLAUDE.md` as a whole.** The user's own lines took them time to write, and a lost line is hard to notice.
 
 ## 1. Pick the target
 
@@ -30,6 +30,8 @@ If `~/.claude/CLAUDE.md` has no `<!-- dont-run-off:method` block, say so: a proj
 Read the target file if it exists. Then check for `<!-- dont-run-off:method` — if present this is an **upgrade**: replace only the text between that marker and `<!-- /dont-run-off:method -->`, leave everything else exactly as it is, and skip to step 5.
 
 An upgrade of a file with no `## My setup` section (set up before My setup existed) adds it first, because the new method would otherwise switch the replies to strict STE without asking. Detect every My setup line with the table in step 3 and confirm them in one message. Then ask only the Language and Stop level questions from step 3, one at a time; if their file already has a rule about how to write replies, propose the Language line that matches it. Write the My setup block from `profile.md` directly below the method block, then go to step 5.
+
+An upgrade of a file whose Stop level line still reads "standard — stop before anything multi-step, unclear, or hard to undo" (written before 0.4.0) keeps the user's level but changes its text: standard now means "agree on the direction before new work; a nod covers the plan". Show the old and the new line in the step 5 recap, and say that "careful" is the level for someone who wants a stop before every change.
 
 Otherwise it's a fresh install. Read their existing content properly and note anything that overlaps the method — a section on how they want to be talked to, rules about planning, testing, or commits. You'll reconcile these in step 4, not silently duplicate them.
 
@@ -55,7 +57,7 @@ Then ask what detection can't answer — **one question at a time**, not a form:
 1. **Altitude.** How do they want to be talked to? Offer the examples from `profile.md` as concrete choices rather than asking an open question.
 2. **Language.** Which language, and which level, should the agent's replies use? First suggest the language they write to you in, and let them confirm or change it. Then offer the four levels from the method — strict STE (the default), 80% STE, plain, technical — with one line each and a short example sentence. Strict STE is the default because its short, single-meaning sentences are the easiest to check; a user who finds it stiff picks 80% STE. STE is a standard for English, so for another language offer plain or technical, with plain as the default. When their file already has a rule about how to write replies, reconcile it in step 4 instead of adding a second one.
 3. **Frictions.** What usually goes wrong when they work with an agent? This is the highest-value line in the whole harness and the one people skip. Don't accept a blank — offer the common ones ("it runs off before I've agreed to anything," "I can't tell what it actually did," "I lose the thread between sessions") and let them pick or add their own.
-4. **Stop level.** When should the agent stop and ask? Offer the three levels from `profile.md` — careful, standard, fast — with one line each on what changes. Standard is the default; it is today's rule.
+4. **Stop level.** When should the agent stop and ask? Offer the three levels from `profile.md` — careful, standard, fast — with one line each on what changes. Standard is the default: the agent agrees on the direction before new work, and then builds the agreed plan without asking again.
 5. **Conventions.** Only if detection left it empty and they seem to have opinions. Blank is a fine answer.
 
 Fill the `profile.md` template with their answers, and write the **My setup** block from what you detected and what they confirmed. A record file they do not want is "none", with where its content goes instead (for example: "Decision log: none. Decisions go in the status file, under 'Decided'."). Delete the italic guidance text as you go — none of it should survive into the final file.
