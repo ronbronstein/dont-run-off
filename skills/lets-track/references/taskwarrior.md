@@ -1,10 +1,16 @@
 # Taskwarrior
 
-Taskwarrior is a free task manager on the command line. Tasks are a local file on the user's machine: no account, no server. An agent can read it as JSON, so it reasons over the real list. It suits solo work; a team that already shares a tracker should keep that tracker. Install: `brew install task` (macOS) or `apt install taskwarrior` (Debian, Ubuntu).
+Taskwarrior is a free task manager on the command line. Tasks are a local file on the user's machine: no account, no server. An agent can read it as JSON, so it reasons over the real list. It suits solo work; a team that already shares a tracker should keep that tracker. Install: `brew install task` (macOS), `apt install taskwarrior` (Debian, Ubuntu, and Windows through WSL).
 
-## The model
+## Their scheme first
 
-One store for all projects (`~/.task`). Projects are kept apart by name: `project:<area>.<project>`, for example `project:work.website`. Never set a per-repo `data.location` or `TASKDATA`: one store, always.
+Read what the user already has before you suggest anything: `task _projects` and `task _tags`. When they already use projects or tags, keep their names and their way of working: their project names, their tags, their store. Do not rename or move anything of theirs.
+
+## The suggested setup
+
+For a user who is new to Taskwarrior, or who asks. Tell them it is a suggested setup, and that they can change it however they like.
+
+One store for all projects (`~/.task`). Projects are kept apart by name: `project:<area>.<project>`, for example `project:work.website`. Do not create a per-repo `data.location` or `TASKDATA` yourself.
 
 ## Find this repo's project name
 
@@ -16,7 +22,7 @@ ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 
 1. `"$ROOT/TASKS.md"` exists: read the project name there. When it maps sub-folders to names, use the one for the folder you work in.
 2. Else `"$ROOT/.taskproject"`: its first line is the name.
-3. Else the repo is not connected: propose a name (`<area>.<folder name>`), tell the user, and follow "Connect" below. Never invent a name and start writing tasks into it.
+3. Else the repo is not connected: propose a name in the user's own pattern (from `task _projects`; for a new user, `<area>.<folder name>`), tell the user, and follow "Connect" below. Never invent a name and start writing tasks into it.
 
 ## The stable ID: the short UUID
 
@@ -47,9 +53,11 @@ Read the JSON, not the table: the table cuts and reorders. A project whose tasks
 
 ## Tags
 
-`+next` (to do now), `+blocked`, `+waiting` (on someone else), `+backlog` (later). Do not invent another "later" tag or a backlog project. Tags that only one repo uses go in its `TASKS.md`.
+When the user has tags for these meanings, use theirs. Else suggest: `+next` (to do now), `+blocked`, `+waiting` (on someone else), `+backlog` (later). Do not invent a second tag for a meaning that already has one. Tags that only one repo uses go in its `TASKS.md`.
 
 ## Connect a repo
+
+Ask before you write these two files: in a repo that others use, they reach the whole team. When the user wants them kept private, add them to the file that `git rev-parse --git-path info/exclude` names.
 
 ```bash
 echo "<area>.<slug>" > "$ROOT/.taskproject"
