@@ -38,5 +38,6 @@ The moves read these lines. Change any of them in plain words. A project's
   undo. *(Or "careful — stop and show the plan before any change to files, even
   a small one." Or "fast — stop only before steps that are hard to undo or that
   other people see, or when the goal is unclear.")*
-- Version control: Git. Commit as you go, one logical change per commit.
+- Version control: Git. Commit as you go, one logical change per commit. *(Or "none":
+  then the agent stops before file changes even at the fast level, because nothing can undo them.)*
 - Work branch: the repo's default branch. Parallel copies: off.

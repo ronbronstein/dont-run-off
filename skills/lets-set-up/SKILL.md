@@ -40,8 +40,8 @@ Detect from the machine — don't ask what you can check:
 | Field | How to detect |
 |---|---|
 | Task tool | `TASKS.md` in the repo says. Else `task` on PATH → Taskwarrior; Linear or Jira tools in your tool list → that tool; a GitHub remote → GitHub Issues. A tool that the `lets-track` skill has no guide for: follow its "your tool" guide with the user. |
-| Version control | `git rev-parse` succeeds → Git. |
-| Work branch | `git symbolic-ref --short refs/remotes/origin/HEAD` (strip `origin/`), else the current branch. |
+| Version control | `git rev-parse` succeeds → Git. Else ask how they keep and undo their work; with nothing, write "Version control: none". |
+| Work branch | `git symbolic-ref --short refs/remotes/origin/HEAD` (strip `origin/`). When that fails (no `origin`, or no HEAD set for it), do not take the current branch, which can be a feature branch: suggest `main` or `master` if one exists, and confirm. |
 | Status file | The name the project already uses: `current-state.md`, `STATUS.md`, `docs/status.md`, `PROGRESS.md`, or a similar file that says where things stand. |
 | Decision log | The name the project already uses: `DECISIONS.md`, `docs/decisions/`, `docs/adr/`, or similar. |
 | Conventions | For a project target: the actual stack, test command, and lint setup. |

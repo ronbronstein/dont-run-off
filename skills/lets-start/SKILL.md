@@ -18,7 +18,7 @@ Read in this order, and stop when you know enough to name the next move:
 1. **The status file** (My setup names it; default `current-state.md`): the live north star and "what's next."
 2. **The last entry of the decision log:** what was decided most recently, and anything left open.
 3. **Open tasks** in the task tool that My setup names: what is queued as next.
-4. **Recent history:** `git log --oneline -10`, the current branch, and uncommitted work.
+4. **Recent history**, when the project uses git: `git log --oneline -10`, the current branch, and uncommitted work. With no version control, the newest changed files stand in for it.
 
 A new or empty project has none of these: say so, and route to "New".
 
