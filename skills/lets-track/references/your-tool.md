@@ -16,6 +16,6 @@ Run one read (list) with the user watching. Write nothing to their tool until th
 
 ## 3. Save the guide
 
-Write it to `${CLAUDE_PLUGIN_DATA}/task-guides/<tool>.md`: the plugin's data folder, which plugin updates do not overwrite. Use the shape of `references/github-issues.md`: before the first call, the stable ID, the seven steps, connect a repo. Then add the tool to My setup, for example "Tasks: Asana, project 'Website' (guide: task-guides/asana.md)".
+Write it to `${CLAUDE_PLUGIN_DATA}/task-guides/<tool>.md`: the plugin's data folder, which plugin updates do not overwrite. Claude Code fills in that path only for a plugin install. If you see the text `${CLAUDE_PLUGIN_DATA}` itself (the skills were copied, for example with `npx skills`), write to `task-guides/<tool>.md` in the config folder (`$CLAUDE_CONFIG_DIR`, else `~/.claude`) instead. Use the shape of `references/github-issues.md`: before the first call, the stable ID, the seven steps, connect a repo. Then add the tool to My setup, with the full path of the guide, for example "Tasks: Asana, project 'Website' (guide: ~/.claude/plugins/data/dont-run-off-kidamti/task-guides/asana.md)".
 
 Claude Code deletes the data folder when the user uninstalls the plugin. Tell the user, so a guide they want to keep can also live in their own notes.

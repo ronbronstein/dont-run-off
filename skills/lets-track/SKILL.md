@@ -19,7 +19,7 @@ Read the **Tasks** line in My setup. A project's `CLAUDE.md` can change it for t
 | Linear | `references/linear.md` |
 | Jira | `references/jira.md` |
 | A to-do file, or none (the status file lists what is next) | `references/none.md` |
-| Any other tool | the guide that setup wrote for it: `${CLAUDE_PLUGIN_DATA}/task-guides/<tool>.md` |
+| Any other tool | the guide that setup wrote for it, at the path that My setup's Tasks line names (usually `${CLAUDE_PLUGIN_DATA}/task-guides/<tool>.md`) |
 
 No Tasks line, and no tool you can see: ask the user once which tool they use, offer "none", and suggest adding the answer to My setup. A tool with no guide: follow `references/your-tool.md` with the user before you write any task.
 
