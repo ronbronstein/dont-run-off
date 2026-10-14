@@ -5,7 +5,7 @@ description: Use when ending or pausing a work session — "let's wrap up," "I'm
 
 # Wrap Session
 
-Close a session so nothing evaporates and the next start is instant. Do this in order.
+Close the session so that nothing is lost and the next session starts fast. Scale it to the session: a short session gets a short wrap. Do the steps in order.
 
 ## 1. Recap
 
@@ -13,21 +13,19 @@ In plain language: what got done this session, and the key decisions made — wi
 
 ## 2. Leave the record true
 
-This is the part that matters most, and the part most often skipped. **A session that ends with a stale status file breaks the next session before it starts.**
+This step carries the thread: the next session starts from these files, so they must say what is true now.
 
 Use the record files that My setup names; a project's `CLAUDE.md` can name others. The defaults are `current-state.md` and `DECISIONS.md`. When My setup says a file is "none", do not create it: put its content where My setup says.
 
-- **The decision log** — append what was decided and why, any deviations from the plan (with the reason), and any open questions. Deviations especially: an undocumented deviation is how a project quietly becomes something nobody chose.
+- **The decision log** — append what was decided and why, any deviations from the plan (with the reason), and any open questions. Record each deviation: a deviation with no record changes the project without anyone choosing it.
 - **The status file** — rewrite it so it describes reality *now*, not the plan from three sessions ago. If a phase finished, say so. If something was abandoned, remove it rather than leaving it looking active.
 - **The task tool** (My setup names it) — close what's done, add what surfaced.
 
-Don't just append. Read what's there and correct anything that's now false.
+Read what is there and correct anything that is now false; do not only add to the end.
 
 ## 3. Check the always-on layer didn't go stale
 
-If this session changed how the project works — a new convention, a renamed directory, a build command that's different now — then the project's `AGENTS.md` / `CLAUDE.md` may now be lying to every future session. Flag it, and offer to fix it.
-
-Cheap here, expensive later: wrong always-on instructions are worse than none, because they get confidently applied to everything.
+If this session changed how the project works — a new convention, a renamed directory, a build command that's different now — then the project's `AGENTS.md` / `CLAUDE.md` may now be wrong for every future session. Flag it, and offer to fix it: wrong always-on instructions do more harm than none, because the agent applies them to everything.
 
 ## 4. Capture open threads
 
@@ -43,6 +41,6 @@ Commit if in a repo, or save/export for knowledge work, following the user's con
 
 One line at the top of the status file: **"Next session starts here → …"** When My setup says the status file is "none", put the line where My setup says, or end the recap with it.
 
-Keep the whole thing tight. The user should be able to walk away and come back in two weeks without losing the thread.
+Keep it short. The user can stop now and come back in two weeks without losing the thread.
 
 **Next move:** `lets-start`, at the beginning of the next session.

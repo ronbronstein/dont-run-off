@@ -12,6 +12,6 @@ Re-orient fast.
 3. What's still open or undecided.
 4. The single best next step.
 
-Keep it short and plain — brief the user, don't replay a transcript.
+Keep it short and plain: a brief, not a replay of the transcript.
 
 **Next move:** continue the work in progress, or `lets-start` to pick new work.

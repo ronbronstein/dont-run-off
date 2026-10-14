@@ -13,6 +13,6 @@ The user may know little here. Help them find their *unknown unknowns* before th
 4. **End with the 3–5 questions** they should be able to answer before anything is built, and how they can prompt you better for this.
 5. **After they answer,** explore further where the answers point.
 
-Don't build yet — the goal is understanding, not output.
+Build nothing in this pass: its result is understanding.
 
 **Next move:** `lets-align` to collect the user's answers, then `lets-shape`.

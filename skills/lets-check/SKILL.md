@@ -7,11 +7,11 @@ description: Use to audit a Claude Code setup for context-engineering problems �
 
 Audit everything that loads: **rules, skills, commands, hooks, agents, MCP servers, plugins, memory.**
 
-The thing people miss is that the always-on cost is not just `CLAUDE.md`. Every skill's description, every agent's description, and every connected MCP server's full tool schemas ride along on *every request* so the model can decide what to reach for. MCP tools are usually the single largest block, and a server you never call is the most expensive dead weight you can own. `/context all` shows the breakdown by source — start there when the budget looks wrong.
+The thing people miss is that the always-on cost is not just `CLAUDE.md`. Every skill's description, every agent's description, and every connected MCP server's full tool schemas ride along on *every request* so the model can decide what to reach for. MCP tools are usually the single largest block, and a server that you never call costs context on every message for nothing. `/context all` shows the breakdown by source — start there when the budget looks wrong.
 
 The built-ins each show one surface: `/doctor` finds installation and invalid-settings problems, `/context all` inventories what loaded this session, `/skills` lists skills by source, `/hooks` lists hooks by event, `/status` shows which settings files were read. Use them to gather — they're faster and more accurate than guessing.
 
-What none of them answers is what *wins* when two sources disagree. That's the failure people actually hit, and it's silent: nothing errors, a skill just never fires, or a stale copy runs instead of the one you installed.
+What none of them answers is what *wins* when two sources disagree. That is the failure people hit most, and it is silent: nothing errors, a skill just never fires, or a stale copy runs instead of the one you installed.
 
 Report first, fix second. Never delete or rewrite anything before showing the finding and getting a yes.
 
@@ -44,27 +44,27 @@ It counts real invocations from local data — `history.jsonl` in the config fol
 
 This is what turns "probably dead" into a measurement. Nothing else here can tell you a skill has sat untouched for three months.
 
-Read the result with judgment. Zero uses is a prompt to look, not a verdict: a skill for a rare moment is doing its job by staying quiet, and something installed last week hasn't had a chance. What *is* damning is a skill that's been installed for months, covers something the person does constantly, and has never once fired — that's a description problem, not a taste problem.
+Read the result with judgment. Zero uses is a prompt to look, not a verdict: a skill for a rare moment is doing its job by staying quiet, and something installed last week hasn't had a chance. The real signal is a skill that has been installed for months, covers something the person does all the time, and has never fired. That is a description problem, not a taste problem.
 
 ## 3. Check
 
 **Rules.** Total the lines actually loaded, imports included, against the 200-line ceiling — past it adherence drops. Flag unresolved imports: a broken `@path` loads nothing and says nothing. Flag two sources instructing differently on the same topic — the docs are explicit that Claude may pick one arbitrarily, and that is what "my instructions are being ignored" almost always is. Flag instructions that restate default behavior; they cost budget and change nothing.
 
-The one people get wrong: a `CLAUDE.md` in a **subdirectory** doesn't load with the session. It's read on demand, if something opens it. Anyone who put project rules three levels down and assumed they were in force is running without them.
+A common mistake: a `CLAUDE.md` in a **subdirectory** doesn't load with the session. It's read on demand, if something opens it. Anyone who put project rules three levels down and assumed they were in force is running without them.
 
-**Skills.** For every name, list every scope it exists in. Precedence runs **personal → project → plugin → bundled**, so a stale `~/.claude/skills/x` silently beats the plugin's current `x`. That's the one people never catch: they install an upgrade and keep running the old copy. Then check each skill can actually fire — a `description` that lists topics instead of naming triggers and phrases means a skill that sits there forever. Flag two skills whose descriptions claim the same moment; that's contention with extra steps. Flag bodies over ~120 lines as probably two skills.
+**Skills.** For every name, list every scope it exists in. Precedence runs **personal → project → plugin → bundled**, so a stale `~/.claude/skills/x` silently beats the plugin's current `x`. Most people miss this one: they install an upgrade and keep running the old copy. Then check each skill can actually fire — a `description` that lists topics instead of naming triggers and phrases means a skill that sits there forever. Flag two skills whose descriptions claim the same moment; that's contention with extra steps. Flag bodies over ~120 lines as probably two skills.
 
 **Commands.** A command and a skill sharing a name is the trap: typing `/x` runs the command, while the model invokes the skill. Two different instruction sets behind one name, usually because one was copied from the other and then drifted. Diff them and say which is stale.
 
-**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently in the worst direction. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. Flag anything slow enough to tax every tool call. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
+**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently, in the place where you counted on it. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. Flag anything slow enough to tax every tool call. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
 
 **Settings themselves.** A settings file with a JSON syntax error doesn't announce itself — it just doesn't load, taking its hooks and permissions with it. Parse every one you found. `/debug settings` and `/debug hooks` show the live resolution if something still doesn't add up.
 
 **Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in the decision log that My setup names, where they can be diffed.
 
-**MCP servers.** The expensive one. Every connected server's tool schemas load on every request whether or not you ever call them, so rank by cost-per-use: a server with a large tool surface and a handful of calls in three months is costing you context on every message you send. Say where each one lives, because that determines how to remove it — servers in `~/.claude.json` come out locally, but account connectors have to be disconnected in claude.ai settings and will otherwise reappear on every machine you log into.
+**MCP servers.** Usually the largest cost. Every connected server's tool schemas load on every request whether or not you ever call them, so rank by cost-per-use: a server with a large tool surface and a handful of calls in three months is costing you context on every message you send. Say where each one lives, because that determines how to remove it — servers in `~/.claude.json` come out locally, but account connectors have to be disconnected in claude.ai settings and will otherwise reappear on every machine you log into.
 
-**Agents.** Subagent descriptions load so the model can route to them. An agent nobody routes to is paying rent. Check whether it's genuinely unused or just badly described — same diagnosis as skills, since routing works the same way.
+**Agents.** Subagent descriptions load so the model can route to them. An agent that nothing routes to still costs context. Check whether it's genuinely unused or just badly described — same diagnosis as skills, since routing works the same way.
 
 **Plugins.** Judge a plugin by everything it contributes: skills, agents, commands, hooks, MCP servers. A plugin whose every surface is unused is a clean uninstall. A plugin where one skill carries it and the rest never fire is worth keeping and worth saying so.
 
