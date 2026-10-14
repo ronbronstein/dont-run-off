@@ -41,7 +41,7 @@ Commit if in a repo, or save/export for knowledge work, following the user's con
 
 ## 6. Leave a breadcrumb
 
-One line at the top of the status file: **"Next session starts here → …"**
+One line at the top of the status file: **"Next session starts here → …"** When My setup says the status file is "none", put the line where My setup says, or end the recap with it.
 
 Keep the whole thing tight. The user should be able to walk away and come back in two weeks without losing the thread.
 

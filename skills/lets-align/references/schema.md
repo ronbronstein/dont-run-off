@@ -78,7 +78,7 @@ no scripts, no event handlers (the checker rejects them). Classes the page style
 A browser never gives a page the full path of a chosen file, only its name. So the page takes files
 in two ways, and the export marks each one:
 
-- a pasted path (`kind: path`, full path; on macOS, ⌥⌘C in Finder copies it)
+- a pasted path (`kind: path`, full path; on macOS, ⌥⌘C in Finder copies it; on Windows, Shift + right-click → Copy as path)
 - a chosen or dropped file (`kind: name_only`: search the project for the name, or ask)
 
 ## The export
@@ -106,4 +106,4 @@ Markdown or JSON, only for open rounds, with a `how_to_read` line for you that n
 - From disk: open `<folder>/index.html` in a browser. It loads the data file with a script tag, which
   works from disk.
 - Some embedded previews open local files as `data:` URLs, which cannot load the data file. Serve the
-  folder instead, for example `python3 -m http.server 4330 --directory <folder>`.
+  folder instead, for example `python3 -m http.server 4330 --directory <folder>` or `npx http-server <folder> -p 4330`.

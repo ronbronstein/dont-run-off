@@ -3,7 +3,7 @@ name: lets-explore
 description: Use to explore several genuinely different directions before committing to one — the divergent option-space pass, the opposite of converging on a single design. Trigger when the user wants options, isn't sure of the approach, or asks to brainstorm directions before deciding.
 ---
 
-# Directions
+# Explore
 
 Diverge before converging.
 
