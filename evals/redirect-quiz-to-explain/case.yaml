@@ -137,9 +137,10 @@ graders:
       why, names one thing the user can check, and offers a diagram, a page,
       or the quiz. FAIL if it only says the command was renamed, or says it
       cannot run the move, or changed files.
-  # An indicator only (not scored): did the agent call the Skill tool for lets-explain?
-  - name: lets-explain-called
+  # lets-explain is typed-only, so the redirect reads its SKILL.md instead of
+  # calling the Skill tool. Scored under --ablation none.
+  - name: lets-explain-read
     type: tool_used
-    tool: Skill
-    input_match: 'lets-explain'
+    tool: Read
+    input_match: 'lets-explain/SKILL.md'
     min: 1
