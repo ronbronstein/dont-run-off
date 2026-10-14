@@ -70,7 +70,7 @@ Keep anything of theirs the method doesn't cover — move it below the two block
 
 ## 5. Write it
 
-Back up first: copy the existing file to `CLAUDE.md.bak` and tell them where it is.
+Back up first: copy the existing file to `CLAUDE.md.bak` and tell them where it is. When that name is taken, add the date and time (`CLAUDE.md.2026-03-05-1412.bak`): never overwrite an earlier backup. In a repo, add the backup's name to the exclude file that `git rev-parse --git-path info/exclude` names, so `git add .` does not commit it.
 
 Then write the target as:
 
