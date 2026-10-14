@@ -26,7 +26,7 @@ In chat, send one question per message and wait for the answer. A question tool 
 ## 3. Write questions that are easy to answer
 
 - One decision per question. If a plan line holds two choices, make two questions; if the honest answer would be "it depends", ask about what it depends on.
-- One plain sentence per question, in simple words (about A2 English). One line of background at most.
+- One plain sentence per question, in simple words (about level A2), in the language that My setup names. The page's own buttons stay in English. One line of background at most.
 - Write for the person who decides, not for the builder. Leave out builder terms (API, webhook, endpoint, schema, data model, job, component, deploy) unless the user uses them; say what the user will notice instead. "Needs a webhook" becomes "needs a link so the app hears when a payment arrives".
 - 2–4 real options. Each one says what happens if it is picked: a `pro`, a `con`, or both. Write concrete results, not adjectives.
 - Recommend one option when you have a view, and put the reason in its `pro`. Do not pre-select it: the user picks.

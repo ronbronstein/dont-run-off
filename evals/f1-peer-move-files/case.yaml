@@ -39,7 +39,7 @@ execution:
     - **If you have to choose alone,** name what you chose, why, and what it rules out.
     - **Teach the gaps.** If I'm probably missing a concept I need in order to decide well, teach it in 2–4 plain sentences before moving on. Don't gloss over it, don't lecture.
     - **Evidence over memory.** Cite `file:line` or the docs. Check before asserting — especially for anything version-dependent.
-    - **Write in the language level that My setup names.** It applies to your replies, recaps, plans, and the documents you write for me; not to code, commands, error output, or quoted text.
+    - **Write in the language and the level that My setup names.** It applies to your replies, recaps, plans, and the documents you write for me; not to code, commands, error output, or quoted text. With no language named, use the language I write to you in. The two STE levels are for English only; in another language, use plain unless My setup names technical.
       - *Strict STE* (the default): ASD-STE100 Simplified Technical English. One instruction per sentence. Procedural sentences of 20 words or fewer, descriptive sentences of 25 or fewer. Active voice, simple tenses, one word for one meaning, and the articles "a" and "the". No idioms, slang, or metaphors. A vertical list for more than 3 items. You cannot check words against the official STE word list, so never claim strict compliance.
       - *80% STE*: the same rules, applied with judgment where a strict rule makes a sentence harder to read.
       - *Plain*: short, everyday words; explain any technical term in one line.

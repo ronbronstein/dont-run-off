@@ -259,7 +259,7 @@ I can't tell what it actually did. I lose the thread between sessions.
 - Work branch: `staging`. Parallel copies: off.
 ```
 
-Every move reads these lines instead of assuming a file name, a task tool, how careful you want the agent to be, or how it should write to you. The default language is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
+Every move reads these lines instead of assuming a file name, a task tool, how careful you want the agent to be, or how it should write to you. Replies come in the language you write in. For English, the default level is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
 
 Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
 
