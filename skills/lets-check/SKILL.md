@@ -17,16 +17,16 @@ Report first, fix second. Never delete or rewrite anything before showing the fi
 
 ## 1. Gather
 
-Read what's on disk. Don't infer it.
+Read what's on disk. Don't infer it. `~/.claude` below means the config folder: `$CLAUDE_CONFIG_DIR` when it is set.
 
 | Surface | Where |
 |---|---|
-| Rules | `~/.claude/CLAUDE.md`, `./CLAUDE.md`, `./.claude/CLAUDE.md`, any `CLAUDE.md` in parent directories, plus `~/.claude/rules/` and `./.claude/rules/` |
+| Rules | `~/.claude/CLAUDE.md`, `./CLAUDE.md`, `./.claude/CLAUDE.md`, `./CLAUDE.local.md`, any `CLAUDE.md` in parent directories, plus `~/.claude/rules/` and `./.claude/rules/`. An organization can also set a managed policy file; `/status` and `/context` show it when one loads |
 | Skills | `~/.claude/skills/`, `./.claude/skills/`, plugin skills under `~/.claude/plugins/` |
 | Commands | `~/.claude/commands/`, `./.claude/commands/` |
 | Hooks | `hooks` in `~/.claude/settings.json`, `./.claude/settings.json`, `./.claude/settings.local.json` |
 | Agents | `~/.claude/agents/`, `./.claude/agents/`, plus any shipped by plugins |
-| MCP servers | `mcpServers` in `~/.claude.json` (global and per-project) — **names only, these files hold tokens** — plus `/mcp` for account connectors, which live in your claude.ai settings and appear nowhere on disk |
+| MCP servers | `mcpServers` in `~/.claude.json` (global and per-project) and in the project's `.mcp.json` — **names only, these files hold tokens** — plus `/mcp` for account connectors, which live in your claude.ai settings and appear nowhere on disk |
 | Plugins | `enabledPlugins` in settings, and `/plugin` for what each one contributes |
 | Memory | `MEMORY.md` and the memory directory for this project |
 
@@ -60,7 +60,7 @@ The one people get wrong: a `CLAUDE.md` in a **subdirectory** doesn't load with 
 
 **Settings themselves.** A settings file with a JSON syntax error doesn't announce itself — it just doesn't load, taking its hooks and permissions with it. Parse every one you found. `/debug settings` and `/debug hooks` show the live resolution if something still doesn't add up.
 
-**Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in `DECISIONS.md` where they can be diffed.
+**Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in the decision log that My setup names, where they can be diffed.
 
 **MCP servers.** The expensive one. Every connected server's tool schemas load on every request whether or not you ever call them, so rank by cost-per-use: a server with a large tool surface and a handful of calls in three months is costing you context on every message you send. Say where each one lives, because that determines how to remove it — servers in `~/.claude.json` come out locally, but account connectors have to be disconnected in claude.ai settings and will otherwise reappear on every machine you log into.
 
