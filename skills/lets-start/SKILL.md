@@ -5,7 +5,7 @@ description: Use at the very start of a work session to orient and route before 
 
 # Start a Session
 
-Orient first, then route — don't dive into building.
+Orient first, then pick the move. A session that starts from the records does not repeat old work or undo old decisions.
 
 ## 0. Answer first
 
@@ -26,12 +26,12 @@ A new or empty project has none of these: say so, and route to "New".
 
 - **New** — no north star yet → shape it first (the `lets-shape` skill), or go straight to design if the goal is already clear.
 - **Existing · pick work** → recommend one next move, with its reason, and name the runner-up and why it lost. Show only those two; the user can ask for the rest.
-- **Existing · resume** → a slice is mid-flight → catch up: where we are, what's in progress, next step.
+- **Existing · resume** → a slice is in progress, and its plan has the user's nod from an earlier session → say in two or three lines where we are and what comes next, then continue it. That nod still covers the plan. Stop first only when the records show that the plan changed, or that a choice is still open.
 - **Rush** — the user says they are short of time and names a target → skip the frame. Reply in 5 lines or fewer: your assumptions (1–3 lines), the first move, and "Go?". No runner-up, no options, no teaching, and no other questions: a decision that can wait comes after the first move. A list of questions costs the time they do not have.
 - **Fuzzy · explore** → offer `lets-blindspot`, `lets-align`, or `lets-explore`.
 
-## 3. State the frame and wait
+## 3. State the frame
 
-Not for a rush (above). One tight paragraph: the project, the session type, the current slice/goal, what "done" looks like, and what's NOT in scope. Propose the first move and **wait for a nod** before executing.
+Not for a rush (above). One short paragraph: the project, the session type, the current slice or goal, what "done" looks like, and what is not in scope. For new work or a pick of work, propose the first move and wait for the nod: choosing the work is a direction choice. For a resume, the frame is the start of the work.
 
 **Next move:** the one the frame names: `lets-shape` for new work, `lets-catch-up` to resume, `lets-blindspot`, `lets-align` or `lets-explore` when the ask is fuzzy.
