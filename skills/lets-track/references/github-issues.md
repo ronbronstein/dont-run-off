@@ -4,6 +4,7 @@ Tasks are issues in the repo's GitHub project, through the `gh` command. The sto
 
 ## Before the first command
 
+- `command -v gh`: when it finds nothing, `gh` is not installed. Tell the user how to install it (https://cli.github.com) and stop; do not ask them to log in yet.
 - `gh auth status`: when it fails, tell the user to run `gh auth login` themselves (type `! gh auth login` in Claude Code). Do not try to log in for them.
 - The repo: `gh repo view --json nameWithOwner` from the repo folder. A repo whose `TASKS.md` names another repo: pass `--repo owner/name` on every command.
 
