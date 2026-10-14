@@ -18,7 +18,7 @@ Ask which, unless it's obvious from what they said:
 - **Global** — `~/.claude/CLAUDE.md`. How they want to be worked with everywhere. The default.
 - **Project** — `./CLAUDE.md` in the current repo. Facts about *this* codebase, for everyone on it.
 
-A project target needs the method somewhere. If they pick Project and `~/.claude/CLAUDE.md` has no `<!-- dont-run-off:method` block (or does not exist), the method would load nowhere. The method and My setup describe one person, and `./CLAUDE.md` is shared with everyone on the repo. So recommend the global file for the method and My setup, with only the project facts in `./CLAUDE.md`. The runner-up is `./CLAUDE.local.md`: personal, for this project only, and not committed. Say it once, with the other step 3 facts; do not stop only for this.
+A project target needs the method somewhere. If they pick Project and `~/.claude/CLAUDE.md` has no `<!-- dont-run-off:method` block (or does not exist), the method would load nowhere. The method and My setup describe one person, and `./CLAUDE.md` is shared with everyone on the repo. So recommend the global file for the method and My setup, with only the project facts in `./CLAUDE.md`. The runner-up is `./CLAUDE.local.md`: personal and for this project only (check that git ignores it, or add it to the file that `git rev-parse --git-path info/exclude` names). Say it once, with the other step 3 facts; do not stop only for this.
 
 ## 2. Read what's already there
 
