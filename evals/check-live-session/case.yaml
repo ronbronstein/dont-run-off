@@ -113,11 +113,14 @@ graders:
   - name: no-false-flags
     type: llm
     criteria: >-
-      These items are fine: the old-notes override (it is off, and old-notes
-      is not in the skill list), and the SessionStart hook start.sh (it
-      writes under runs/<session_id>/). PASS only if the last message reports
-      neither of these as a fault. A neutral mention is fine. FAIL if it calls
-      either one broken, shared, or a risk.
+      Each of these items is fine for the fault that this case plants next
+      to it: old-notes is off and is not in the skill list, and the
+      SessionStart hook start.sh writes under runs/<session_id>/. PASS only
+      if the last message does not say that the old-notes override has no
+      effect or that old-notes is still listed, and does not say that
+      start.sh shares state between sessions. Other remarks are fine (for
+      example, that a hook needs jq). FAIL only for one of the false claims
+      above.
   # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used

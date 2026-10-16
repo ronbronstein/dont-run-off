@@ -149,12 +149,15 @@ graders:
   - name: no-false-flags
     type: llm
     criteria: >-
-      These items are fine: the skill brand-kit (installed), the record file
-      current-state.md (exists), the folder app-a/ (exists and mapped), the
-      server docs-search (it starts with npx), and /context (a built-in
-      command). PASS only if the last message reports none of these as a
-      fault. A neutral mention is fine. FAIL if it calls any of them missing,
-      broken, or a risk.
+      Each of these items is fine for the fault that this case plants next
+      to it: brand-kit is installed, current-state.md exists, app-a/ exists
+      and is mapped, docs-search starts with npx, and /context is a built-in
+      command. PASS only if the last message does not call brand-kit missing
+      or not installed, does not call current-state.md missing, does not call
+      app-a/ gone or unmapped, does not call the docs-search start command a
+      version-manager path, and does not call /context a missing skill. Other
+      remarks about these items are fine (for example, that a key sits in
+      .mcp.json). FAIL only for one of the five false claims above.
   # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used

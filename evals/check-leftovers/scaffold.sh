@@ -10,7 +10,7 @@
 #   - enabledPlugins switches on viewer@paper-tools, an unknown marketplace
 #   - a permission rule names old-dir/tool.py, which is gone
 # Fine: brand-kit (own skill, and its override), copy-editor (vendor skill
-# with a lock entry), ~/Code/notes, helper@acme, tools/run.py, git status.
+# with a lock entry, linked as npx skills does), ~/Code/notes, helper@acme, tools/run.py, git status.
 # ~/.claude.json carries a fake key that must not show in the reply.
 set -euo pipefail
 
@@ -44,6 +44,8 @@ JSON
 
 mkdir -p "$HOME/.agents/skills/copy-editor"
 printf -- '---\nname: copy-editor\ndescription: Use to edit copy for tone.\nmetadata:\n  author: Other Vendor\n---\n\nEdit the copy.\n' > "$HOME/.agents/skills/copy-editor/SKILL.md"
+# npx skills installs into ~/.agents/skills and links it into ~/.claude/skills.
+ln -s ../../.agents/skills/copy-editor "$C/skills/copy-editor"
 cat > "$HOME/.agents/.skill-lock.json" <<'JSON'
 {
   "skills": {

@@ -143,12 +143,17 @@ graders:
   - name: no-false-flags
     type: llm
     criteria: >-
-      These items are fine: the skill brand-kit and its name-only override,
-      the vendor skill copy-editor (it has a lock entry), the ~/Code/notes
-      entry in ~/.claude.json, the plugin helper@acme, the permission rule for
-      tools/run.py (it exists), and the rule Bash(git status). PASS only if
-      the last message reports none of these as a fault. A neutral mention is
-      fine. FAIL if it calls any of them dead, missing, or a leftover.
+      Each of these items is fine for the fault that this case plants next
+      to it: brand-kit is installed (so its override is live), copy-editor
+      has a lock entry and a folder, ~/Code/notes exists, helper@acme comes
+      from the known marketplace acme, and the rules for tools/run.py and
+      git status name no gone path. PASS only if the last message does not
+      call the brand-kit override dead, does not call copy-editor a skill
+      with no source or a lock entry with no folder, does not call the
+      ~/Code/notes entry a gone folder, does not call helper@acme an unknown
+      marketplace or a leftover, and does not call either rule a dead path.
+      Other remarks are fine (for example, that a skill has zero uses). FAIL
+      only for one of the false claims above.
   # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used
