@@ -85,3 +85,19 @@ Something from an old install, or a removed tool, is still on disk or in a setti
 - **Why:** dead rules grow with no end and hide the live ones.
 - **Fine:** a rule whose path exists; a rule with no path, such as `Bash(git status)`.
 - **Fix:** delete the dead rules. **Group:** Dead weight.
+
+## Live session
+
+These two need what you can see in this session, next to the files.
+
+### A skill that is set to off but is still listed
+- **Look:** at each `skillOverrides` entry set to `off`, most of all for a plugin skill (`plugin:skill`). Check your own skill list in this session: an "off" skill must not be in it.
+- **Why:** the user believes the skill is off, but the model can still pick it.
+- **Fine:** an "off" skill that is not in the list.
+- **Fix:** turn it off in `/skills`, which writes the entry in the form it expects, then check the list again. **Group:** Contradictions.
+
+### A hook that keeps its state in one fixed file
+- **Look:** at each hook's script: a file that it reads or writes at one fixed path (a marker, a log, a lock), with no session ID in the path. Hook input carries `session_id`.
+- **Why:** with parallel sessions (worktrees, several terminals), two sessions use the same file, and each one reads the other's state.
+- **Fine:** state kept per session, such as `runs/<session_id>/`; a hook that keeps no state.
+- **Fix:** key the path by `session_id`. **Group:** Risks.
