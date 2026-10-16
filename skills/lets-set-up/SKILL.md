@@ -88,7 +88,7 @@ Then write the target as:
 ...anything of theirs you kept...
 ```
 
-For a **shared** project file, cut the method down to project facts — stack, commands, conventions, gotchas. The full method belongs in the global file; repeating it per project burns the always-on budget for no gain. When this project differs from the global My setup (another status file, another task tool, another work branch), add a `## My setup` section with only the lines that differ.
+For a **shared** project file, write only project facts — stack, commands, conventions, gotchas — with no method block. The method belongs in the global file; a copy per project burns the always-on budget for no gain, and an upgrade would put the full method back between the markers. When this project differs from the global My setup (another status file, another task tool, another work branch), add a `## My setup` section with only the lines that differ.
 
 ## 6. Check what you just installed into
 
@@ -100,6 +100,6 @@ Report what it finds before offering to fix anything.
 
 Check the total line count. Over 200 and adherence drops — if it's close, say so and offer to trim.
 
-Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, anything `lets-check` flagged, and that the profile content is theirs to edit freely — upgrades only touch the marked block.
+Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, anything `lets-check` flagged, and that the profile content is theirs to edit freely — upgrades change only the marked block, and add My setup only where it is missing.
 
 **Next move:** `lets-start` in a project.
