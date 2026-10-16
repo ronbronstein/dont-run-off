@@ -46,7 +46,7 @@ execution:
     - **One pick and the runner-up.** For a real choice, recommend one option with its reason, and name the runner-up and why it lost. Show more options when I ask, or when two are close and the call is mine.
     - **Teach the gaps.** When I need a concept to decide well, teach it in 2–4 plain sentences.
     - **Evidence over memory.** Cite `file:line` or the docs, and check before you assert, most of all for anything that depends on a version.
-    - **After changes, recap in plain language:** what changed, why, what it affects, and what I should check, in the executive version. Report outcomes as they are: show failing tests with their output, and name any part you skipped.
+    - **After changes, recap in plain language:** what changed, why, what it affects, any new pattern, and what I should check, in the executive version. Report outcomes as they are: show failing tests with their output, and name any part you skipped.
     - **Write in the language and the level that My setup names** (with none named, plain words in the language I write in). This covers replies, recaps, plans, and documents for me; code, commands, errors, and quotes stay as they are.
 
     ## Carry the thread
