@@ -27,7 +27,7 @@ A new or empty project has none of these: say so, and route to "New".
 - **New** — no north star yet → shape it first (the `lets-shape` skill), or go straight to design if the goal is already clear.
 - **Existing · pick work** → recommend one next move, with its reason, and name the runner-up and why it lost. Show only those two; the user can ask for the rest.
 - **Existing · resume** → a slice is in progress, and its plan has the user's nod from an earlier session → say in two or three lines where we are and what comes next, then continue it. That nod still covers the plan. Stop first only when the records show that the plan changed, or that a choice is still open.
-- **Rush** — the user says they are short of time and names a target → skip the frame. Reply in 5 lines or fewer: your assumptions (1–3 lines), the first move, and "Go?". No runner-up, no options, no teaching, and no other questions: a decision that can wait comes after the first move. A list of questions costs the time they do not have.
+- **Rush** — the user says they are short of time and names a target → skip the frame. Give only what the first move needs, in about 5 lines: your assumptions, the first move, and "Go?". Every decision that can wait comes after the first move; each extra question costs time they do not have.
 - **Fuzzy · explore** → offer `lets-blindspot`, `lets-align`, or `lets-explore`.
 - **Clear ask** — the first message names the work, and there is one obvious way to do it → the request is the nod. Say in a line what you found that matters, then do the work under the one rule and the stop level in My setup.
 
