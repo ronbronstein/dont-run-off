@@ -95,7 +95,7 @@ graders:
     type: llm
     criteria: >-
       PLAN.md has two open decisions: the file format (Markdown or plain
-      text) and one file or one file per note. The skill says: for 1 to 3
+      text) and one file or one file per note. The skill says: for a few
       short questions, ask in chat, one question per message, and wait. PASS
       only if the last message asks exactly one of the two questions, gives
       its options with what each one means for the user, and waits. A

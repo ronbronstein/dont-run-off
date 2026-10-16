@@ -15,13 +15,13 @@ Get the answers the work needs, with the least effort for the user, in a form yo
 
 ## 2. Pick the medium
 
-| Situation | Medium |
-|---|---|
-| 1–3 questions, each answerable in a line, no pictures or files | **Chat.** |
-| The goal itself is fuzzy | **Chat, one question at a time.** Each answer changes the next question, so they cannot be batched. Start with the question that changes the most, usually the problem behind the request. Then, one per message: for whom, how you will know it worked, scope in and out, hard limits, edge cases, and examples they like. After about 5–8 answers in total, write a short spec for a nod, and move any remaining concrete choices to a page. |
-| 4 or more questions ready at once; options whose effects need spelling out, a picture, or a file; or the user asks for a page | **Review page** (steps 3–5). |
+Pick the medium that costs the user the least effort for the answers you need:
 
-In chat, send one question per message and wait for the answer. A question tool may show up to 4 short questions at once. Never send a numbered list of questions as text: if you are about to, you have a page's worth, so build the page.
+- **Chat** for a few short questions, each answerable in a line: one question per message, and wait for each answer. A question tool may show up to 4 short questions at once.
+- **Chat, one question at a time,** when the goal itself is fuzzy: each answer changes the next question, so they cannot be batched. Start with the question that changes the most, usually the problem behind the request. Then ask for what the work still lacks, such as for whom, how you will know it worked, scope in and out, hard limits, edge cases, and examples they like. When you can write a short spec, write it for a nod, and move any remaining concrete choices to a page.
+- **A review page** (steps 3–5) when many questions are ready at once; when options need their effects spelled out, a picture, or a file; or when the user asks for a page.
+
+A numbered list of questions in one chat message is hard to answer. When you have that many, use the question tool or build the page.
 
 ## 3. Write questions that are easy to answer
 
