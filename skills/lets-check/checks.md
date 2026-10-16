@@ -45,3 +45,43 @@ Something points at a thing that is not there. It loads nothing and says nothing
 - **Why:** work that is not committed is in no history and in no backup: a skill can exist on one machine only.
 - **Fine:** a clean tree. Some tools rewrite `settings.json` at each start, so a changed `settings.json` alone is a question, not a fault.
 - **Fix:** commit it, or move it to the repo or plugin that owns it. **Group:** Risks.
+
+## Leftovers
+
+Something from an old install, or a removed tool, is still on disk or in a settings file. It costs little today, but it misleads the next reader, and some of it comes back to life.
+
+### A `skillOverrides` entry for a skill that does not exist
+- **Look:** at each key in `skillOverrides` (user, project, and local settings). Check it against the installed skills: personal, project, and plugin (`plugin:skill`).
+- **Why:** a dead switch hides nothing, but it applies again, without a word, if a skill with that name comes back.
+- **Fine:** a key for an installed skill.
+- **Fix:** delete the entry; ask first, because the user may plan to bring the skill back. **Group:** Dead weight.
+
+### A third-party skill with no source
+- **Look:** for a skill that is not the user's own (a license file, an author or vendor in its frontmatter, a vendor path) and has no record of where it came from: no entry in a lock file (`skills-lock.json`, `~/.agents/.skill-lock.json`) and no source and version in its frontmatter. Note a copy of a skill that an installed plugin also ships.
+- **Why:** a copy with no source never updates, and nobody can check what changed in it.
+- **Fine:** the user's own skills; a skill with a lock entry.
+- **Fix:** record the source and the version, or install the plugin instead. Teach the trade-off: a plugin from a marketplace that updates by itself changes with no review. **Group:** Risks.
+
+### A skills lock entry with no skill folder
+- **Look:** at each entry in `~/.agents/.skill-lock.json` and in a repo's `skills-lock.json`: its skill folder must exist.
+- **Why:** the lock and the disk disagree, and the next update can bring back a skill that the user removed.
+- **Fine:** an entry whose folder exists.
+- **Fix:** `npx skills remove -g <name>`, or install it again. **Group:** Dead weight.
+
+### Project entries in `~/.claude.json` for folders that are gone
+- **Look:** at the paths under `projects` in `~/.claude.json` that hold `mcpServers`: each path must still exist. Read the paths and the server names only.
+- **Why:** dead MCP config. It comes back to life when a folder is made at that path again.
+- **Fine:** an entry whose folder exists.
+- **Fix:** remove the entry. The file also holds account data, so the user makes the change, or you change only that entry after their yes. **Group:** Dead weight.
+
+### Plugin leftovers
+- **Look:** in the plugins folder (`installed_plugins.json`, `known_marketplaces.json`, `cache/`) and at `enabledPlugins` in each settings file: cache folders for a marketplace that is not known, `*.bak` marketplace folders, several cached versions of a plugin that is off, and an `enabledPlugins` key whose marketplace is not known.
+- **Why:** old copies confuse which version runs, and a switch for an unknown marketplace never loads anything.
+- **Fine:** one cached version of each enabled plugin, from a known marketplace.
+- **Fix:** clean up with `claude plugin`. **Group:** Dead weight; an `enabledPlugins` key that never loads goes under Never fires.
+
+### Permission rules with paths that are gone
+- **Look:** at each `permissions.allow` and `permissions.deny` rule that holds a path: the path must exist.
+- **Why:** dead rules grow with no end and hide the live ones.
+- **Fine:** a rule whose path exists; a rule with no path, such as `Bash(git status)`.
+- **Fix:** delete the dead rules. **Group:** Dead weight.
