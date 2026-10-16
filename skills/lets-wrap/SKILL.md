@@ -15,7 +15,7 @@ In plain language: what got done this session, and the key decisions made — wi
 
 This step carries the thread: the next session starts from these files, so they must say what is true now.
 
-Use the record files that My setup names; a project's `CLAUDE.md` can name others. The defaults are `current-state.md` and `DECISIONS.md`. When My setup says a file is "none", do not create it: put its content where My setup says.
+Use the record files that My setup names; a project's `CLAUDE.md` can name others. The defaults are `current-state.md` and `DECISIONS.md`. When My setup says a file is "none", keep its content where My setup says, or in the recap, and create no file for it.
 
 - **The decision log** — append what was decided and why, any deviations from the plan (with the reason), and any open questions. Record each deviation: a deviation with no record changes the project without anyone choosing it.
 - **The status file** — rewrite it so it describes reality *now*, not the plan from three sessions ago. If a phase finished, say so. If something was abandoned, remove it rather than leaving it looking active.
