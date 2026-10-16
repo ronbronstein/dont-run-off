@@ -41,7 +41,7 @@ For each slice, decide before you build it how you will know that it works: what
 
 ## Hand off
 
-Give the result in one short block: the frame, the size and verdict, the design and its open choices, and the slices with their checks. Ask for the nod once. It covers the whole plan, so build the slices after it without asking again; come back only when what you find changes the plan.
+Give the result in one short block: the frame, the size and verdict, the design and its open choices, and the slices with their checks. Ask for the nod once. It covers the whole plan, so build the slices after it without asking again. Come back when the one rule says: when what you find changes the plan, or before a step that is hard to undo or that others see.
 
 Build one slice at a time, and show each one working before you call it done. A new idea in the middle of a slice goes to the task list, not into the slice.
 
