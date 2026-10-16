@@ -29,8 +29,6 @@ If `~/.claude/CLAUDE.md` has no `<!-- dont-run-off:method` block, say so: a proj
 
 Read the target file if it exists. Then check for `<!-- dont-run-off:method` — if present this is an **upgrade**: replace only the text between that marker and `<!-- /dont-run-off:method -->`, leave everything else exactly as it is, and skip to step 5.
 
-One exception: a My setup Stop level line written before 0.4.0 reads "standard — stop before anything multi-step, unclear, or hard to undo", and that text now disagrees with the method. Before you write, show the old line and the new one ("standard — agree on the direction before new work; a nod covers the plan"), and say that "careful" is the level for a stop before every change. Change that line only after the user says yes.
-
 An upgrade of a file with no `## My setup` section (set up before My setup existed) adds it first, because the new method would otherwise switch the replies to strict STE without asking. Detect every My setup line with the table in step 3 and confirm them in one message. Then ask only the Language and Stop level questions from step 3, one at a time; if their file already has a rule about how to write replies, propose the Language line that matches it. Write the My setup block from `profile.md` directly below the method block, then go to step 5.
 
 Otherwise it's a fresh install. Read their existing content properly and note anything that overlaps the method — a section on how they want to be talked to, rules about planning, testing, or commits. You'll reconcile these in step 4, not silently duplicate them.
@@ -98,6 +96,6 @@ Report what it finds before offering to fix anything.
 
 Check the total line count. Over 200 and adherence drops — if it's close, say so and offer to trim.
 
-Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, anything `lets-check` flagged, and that the profile content is theirs to edit freely — upgrades only touch the marked block (and, with their yes, an old Stop level line).
+Tell them to run **`/context`** and confirm the file is listed. An install you haven't verified isn't finished. Then recap in plain language: what you wrote, what you merged or dropped and why, where the backup is, anything `lets-check` flagged, and that the profile content is theirs to edit freely — upgrades only touch the marked block.
 
 **Next move:** `lets-start` in a project.
