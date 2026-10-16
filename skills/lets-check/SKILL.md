@@ -26,7 +26,7 @@ Read what's on disk. Don't infer it. `~/.claude` below means the config folder: 
 | Commands | `~/.claude/commands/`, `./.claude/commands/` |
 | Hooks | `hooks` in `~/.claude/settings.json`, `./.claude/settings.json`, `./.claude/settings.local.json` |
 | Agents | `~/.claude/agents/`, `./.claude/agents/`, plus any shipped by plugins |
-| MCP servers | `mcpServers` in `~/.claude.json` (global and per-project) and in the project's `.mcp.json` — **names only, these files hold tokens** — plus `/mcp` for account connectors, which live in your claude.ai settings and appear nowhere on disk |
+| MCP servers | `mcpServers` in `~/.claude.json` (global and per-project) and in the project's `.mcp.json` — **names, commands, and paths only, through a filter: these files hold tokens** — plus `/mcp` for account connectors, which live in your claude.ai settings and appear nowhere on disk |
 | Plugins | `enabledPlugins` in settings, and `/plugin` for what each one contributes |
 | Memory | `MEMORY.md` and the memory directory for this project |
 
@@ -68,6 +68,8 @@ A common mistake: a `CLAUDE.md` in a **subdirectory** doesn't load with the sess
 
 **Plugins.** Judge a plugin by everything it contributes: skills, agents, commands, hooks, MCP servers. A plugin whose every surface is unused is a clean uninstall. A plugin where one skill carries it and the rest never fire is worth keeping and worth saying so.
 
+**More checks.** Then go through `checks.md` next to this skill: faults from real setups that no built-in command shows, such as links to things that are gone and leftovers of old installs. Each one names its report group.
+
 ## 4. Report
 
 Lead with the gap between what they think is in force and what actually is. Group findings so the worst are first:
@@ -77,6 +79,7 @@ Lead with the gap between what they think is in force and what actually is. Grou
 3. **Contradictions** — two sources steering the same behavior.
 4. **Over budget** — always-on total against the ceiling.
 5. **Dead weight** — restates defaults, duplicates another source, or hasn't changed behavior since it was written.
+6. **Risks** — works today, but breaks later or opens a door: a path that the next upgrade moves, servers approved with no prompt, config with no history.
 
 Every finding needs a path, the consequence in plain language, and a specific fix. "Skills may conflict" is not a finding. "`~/.claude/skills/wrap-session/` (16 lines) shadows the plugin's current 42-line version — delete yours and the upgrade takes effect" is.
 
