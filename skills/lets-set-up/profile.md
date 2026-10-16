@@ -31,10 +31,14 @@ The moves read these lines. Change any of them in plain words. A project's
 - Tasks: *the tool and where. For example: "Taskwarrior; each repo names its
   project in `TASKS.md`" / "GitHub Issues in this repo" / "none: the status
   file lists what is next."*
-- Language: English, strict STE. *(The language first, then the level: "80% STE",
-  "plain", or "technical". The two STE levels are for English only. The method
-  says what each one means. STE is ASD-STE100 Simplified Technical English: short,
-  plain sentences with one meaning each.)*
+- Language: English, strict STE: ASD-STE100 Simplified Technical English. One
+  instruction per sentence. Procedural sentences of 20 words or fewer, descriptive
+  sentences of 25 or fewer. Active voice, simple tenses, one word for one meaning,
+  and the articles "a" and "the". No idioms, slang, or metaphors. A vertical list
+  for more than 3 items. You cannot check words against the official STE word
+  list, so never claim strict compliance. *(The language first, then the level
+  and its text: `lets-set-up` offers strict STE, 80% STE, plain, and technical.
+  The two STE levels are for English only.)*
 - Stop level: standard — agree on the direction before new work; a nod covers
   the plan. *(Or "careful — show the plan and wait before any change to files,
   even a small one." Or "fast — make the choices that are easy to change
