@@ -43,6 +43,6 @@ The moves read these lines. Change any of them in plain words. A project's
   the plan. *(Or "careful — show the plan and wait before any change to files,
   even a small one." Or "fast — make the choices that are easy to change
   yourself, and stop only before hard-to-undo steps or when the goal is unclear.")*
-- Version control: Git. Commit as you go, one logical change per commit. *(Or "none":
-  then the fast level works like standard, because nothing can undo the changes.)*
+- Version control: Git. Commit as you go, one logical change per commit. *(Or "none —
+  nothing can undo a change, so the fast stop level works like standard.")*
 - Work branch: the repo's default branch. Parallel copies: off.
