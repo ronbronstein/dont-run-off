@@ -199,6 +199,11 @@ for (const f of ["method.md", "profile.md"]) {
     if (!names.has(m[1]))
       errors.push(`${at}: references unknown skill '${m[1]}'`);
   }
+  // The moves list names skills as bare `lets-…` words, with no table row.
+  for (const m of text.matchAll(/`(lets-[a-z0-9-]+)`/g)) {
+    if (!names.has(m[1]))
+      errors.push(`${at}: names unknown skill '${m[1]}'`);
+  }
 }
 
 if (alwaysOnTotal > MAX_ALWAYS_ON_LINES)
