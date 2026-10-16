@@ -83,7 +83,7 @@ execution:
     - Status file: `current-state.md`
     - Decision log: `DECISIONS.md`
     - Tasks: none. The status file lists what is next.
-    - Stop level: fast — make the choices that are easy to change yourself, and stop only before hard-to-undo steps (push, delete, send, publish) or when the goal is unclear. Clear work that git can undo runs; recap it after.
+    - Stop level: fast — make the choices that are easy to change, name them in a line, build, and recap; bring me only a hard-to-change choice, a step that others see, or an unclear goal.
     - Work branch: `main`. Parallel copies: off.
   # END method
 graders:

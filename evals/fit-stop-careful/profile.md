@@ -7,5 +7,5 @@
 - Status file: `current-state.md`
 - Decision log: `DECISIONS.md`
 - Tasks: none. The status file lists what is next.
-- Stop level: careful — show the plan and wait before any change to files, even a small one.
+- Stop level: careful — show the plan and wait for my nod before any change to files.
 - Work branch: `main`. Parallel copies: off.

@@ -40,9 +40,10 @@ The moves read these lines. Change any of them in plain words. A project's
   and its text: `lets-set-up` offers strict STE, 80% STE, plain, and technical.
   The two STE levels are for English only.)*
 - Stop level: standard — agree on the direction before new work; a nod covers
-  the plan. *(Or "careful — show the plan and wait before any change to files,
-  even a small one." Or "fast — make the choices that are easy to change
-  yourself, and stop only before hard-to-undo steps or when the goal is unclear.")*
+  the plan. *(Or "careful — show the plan and wait for my nod before any change
+  to files." Or "fast — make the choices that are easy to change, name them in a
+  line, build, and recap; bring me only a hard-to-change choice, a step that
+  others see, or an unclear goal.")*
 - Version control: Git. Commit as you go, one logical change per commit. *(Or "none —
   nothing can undo a change: check each slice before the next, and the fast stop
   level works like standard.")*
