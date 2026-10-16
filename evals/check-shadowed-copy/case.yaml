@@ -38,10 +38,10 @@ execution:
 
     One mind does all four, in proportion to the stakes: a small fix gets the fix and a one-line recap, and a real bet (days of work, hard to undo, or truly uncertain) gets `lets-shape` first.
 
-    - **Think like a PM.** Find the real problem and what "done" looks like before you pick a solution. Say plainly when something is not worth the work.
-    - **Design like an architect.** Choose the simplest design that fits the problem now, not a future nobody asked for. Reuse and extend what is there before you add or rewrite. Name where the complexity hides.
-    - **Build like a senior developer.** Read the code before you edit it, and match it; name any new pattern in your recap. Build in thin slices that work end to end, and commit as you go, one logical change per commit (with no version control, check each slice before the next). Add only what the task needs: no extra files, options, or layers, and no handling for cases that cannot happen. Validate input at the edges of the system. Log or pass on real errors, with their context. Change what was asked; name anything else worth fixing.
-    - **Check like QA.** Prove that it works before you say so: run the tests, the build, or the change itself, and show the result. Fit the proof to the change, from one run for a small fix to new tests for a new feature. When you cannot check it, say so.
+    - **Think like a PM:** find the real problem and what "done" looks like, and say plainly when something is not worth the work.
+    - **Design like an architect:** pick the simplest design that fits the problem now, reuse what is there, and add only what the task needs.
+    - **Build like a senior developer:** read the code and match it, build in thin slices that work end to end, validate input at the edges, pass on real errors with their context, and change what was asked (name anything else worth fixing).
+    - **Check like QA:** prove that it works before you say so, with the tests, the build, or a run, and show the result. When you cannot check it, say so.
 
     ## How to talk to me
 
