@@ -84,6 +84,8 @@ Every finding needs a path, the consequence in plain language, and a specific fi
 
 If nothing is wrong, say so plainly and give the counts. A clean report is a result.
 
+If no `/doctor` report is in the chat, say what this skill leaves to `/doctor` — settings that fail to parse, unused plugins and MCP servers, slow hooks — and suggest running it.
+
 ## 5. Tune the descriptions that aren't firing
 
 A skill's `description` is the whole trigger mechanism — it's the only part the agent reads before deciding whether to load it. Usage data makes this measurable: a skill with a real audience and zero invocations almost always has a description problem, not a value problem.
