@@ -41,15 +41,13 @@ Expand `@` imports and follow them. An import pointing at a directory pulls in e
 
 ## 2. Measure what actually gets used
 
-Run the script next to this skill. It needs Node.js: check with `command -v node` first. Without Node.js, skip this step and say in the report that use was not measured.
+Take the use counts from the `/doctor` report first. Run the script next to this skill only when that report has no count for a skill or command that steps 3 and 5 need: the user skipped `/doctor`, or the report did not list a plugin's skills one by one. The script needs Node.js: check with `command -v node` first. Without Node.js, skip the script and say in the report that use was not measured.
 
 ```bash
 node "${CLAUDE_SKILL_DIR}/usage.mjs" --days 90
 ```
 
 It counts real invocations from local data — `history.jsonl` in the config folder (`$CLAUDE_CONFIG_DIR`, else `~/.claude`) for slash commands, session transcripts for `Skill` and MCP tool calls — and joins them against what's installed, so every skill, command and MCP server comes back with a use count and a last-used date. `--json` gives the same thing machine-readable. It reads names and counts only, never message content.
-
-This is what turns "probably dead" into a measurement. Nothing else here can tell you a skill has sat untouched for three months.
 
 Read the result with judgment. Zero uses is a prompt to look, not a verdict: a skill for a rare moment is doing its job by staying quiet, and something installed last week hasn't had a chance. The real signal is a skill that has been installed for months, covers something the person does all the time, and has never fired. That is a description problem, not a taste problem.
 
@@ -63,17 +61,11 @@ A common mistake: a `CLAUDE.md` in a **subdirectory** doesn't load with the sess
 
 **Commands.** A command and a skill sharing a name is the trap: typing `/x` runs the command, while the model invokes the skill. Two different instruction sets behind one name, usually because one was copied from the other and then drifted. Diff them and say which is stale.
 
-**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently, in the place where you counted on it. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. Flag anything slow enough to tax every tool call. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
-
-**Settings themselves.** A settings file with a JSON syntax error doesn't announce itself — it just doesn't load, taking its hooks and permissions with it. Parse every one you found. `/debug settings` and `/debug hooks` show the live resolution if something still doesn't add up.
+**Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently, in the place where you counted on it. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
 
 **Memory.** Auto memory loads its index every session, so it's part of the always-on cost. Check the index hasn't grown past its limits, and flag entries that contradict the rules or record decisions that belong in the decision log that My setup names, where they can be diffed.
 
-**MCP servers.** Usually the largest cost. Every connected server's tool schemas load on every request whether or not you ever call them, so rank by cost-per-use: a server with a large tool surface and a handful of calls in three months is costing you context on every message you send. Say where each one lives, because that determines how to remove it — servers in `~/.claude.json` come out locally, but account connectors have to be disconnected in claude.ai settings and will otherwise reappear on every machine you log into.
-
 **Agents.** Subagent descriptions load so the model can route to them. An agent that nothing routes to still costs context. Check whether it's genuinely unused or just badly described — same diagnosis as skills, since routing works the same way.
-
-**Plugins.** Judge a plugin by everything it contributes: skills, agents, commands, hooks, MCP servers. A plugin whose every surface is unused is a clean uninstall. A plugin where one skill carries it and the rest never fire is worth keeping and worth saying so.
 
 **More checks.** Then go through `checks.md` next to this skill: faults from real setups that no built-in command shows, such as links to things that are gone and leftovers of old installs. Each one names its report group.
 
@@ -95,6 +87,8 @@ If nothing is wrong, say so plainly and give the counts. A clean report is a res
 ## 5. Tune the descriptions that aren't firing
 
 A skill's `description` is the whole trigger mechanism — it's the only part the agent reads before deciding whether to load it. Usage data makes this measurable: a skill with a real audience and zero invocations almost always has a description problem, not a value problem.
+
+Start with the skills that the `/doctor` report flagged as unused or turned off. `/doctor` reads zero uses as a reason to remove; here it is a reason to look at the description. When such a skill's moment comes up often, propose turning it back on and rewriting its description.
 
 Compare a skill's invocation count against how often its *moment* actually came up in recent sessions. When something should have fired and didn't, rewrite the description to include:
 
