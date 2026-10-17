@@ -1,19 +1,26 @@
 ---
 name: lets-check
-description: Use to audit a Claude Code setup for context-engineering problems — what actually loads, what shadows what, what silently never fires, and what contradicts what. Covers rules (CLAUDE.md), skills, slash commands, and hooks. Trigger on "check my setup," "audit my config," "what's actually loaded," "why isn't my skill firing," "checkup," or right after installing or upgrading the harness.
+description: Use to audit a Claude Code setup for the context-engineering problems that the built-in /doctor does not cover — what shadows what, what silently never fires, and what contradicts what. It starts by asking the user to run /doctor in the chat. Covers rules (CLAUDE.md), skills, slash commands, and hooks. Trigger on "check my setup," "audit my config," "what's actually loaded," "why isn't my skill firing," "checkup," or right after installing or upgrading the harness.
 ---
 
 # Check the Setup
 
 Audit everything that loads: **rules, skills, commands, hooks, agents, MCP servers, plugins, memory.**
 
-The thing people miss is that the always-on cost is not just `CLAUDE.md`. Every skill's description, every agent's description, and every connected MCP server's full tool schemas ride along on *every request* so the model can decide what to reach for. MCP tools are usually the single largest block, and a server that you never call costs context on every message for nothing. `/context all` shows the breakdown by source — start there when the budget looks wrong.
+The thing people miss is that the always-on cost is not just `CLAUDE.md`. Every skill's description and every agent's description ride along on *every request* so the model can decide what to reach for. MCP tools are deferred by default: only their names load until one is used, unless a server is set to load in full. `/context all` shows the breakdown by source — start there when the budget looks wrong.
 
-The built-ins each show one surface: `/doctor` finds installation and invalid-settings problems, `/context all` inventories what loaded this session, `/skills` lists skills by source, `/hooks` lists hooks by event, `/status` shows which settings files were read. Use them to gather — they're faster and more accurate than guessing.
+`/doctor` is Claude Code's own audit of the setup, and it grows with each release. This skill adds to it and does not repeat it. The other built-ins each show one surface: `/context all` inventories what loaded this session, `/skills` lists skills by source, `/hooks` lists hooks by event, `/status` shows which settings files were read. Use them to gather — they're faster and more accurate than guessing.
 
 What none of them answers is what *wins* when two sources disagree. That is the failure people hit most, and it is silent: nothing errors, a skill just never fires, or a stale copy runs instead of the one you installed.
 
 Report first, fix second. Never delete or rewrite anything before showing the finding and getting a yes.
+
+## 0. Start with `/doctor`
+
+- If a `/doctor` report is already in this chat, or the user says they ran it or wants to skip it, go to step 1.
+- Otherwise, stop here and audit nothing yet. Ask the user to type `/doctor` in this chat and let it finish, its fixes included. Then they say "go on" or run this skill again.
+
+From here on, skip any finding that the `/doctor` report in this chat already shows. The report, not a fixed list, says what `/doctor` covered: an older Claude Code checks less, and a newer one checks more.
 
 ## 1. Gather
 
