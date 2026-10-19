@@ -154,6 +154,10 @@ graders:
       marketplace or a leftover, and does not call either rule a dead path.
       Other remarks are fine (for example, that a skill has zero uses). FAIL
       only for one of the false claims above.
+      A remark that ~/.claude is not the config folder in force (for
+      example, because CLAUDE_CONFIG_DIR points to another folder), and any
+      claim that rests only on that remark, is fine: an eval run does not
+      load ~/.claude.
   # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used
