@@ -215,7 +215,7 @@ else if (alwaysOnTotal > MAX_ALWAYS_ON_LINES * 0.8)
     `always-on layer is ${alwaysOnTotal} lines, approaching the ${MAX_ALWAYS_ON_LINES}-line budget`,
   );
 
-// The setup skill is what installs the always-on layer, so it has to be able to
+// The lets-set-up skill is what installs the always-on layer, so it has to be able to
 // name both halves it writes.
 const setupSkill = existsSync(join(SETUP, "SKILL.md"))
   ? readFileSync(join(SETUP, "SKILL.md"), "utf8")
