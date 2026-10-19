@@ -83,7 +83,7 @@ Lead with the gap between what they think is in force and what actually is. Grou
 5. **Dead weight** — restates defaults, duplicates another source, or hasn't changed behavior since it was written.
 6. **Risks** — works today, but breaks later or opens a door: a path that the next upgrade moves, servers approved with no prompt, config with no history.
 
-Every finding needs a path, the consequence in plain language, and a specific fix. "Skills may conflict" is not a finding. "`~/.claude/skills/wrap-session/` (16 lines) shadows the plugin's current 42-line version — delete yours and the upgrade takes effect" is.
+Every finding needs a path, the consequence in plain language, and a specific fix. "Skills may conflict" is not a finding. "`~/.claude/skills/lets-wrap/` (16 lines) shadows the plugin's current 42-line version — delete yours and the upgrade takes effect" is.
 
 If nothing is wrong, say so plainly and give the counts. A clean report is a result.
 
