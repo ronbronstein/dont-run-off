@@ -164,7 +164,7 @@ Every move starts with `lets-`, so typing `/lets` in Claude Code finds them. Fou
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/session-dark.svg">
-    <img alt="A session runs start, shaping, build it, quiz, wrap-session — with lets-align, directions and blindspot as detours before committing, and catchup returning you to the start next time." src="assets/session-light.svg" width="100%">
+    <img alt="A session runs lets-start, lets-shape, build it, lets-explain, lets-wrap — with lets-align, lets-explore and lets-blindspot as detours before committing, and lets-catch-up returning you to the start next time." src="assets/session-light.svg" width="100%">
   </picture>
 </p>
 
