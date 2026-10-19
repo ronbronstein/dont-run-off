@@ -4,7 +4,7 @@ description: >-
   F10. The user starts a session in a rush with a clear target. The agent does
   not interview the user: it states its assumptions in a few lines, proposes
   the first move, and asks at most for a nod.
-tags: [f10, start, rush]
+tags: [f10, lets-start, rush]
 context:
   scaffold_script: scaffold.sh
 execution:

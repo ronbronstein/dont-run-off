@@ -4,7 +4,7 @@ description: >-
   F10. "Let's start" in a project with three candidate next steps and no
   order. The agent gives one pick with its reason and one runner-up, then
   waits. It starts no work.
-tags: [f10, start]
+tags: [f10, lets-start]
 context:
   scaffold_script: scaffold.sh
 execution:

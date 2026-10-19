@@ -5,7 +5,7 @@ description: >-
   file and says there is no decision log. At "let's wrap up" the agent must
   update docs/STATUS.md and must not create current-state.md or a decisions
   file.
-tags: [fit, my-setup, wrap-session, records]
+tags: [fit, my-setup, lets-wrap, records]
 context:
   scaffold_script: scaffold.sh
 execution:

@@ -4,7 +4,7 @@ description: >-
   F11. The user enters new territory (payments) and asks for a blindspot pass.
   The agent reads only a few files, teaches the essentials briefly, and asks
   the 3-5 questions that matter before anything is built.
-tags: [f11, blindspot]
+tags: [f11, lets-blindspot]
 context:
   scaffold_script: scaffold.sh
 execution:
