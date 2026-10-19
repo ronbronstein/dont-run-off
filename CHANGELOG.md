@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.4.0 — unreleased
+
+### The old names are gone
+
+The old names from 0.3.0 no longer work, and there is no redirect. Use the `lets-` names.
+
+| Old name | Name now |
+|---|---|
+| `start` | `lets-start` |
+| `catchup` | `lets-catch-up` |
+| `wrap-session` | `lets-wrap` |
+| `shaping` | `lets-shape` |
+| `directions` | `lets-explore` |
+| `blindspot`, `lets-find-gaps` | `lets-blindspot` |
+| `checkup` | `lets-check` |
+| `setup` | `lets-set-up` |
+| `quiz` | `lets-explain` |
+| `taskwarrior` | `lets-track` |
+
+`lets-find-gaps` from 0.3.0 is `lets-blindspot` again.
+
+**After you update,** run `/dont-run-off:lets-set-up` once. It refreshes the method block in your
+`CLAUDE.md`. A 0.3.0 block names `lets-find-gaps`, which no longer exists.
+
 ## 0.3.0 — 2026-10-11
 
 ### The moves have new names
