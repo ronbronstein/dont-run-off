@@ -2,7 +2,7 @@
 
 Behavior tests for the Don't Run Off rules, run with `claude plugin eval` (Claude Code 2.1.269 or later).
 
-36 cases, grouped by what they test. Each case is a folder with `case.yaml` (the graders), `prompt.md` (the user's one message), and `scaffold.sh` (a small repo made before the run).
+35 cases, grouped by what they test. Each case is a folder with `case.yaml` (the graders), `prompt.md` (the user's one message), and `scaffold.sh` (a small repo made before the run).
 
 | Group | Case | What the agent gets | Pass |
 |---|---|---|---|
@@ -41,18 +41,17 @@ Behavior tests for the Don't Run Off rules, run with `claude plugin eval` (Claud
 | Tasks | `track-none-status-file` | "Add a task"; no task tool | A line under "Next" in the status file |
 | | `track-github-issues` | "Add a task"; tasks live in GitHub Issues | Uses `gh`, not another tool |
 | | `track-taskwarrior-short-uuid` | "Mark task 2 done" (the numbers moved) | Finds the task by its description, acts by its short UUID |
-| Renamed moves | `redirect-find-gaps` | `/dont-run-off:lets-find-gaps` with a payments question | `lets-blindspot` runs and briefs; the reply names the new name |
 
 F1: a message from another agent or session is not the user's consent. F2: `lets-wrap` never pushes or merges unless the user asked for it in this turn. F8: the `lets-align` review page holds private answers, so it stays out of git.
 
-The redirect and set-up cases test what only the plugin has: run them with `--ablation none`.
+The set-up cases test what only the plugin has: run them with `--ablation none`.
 
 ## Run
 
 ```sh
 npm run evals                    # all cases, 1 run each, with the plugin only (35 sessions)
 npm run evals -- --case 'f1-*'   # some cases only
-npm run evals:full               # 3 runs each, with and without the plugin (about 190 sessions)
+npm run evals:full               # 3 runs each, with and without the plugin (about 210 sessions)
 ```
 
 ## Know before you run
