@@ -158,6 +158,9 @@ graders:
       example, because CLAUDE_CONFIG_DIR points to another folder), and any
       claim that rests only on that remark, is fine: an eval run does not
       load ~/.claude.
+      For example, "the brand-kit override does nothing here, because the
+      config folder in force is not ~/.claude" is fine; it does not call the
+      override dead.
   # Did the lets-check skill run? Scored with --ablation none; an indicator only with with-without.
   - name: lets-check-ran
     type: tool_used
