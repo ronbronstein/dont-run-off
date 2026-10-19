@@ -19,7 +19,7 @@ Report first, fix second. Never delete or rewrite anything before showing the fi
 
 - If the user asks one narrow question — one skill, command, hook, or rule that misbehaves — skip this step. Answer that question with the steps below, then suggest `/doctor` at the end.
 - If a `/doctor` report is already in this chat, or the user says they ran it or wants to skip it, go to step 1.
-- Otherwise, stop here and audit nothing yet. Ask the user to type `/doctor` in this chat and let it finish, its fixes included. Then they say "go on" or run this skill again.
+- Otherwise, stop here and audit nothing yet. Ask the user to type `/doctor` in this chat and let it finish, its fixes included. Then they say "go on" or run this skill again. If they skip it, `/doctor`'s topics stay unchecked: say so, and do not promise to check them here.
 
 From here on, skip any finding that the `/doctor` report in this chat already shows. The report, not a fixed list, says what `/doctor` covered: an older Claude Code checks less, and a newer one checks more.
 
@@ -60,6 +60,8 @@ A common mistake: a `CLAUDE.md` in a **subdirectory** doesn't load with the sess
 
 **Skills.** For every name, list every scope it exists in. Precedence runs **personal → project → plugin → bundled**, so a stale `~/.claude/skills/x` silently beats the plugin's current `x`. Most people miss this one: they install an upgrade and keep running the old copy. Then check each skill can actually fire — a `description` that lists topics instead of naming triggers and phrases means a skill that sits there forever. Flag two skills whose descriptions claim the same moment; that's contention with extra steps. Flag bodies over ~120 lines as probably two skills.
 
+Then take each skill that the `/doctor` report flagged as unused or turned off. When a skill that runs often covers the same area — a design skill with many uses next to an animation skill with none — report the unused one under **Never fires**: its description loses to its neighbour, and step 5 gives the fix.
+
 **Commands.** A command and a skill sharing a name is the trap: typing `/x` runs the command, while the model invokes the skill. Two different instruction sets behind one name, usually because one was copied from the other and then drifted. Diff them and say which is stale.
 
 **Hooks.** Hooks are the only deterministic layer — they run whether or not the model cooperates — so a broken one fails silently, in the place where you counted on it. Check each event name is real, each matcher compiles, and each command actually exists and is executable. Flag the same event configured in more than one settings file, and overlapping matchers within an event, where firing order decides the outcome. If a rule says something must happen *every time*, say so: that's a hook's job, and a rule is the wrong tool for it.
@@ -75,7 +77,7 @@ A common mistake: a `CLAUDE.md` in a **subdirectory** doesn't load with the sess
 Lead with the gap between what they think is in force and what actually is. Group findings so the worst are first:
 
 1. **Shadowed** — installed but never used. Name the winner and the loser, with paths.
-2. **Never fires** — present but untriggerable: weak descriptions, broken hooks, dead imports.
+2. **Never fires** — present but untriggerable: weak descriptions, skills that lose to a neighbour, broken hooks, dead imports.
 3. **Contradictions** — two sources steering the same behavior.
 4. **Over budget** — always-on total against the ceiling.
 5. **Dead weight** — restates defaults, duplicates another source, or hasn't changed behavior since it was written.
