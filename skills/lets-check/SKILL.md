@@ -17,6 +17,7 @@ Report first, fix second. Never delete or rewrite anything before showing the fi
 
 ## 0. Start with `/doctor`
 
+- If the user asks one narrow question — one skill, command, hook, or rule that misbehaves — skip this step. Answer that question with the steps below, then suggest `/doctor` at the end.
 - If a `/doctor` report is already in this chat, or the user says they ran it or wants to skip it, go to step 1.
 - Otherwise, stop here and audit nothing yet. Ask the user to type `/doctor` in this chat and let it finish, its fixes included. Then they say "go on" or run this skill again.
 

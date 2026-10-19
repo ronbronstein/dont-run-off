@@ -4,7 +4,8 @@ description: >-
   lets-check from plain words. A project skill and a project command, both
   named lets-wrap, are old copies; the short name runs one of them, not the
   plugin's current move. The agent finds them, explains what wins, and
-  reports before it changes or deletes anything.
+  reports before it changes or deletes anything. The question is narrow, so
+  the agent answers it with no stop for /doctor first.
 tags: [check, trigger, shadowing]
 context:
   scaffold_script: scaffold.sh
