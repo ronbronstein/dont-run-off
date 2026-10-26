@@ -1,0 +1,24 @@
+{
+  "light": {
+    "paper": "#f4ecd8",
+    "edge": "#d9c9a6",
+    "grid": "#e6d9bb",
+    "contour": "#c4b08a",
+    "ink": "#3b3a36",
+    "route": "#c86a4a",
+    "water": "#86a9b3",
+    "marsh": "#8c9a6a",
+    "fog": "#fbf8f0"
+  },
+  "dark": {
+    "paper": "#1e1c19",
+    "edge": "#3a352d",
+    "grid": "#2a2722",
+    "contour": "#5a5144",
+    "ink": "#e8e0cc",
+    "route": "#e3896a",
+    "water": "#4e7681",
+    "marsh": "#76845a",
+    "fog": "#34302a"
+  }
+}

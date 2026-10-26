@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-label="A route on a paper map runs straight into fog. A blindspot pass clears the fog, finds a cliff, a marsh and a river hidden there, marks three questions, and the route bends around them before anything is built.">
+<!-- Source for assets/scene-blindspot-*.svg. Edit this file, then run: npm run art -->
+<!-- The base attribute values draw the final frame (art rule 7); every animation runs on one 9 s clock. -->
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+.still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .motion { display: none; }
+  .still { display: inline; }
+  * { animation: none !important; }
+}
+</style>
+<defs>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
+  <g id="tuft" fill="none" stroke="#8c9a6a" stroke-width="2" stroke-linecap="round">
+    <path d="M0 0 l-5 -10 M0 0 l0 -13 M0 0 l5 -10 M-9 2 h18"/>
+  </g>
+  <clipPath id="map"><rect x="6" y="6" width="948" height="368" rx="14"/></clipPath>
+  <mask id="reveal">
+    <rect x="0" y="0" width="960" height="380" fill="#fff">
+      <animate attributeName="width" values="0;960;960" keyTimes="0;0.17;1" dur="9s" repeatCount="indefinite"/>
+    </rect>
+  </mask>
+  <mask id="lens-hole">
+    <rect x="0" y="0" width="960" height="380" fill="#fff"/>
+    <circle cx="670" cy="200" r="46" fill="#000">
+      <animate attributeName="r" values="0;0;46;46" keyTimes="0;0.16;0.18;1" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="330;330;670;670" keyTimes="0;0.17;0.36;1" dur="9s" repeatCount="indefinite"/>
+    </circle>
+  </mask>
+</defs>
+
+<!-- The map: paper, grid, terrain. Always still. -->
+<rect x="6" y="6" width="948" height="368" rx="14" fill="#f4ecd8" stroke="#d9c9a6" stroke-width="2"/>
+<g stroke="#e6d9bb" stroke-width="1">
+  <path d="M120 6 V374 M240 6 V374 M360 6 V374 M480 6 V374 M600 6 V374 M720 6 V374 M840 6 V374"/>
+  <path d="M6 95 H954 M6 190 H954 M6 285 H954"/>
+</g>
+<g fill="none" stroke="#c4b08a" stroke-width="1.5">
+  <path d="M60 330 C 110 270 250 260 300 320"/>
+  <path d="M90 340 C 130 295 230 290 270 335"/>
+  <path d="M125 350 C 150 322 210 320 235 348"/>
+  <path d="M700 60 C 750 20 880 25 910 80 C 930 120 820 140 760 120 C 720 108 690 90 700 60 Z"/>
+  <path d="M740 70 C 770 48 850 50 870 82 C 880 102 815 112 780 102 C 755 95 735 85 740 70 Z"/>
+</g>
+
+<!-- What the map did not show: a cliff, a marsh, a river with one ford. -->
+<g fill="none" stroke="#3b3a36" stroke-width="1.6" opacity="0.75">
+  <path d="M398 140 C 430 165 446 200 424 246"/>
+  <path d="M406 140 C 438 165 454 200 432 246"/>
+  <path d="M414 140 C 446 165 462 200 440 246"/>
+  <path d="M422 140 C 454 165 470 200 448 246"/>
+  <path d="M430 140 C 462 165 478 200 456 246"/>
+  <path d="M436 150 l10 -6 M450 172 l11 -4 M457 198 l12 0 M452 224 l11 4" stroke-width="1.3"/>
+</g>
+<g>
+  <use href="#tuft" x="505" y="182"/>
+  <use href="#tuft" x="530" y="172"/>
+  <use href="#tuft" x="518" y="205"/>
+  <use href="#tuft" x="545" y="198"/>
+  <use href="#tuft" x="500" y="222"/>
+</g>
+<path d="M612 6 C 585 60 632 120 604 180 C 580 228 604 258 588 284 C 576 306 594 336 582 374" fill="none" stroke="#86a9b3" stroke-width="13" stroke-linecap="round" clip-path="url(#map)"/>
+<g fill="#f4ecd8" stroke="#3b3a36" stroke-width="1.4">
+  <ellipse cx="578" cy="281" rx="5" ry="3.5"/>
+  <ellipse cx="589" cy="285" rx="5" ry="3.5"/>
+  <ellipse cx="600" cy="281" rx="5" ry="3.5"/>
+</g>
+
+<!-- Start and goal. -->
+<g fill="#3b3a36">
+  <circle cx="104" cy="200" r="7"/>
+  <circle cx="104" cy="200" r="14" fill="none" stroke="#3b3a36" stroke-width="2"/>
+  <text x="104" y="236" font-size="15" text-anchor="middle">you are here</text>
+</g>
+<g>
+  <path d="M856 176 V120" stroke="#3b3a36" stroke-width="3" stroke-linecap="round"/>
+  <path d="M858 121 L894 133 L858 146 Z" fill="#c86a4a"/>
+</g>
+
+<!-- Animated layer. -->
+<g class="motion">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.03;0.96;1" dur="9s" repeatCount="indefinite"/>
+
+  <!-- The first plan: a straight line. It stays as a faint ghost. -->
+  <path d="M110 200 C 230 197 290 196 350 194 C 450 191 550 187 650 184 C 730 181 790 178 850 175" fill="none" stroke="#c86a4a" stroke-width="3" stroke-dasharray="10 8" opacity="0.35">
+    <animate attributeName="opacity" values="0;0;0.35;0.35" keyTimes="0;0.5;0.6;1" dur="9s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- The route: drawn straight and dashed, then it bends around what the pass found. -->
+  <g mask="url(#reveal)">
+    <path d="M110 200 C 230 205 300 230 380 268 C 450 300 520 300 590 282 C 680 258 760 200 850 175" fill="none" stroke="#c86a4a" stroke-width="5" stroke-linecap="round">
+      <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;0.72;1" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"
+        values="M110 200 C 230 197 290 196 350 194 C 450 191 550 187 650 184 C 730 181 790 178 850 175;M110 200 C 230 197 290 196 350 194 C 450 191 550 187 650 184 C 730 181 790 178 850 175;M110 200 C 230 205 300 230 380 268 C 450 300 520 300 590 282 C 680 258 760 200 850 175;M110 200 C 230 205 300 230 380 268 C 450 300 520 300 590 282 C 680 258 760 200 850 175"/>
+      <animate attributeName="stroke-dasharray" dur="9s" repeatCount="indefinite" calcMode="discrete" values="10 8;10 0" keyTimes="0;0.72"/>
+      <animate attributeName="stroke-width" dur="9s" repeatCount="indefinite" values="3;3;5;5" keyTimes="0;0.5;0.72;1"/>
+    </path>
+  </g>
+
+  <!-- The fog over the unknown part. The lens clears it. -->
+  <g clip-path="url(#map)"><g mask="url(#lens-hole)" opacity="0">
+    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.2;0.38;1" dur="9s" repeatCount="indefinite"/>
+    <g filter="url(#soft)" fill="#fbf8f0">
+      <animateTransform attributeName="transform" type="translate" values="0 0;14 5;0 0" dur="9s" repeatCount="indefinite"/>
+      <ellipse cx="420" cy="190" rx="110" ry="210"/>
+      <ellipse cx="530" cy="190" rx="120" ry="220"/>
+      <ellipse cx="610" cy="190" rx="90" ry="220"/>
+    </g>
+  </g></g>
+  <g opacity="0" transform="translate(340 0)">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.19;0.35;0.39;1" dur="9s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 0;340 0;340 0" keyTimes="0;0.17;0.36;1" dur="9s" repeatCount="indefinite"/>
+    <circle cx="330" cy="200" r="46" fill="none" stroke="#3b3a36" stroke-width="4"/>
+    <path d="M363 233 L392 262" stroke="#3b3a36" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- The three questions: a question mark first, then a number. -->
+  <g>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.33;0.36;1" dur="9s" repeatCount="indefinite"/>
+    <circle cx="440" cy="118" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="440" y="124" font-size="16" font-weight="700" text-anchor="middle" fill="#3b3a36" opacity="0">?<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+    <text x="440" y="124" font-size="15" font-weight="700" text-anchor="middle" fill="#c86a4a">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+  </g>
+  <g>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.36;0.39;1" dur="9s" repeatCount="indefinite"/>
+    <circle cx="526" cy="146" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="526" y="152" font-size="16" font-weight="700" text-anchor="middle" fill="#3b3a36" opacity="0">?<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+    <text x="526" y="152" font-size="15" font-weight="700" text-anchor="middle" fill="#c86a4a">2<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+  </g>
+  <g>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.39;0.42;1" dur="9s" repeatCount="indefinite"/>
+    <circle cx="640" cy="104" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="640" y="110" font-size="16" font-weight="700" text-anchor="middle" fill="#3b3a36" opacity="0">?<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+    <text x="640" y="110" font-size="15" font-weight="700" text-anchor="middle" fill="#c86a4a">3<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
+  </g>
+</g>
+
+<!-- The still frame for reduced motion: the same as the last frame above. -->
+<g class="still">
+  <path d="M110 200 C 230 197 290 196 350 194 C 450 191 550 187 650 184 C 730 181 790 178 850 175" fill="none" stroke="#c86a4a" stroke-width="3" stroke-dasharray="10 8" opacity="0.35"/>
+  <path d="M110 200 C 230 205 300 230 380 268 C 450 300 520 300 590 282 C 680 258 760 200 850 175" fill="none" stroke="#c86a4a" stroke-width="5" stroke-linecap="round"/>
+  <g font-size="15" font-weight="700" text-anchor="middle" fill="#c86a4a">
+    <circle cx="440" cy="118" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="440" y="124">1</text>
+    <circle cx="526" cy="146" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="526" y="152">2</text>
+    <circle cx="640" cy="104" r="14" fill="#f4ecd8" stroke="#3b3a36" stroke-width="2"/>
+    <text x="640" y="110">3</text>
+  </g>
+</g>
+</svg>
