@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-label="A route shoots from you are here off the map and into fog, far from the goal. It rewinds. A pin stops it at the start, a short plan appears, a check mark gives the nod, and the route follows the plan to the goal.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-label="Alone: the agent throws one thin plank across a gorge and runs onto it; the plank sags, snaps, and the agent falls into the river. Together: you plant the posts and the deck, the agent adds the bracing, triangle by triangle, and both of you cross a strong truss bridge to the goal.">
 <!-- Source for assets/scene-runs-off-*.svg. Edit this file, then run: npm run art -->
-<!-- The base attribute values draw the final frame (art rule 7); every animation runs on one 10 s clock. -->
+<!-- The base attribute values draw the final frame (art rule 7); every animation runs on one 12 s clock. -->
 <style>
 text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
 .still { display: none; }
@@ -12,85 +12,165 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 </style>
 <defs>
   <clipPath id="map"><rect x="6" y="6" width="948" height="368" rx="14"/></clipPath>
-  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+  <clipPath id="ground"><path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954 V374 H6 Z"/></clipPath>
 </defs>
 
-<!-- The map: paper, grid, terrain. Always still. -->
+<!-- The map: paper and grid. -->
 <rect x="6" y="6" width="948" height="368" rx="14" fill="#1e1c19" stroke="#3a352d" stroke-width="2"/>
 <g stroke="#2a2722" stroke-width="1">
   <path d="M120 6 V374 M240 6 V374 M360 6 V374 M480 6 V374 M600 6 V374 M720 6 V374 M840 6 V374"/>
   <path d="M6 95 H954 M6 190 H954 M6 285 H954"/>
 </g>
-<g fill="none" stroke="#5a5144" stroke-width="1.5">
-  <path d="M300 370 C 340 320 470 315 520 370"/>
-  <path d="M340 374 C 370 345 450 342 480 374"/>
-  <path d="M600 330 C 640 300 720 300 760 335 C 780 352 700 362 650 356 C 615 352 590 345 600 330 Z"/>
+
+<!-- The ground in profile: strata lines crowd on the gorge walls. -->
+<g clip-path="url(#map)">
+  <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954 V374 H6 Z" fill="#1e1c19"/>
+  <g clip-path="url(#ground)" fill="none" stroke="#5a5144" stroke-width="1.2">
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 15)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 30)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 45)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 60)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 75)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 90)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 105)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 120)"/>
+    <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" transform="translate(0 135)"/>
+  </g>
+  <!-- The river at the bottom of the gorge, and rocks. -->
+  <path d="M423 332 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L577 332 Z" fill="#4e7681"/>
+  <g fill="#5a5144" stroke="#e8e0cc" stroke-width="1">
+    <path d="M436 352 q4 -10 13 -8 q7 2 6 8 Z"/>
+    <path d="M540 352 q3 -7 10 -6 q6 1 5 6 Z"/>
+    <path d="M404 296 q6 -6 12 -2 l-2 8 Z"/>
+    <path d="M590 286 q5 -5 10 0 l-6 8 Z"/>
+  </g>
+  <path d="M6 232 H374 Q380 232 382 238 L428 344 Q432 352 442 352 H558 Q568 352 572 344 L618 238 Q620 232 626 232 H954" fill="none" stroke="#e8e0cc" stroke-width="2.5" stroke-linejoin="round"/>
 </g>
 
 <!-- Start and goal. -->
-<g fill="#e8e0cc">
-  <circle cx="104" cy="250" r="7"/>
-  <circle cx="104" cy="250" r="14" fill="none" stroke="#e8e0cc" stroke-width="2"/>
-  <text x="104" y="286" font-size="15" text-anchor="middle">you are here</text>
-</g>
-<g>
-  <path d="M856 232 V176" stroke="#e8e0cc" stroke-width="3" stroke-linecap="round"/>
-  <path d="M858 177 L894 189 L858 202 Z" fill="#e3896a"/>
-</g>
+<circle cx="104" cy="223" r="13" fill="none" stroke="#e8e0cc" stroke-width="2"/>
+<text x="104" y="258" font-size="15" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">you are here</text>
+<path d="M856 232 V176" stroke="#e8e0cc" stroke-width="3" stroke-linecap="round"/>
+<path d="M858 177 L894 189 L858 202 Z" fill="#e3896a"/>
 
 <!-- Animated layer. -->
 <g class="motion">
-  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.03;0.96;1" dur="10s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.03;0.96;1" dur="12s" repeatCount="indefinite"/>
 
-  <!-- The run-off: fast and sure, the wrong way, into the fog. It rewinds, then stays as a faint ghost. -->
-  <path clip-path="url(#map)" pathLength="1" d="M110 248 C 250 236 360 130 500 90 C 640 50 800 30 1000 20" fill="none" stroke="#e3896a" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0" opacity="0.25">
-    <animate attributeName="stroke-dashoffset" values="1;0;0;1;1;0;0" keyTimes="0;0.16;0.26;0.36;0.84;0.9;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="stroke-width" values="5;5;3;3" keyTimes="0;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;1;0.25;0.25" keyTimes="0;0.84;0.85;1" dur="10s" repeatCount="indefinite"/>
+  <!-- The river moves. -->
+  <path d="M432 340 q8 -4 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="#1e1c19" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="10 14" opacity="0.7">
+    <animate attributeName="stroke-dashoffset" values="0;-240" keyTimes="0;1" dur="12s" repeatCount="indefinite"/>
   </path>
 
-  <!-- The pin: it stops at the start. -->
+  <!-- Alone: one thin plank, thrown fast. It sags, snaps, and the halves swing onto the walls. -->
+  <g stroke="#e3896a" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45">
+    <animate attributeName="opacity" values="1;1;0.45;0.45" keyTimes="0;0.3;0.34;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <path pathLength="1" d="M380 232 L440 334" stroke-dasharray="1 1" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.06;0.085;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/>
+      <animate attributeName="d" values="M380 232 L500 232;M380 232 L500 232;M380 232 L500 262;M380 232 L500 257;M380 232 L500 265;M380 232 L478 312;M380 232 L430 340;M380 232 L446 330;M380 232 L440 334;M380 232 L440 334" keyTimes="0;0.11;0.17;0.19;0.21;0.235;0.26;0.272;0.285;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.5 0 1 1;0.2 0 0.4 1;0.3 0 0.6 1;0.3 0 0.6 1;0 0 1 1"/>
+    </path>
+    <path pathLength="1" d="M620 232 L560 334" stroke-dasharray="1 1" stroke-dashoffset="0">
+      <animate attributeName="stroke-dashoffset" values="-1;-1;0;0" keyTimes="0;0.085;0.11;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/>
+      <animate attributeName="d" values="M620 232 L500 232;M620 232 L500 232;M620 232 L500 262;M620 232 L500 257;M620 232 L500 265;M620 232 L522 312;M620 232 L570 340;M620 232 L554 330;M620 232 L560 334;M620 232 L560 334" keyTimes="0;0.11;0.17;0.19;0.21;0.235;0.26;0.272;0.285;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.5 0 1 1;0.2 0 0.4 1;0.3 0 0.6 1;0.3 0 0.6 1;0 0 1 1"/>
+    </path>
+  </g>
+  <!-- The snap. -->
+  <g stroke="#e8e0cc" stroke-width="2.5" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.209;0.212;0.25;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <path d="M500 250 l-6 -14 M508 252 l10 -10 M490 262 l-14 -2 M512 266 l14 2 M496 274 l-6 12 M506 274 l6 12"/>
+  </g>
+  <!-- The splash. -->
+  <ellipse cx="500" cy="334" rx="26" ry="6" fill="none" stroke="#1e1c19" stroke-width="2" opacity="0">
+    <animate attributeName="rx" values="4;4;30;30" keyTimes="0;0.285;0.34;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.284;0.29;0.34;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/>
+  </ellipse>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.03;0.05;0.27;0.29;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;372 223;500 253;500 249;500 256;500 340;500 340" keyTimes="0;0.045;0.11;0.17;0.19;0.211;0.285;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.5 0 0.6 1;0.3 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.6 0 1 1;0 0 1 1"/>
+    <circle r="8" fill="#e3896a" stroke="#1e1c19" stroke-width="2"/>
+    <text y="-17" font-size="14" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">agent</text>
+  </g>
+  <text x="34" y="52" font-size="22" font-weight="600" fill="#e8e0cc" opacity="0">Alone<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.3;0.33;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/></text>
+
+  <!-- Together: you plant the posts and lay the deck. -->
+  <g stroke="#e8e0cc" stroke-linecap="round" fill="none">
+    <path pathLength="1" d="M380 232 L380 190" stroke-width="5" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.45;0.48;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+    <path pathLength="1" d="M620 232 L620 190" stroke-width="5" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.48;0.51;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+    <path d="M370 232 H388" stroke-width="5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.45;0.46;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/></path>
+    <path d="M612 232 H630" stroke-width="5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.49;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/></path>
+    <path pathLength="1" d="M380 232 L620 232" stroke-width="5" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.515;0.575;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  </g>
+
+  <!-- The agent adds what you did not see: the bracing, triangle by triangle. -->
+  <path pathLength="1" d="M380 232 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.585;0.607;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M380 190 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.601;0.621;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M440 232 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.615;0.633;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M440 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.64;0.662;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M440 190 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.656;0.676;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M500 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.67;0.688;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M560 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.695;0.717;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M500 190 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.711;0.731;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M560 232 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.725;0.743;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M620 232 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.75;0.772;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  <path pathLength="1" d="M560 190 L620 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.766;0.786;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/></path>
+  
+  <circle cx="440" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.635;0.64;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/><animate attributeName="r" values="4;4;6.5;4;4" keyTimes="0;0.635;0.647;0.665;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/></circle>
+  <circle cx="440" cy="190" r="16" fill="none" stroke="#e3896a" stroke-width="2" opacity="0"><animate attributeName="r" values="4;4;18;18" keyTimes="0;0.635;0.675;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.4 1;0 0 1 1"/><animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.635;0.639;0.675;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/></circle>
+  <circle cx="500" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.69;0.695;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/><animate attributeName="r" values="4;4;6.5;4;4" keyTimes="0;0.69;0.702;0.72;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/></circle>
+  <circle cx="500" cy="190" r="16" fill="none" stroke="#e3896a" stroke-width="2" opacity="0"><animate attributeName="r" values="4;4;18;18" keyTimes="0;0.69;0.73;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.4 1;0 0 1 1"/><animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.69;0.694;0.73;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/></circle>
+  <circle cx="560" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.745;0.75;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/><animate attributeName="r" values="4;4;6.5;4;4" keyTimes="0;0.745;0.757;0.775;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/></circle>
+  <circle cx="560" cy="190" r="16" fill="none" stroke="#e3896a" stroke-width="2" opacity="0"><animate attributeName="r" values="4;4;18;18" keyTimes="0;0.745;0.785;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.4 1;0 0 1 1"/><animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.745;0.749;0.785;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/></circle>
+  <circle cx="620" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.8;0.805;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/><animate attributeName="r" values="4;4;6.5;4;4" keyTimes="0;0.8;0.812;0.83;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/></circle>
+  <circle cx="620" cy="190" r="16" fill="none" stroke="#e3896a" stroke-width="2" opacity="0"><animate attributeName="r" values="4;4;18;18" keyTimes="0;0.8;0.84;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.2 0.8 0.4 1;0 0 1 1"/><animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.8;0.804;0.84;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1;0 0 1 1"/></circle>
+
+  <!-- You and the agent. -->
   <g>
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.38;0.42;1" dur="10s" repeatCount="indefinite"/>
-    <animateTransform attributeName="transform" type="translate" values="0 -40;0 -40;0 0;0 0" keyTimes="0;0.38;0.44;1" dur="10s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.3 0 0.2 1.3;0 0 1 1"/>
-    <path d="M104 234 C 93 220 88 211 88 204 A16 16 0 1 1 120 204 C 120 211 115 220 104 234 Z" fill="#e3896a" stroke="#e8e0cc" stroke-width="2"/>
-    <circle cx="104" cy="204" r="5.5" fill="#1e1c19"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.355;0.38;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;352 223;352 223;818 223;818 223" keyTimes="0;0.37;0.44;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <circle r="8" fill="#e8e0cc" stroke="#1e1c19" stroke-width="2"/>
+    <text y="-17" font-size="14" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">you</text>
   </g>
-
-  <!-- The plan: a short, dotted route in slices. -->
-  <g fill="none" stroke="#e8e0cc" stroke-linecap="round">
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.46;0.54;1" dur="10s" repeatCount="indefinite"/>
-    <path d="M110 250 C 300 258 420 212 560 216 C 680 220 760 236 850 232" stroke-width="2.5" stroke-dasharray="2 9"/>
-    <path d="M326 236 l4 18 M560 206 v20 M712 216 l-2 20" stroke-width="3"/>
+  <g>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.355;0.38;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;312 223;312 223;410 223;410 223;470 223;470 223;530 223;530 223;590 223;590 223;772 223;772 223" keyTimes="0;0.37;0.44;0.575;0.585;0.635;0.64;0.69;0.695;0.745;0.75;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <circle r="8" fill="#e3896a" stroke="#1e1c19" stroke-width="2"/>
+    <text y="-17" font-size="14" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">agent</text>
   </g>
-
-  <!-- The nod. -->
-  <path pathLength="1" d="M134 206 l9 9 l17 -20" fill="none" stroke="#e3896a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 1" stroke-dashoffset="0">
-    <animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.58;0.63;1" dur="10s" repeatCount="indefinite"/>
-  </path>
-
-  <!-- The route that was agreed: it follows the plan to the goal. -->
-  <path pathLength="1" d="M110 250 C 300 258 420 212 560 216 C 680 220 760 236 850 232" fill="none" stroke="#e3896a" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0">
-    <animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.66;0.84;1" dur="10s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/>
-  </path>
+  <text x="34" y="52" font-size="22" font-weight="600" fill="#e8e0cc">Together<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.34;0.37;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/></text>
 </g>
 
 <!-- The still frame for reduced motion: the same as the last frame above. -->
 <g class="still">
-  <path clip-path="url(#map)" d="M110 248 C 250 236 360 130 500 90 C 640 50 800 30 1000 20" fill="none" stroke="#e3896a" stroke-width="3" stroke-linecap="round" opacity="0.25"/>
-  <path d="M104 234 C 93 220 88 211 88 204 A16 16 0 1 1 120 204 C 120 211 115 220 104 234 Z" fill="#e3896a" stroke="#e8e0cc" stroke-width="2"/>
-  <circle cx="104" cy="204" r="5.5" fill="#1e1c19"/>
-  <g fill="none" stroke="#e8e0cc" stroke-linecap="round">
-    <path d="M110 250 C 300 258 420 212 560 216 C 680 220 760 236 850 232" stroke-width="2.5" stroke-dasharray="2 9"/>
-    <path d="M326 236 l4 18 M560 206 v20 M712 216 l-2 20" stroke-width="3"/>
+  <g stroke="#e3896a" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45">
+    <path d="M380 232 L440 334"/>
+    <path d="M620 232 L560 334"/>
   </g>
-  <path d="M134 206 l9 9 l17 -20" fill="none" stroke="#e3896a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M110 250 C 300 258 420 212 560 216 C 680 220 760 236 850 232" fill="none" stroke="#e3896a" stroke-width="5" stroke-linecap="round"/>
-</g>
-<!-- Fog past the known part of the map, above the routes so the run-off goes into it. -->
-<g clip-path="url(#map)" filter="url(#soft)" fill="#34302a">
-  <ellipse cx="760" cy="40" rx="190" ry="70"/>
-  <ellipse cx="910" cy="30" rx="110" ry="60"/>
-  <ellipse cx="900" cy="70" rx="120" ry="90"/>
+  <g stroke="#e8e0cc" stroke-linecap="round" fill="none" stroke-width="5">
+    <path d="M380 232 L380 190"/>
+    <path d="M620 232 L620 190"/>
+    <path d="M370 232 H388"/>
+    <path d="M612 232 H630"/>
+    <path d="M380 232 L620 232"/>
+  </g>
+  <path d="M380 232 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M380 190 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M440 232 L440 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M440 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M440 190 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M500 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M560 232 L500 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M500 190 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M560 232 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M620 232 L560 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M560 190 L620 190" fill="none" stroke="#e3896a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="440" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"/>
+  <circle cx="500" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"/>
+  <circle cx="560" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"/>
+  <circle cx="620" cy="190" r="4" fill="#1e1c19" stroke="#e8e0cc" stroke-width="2"/>
+  <g transform="translate(818 223)"><circle r="8" fill="#e8e0cc" stroke="#1e1c19" stroke-width="2"/>
+    <text y="-17" font-size="14" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">you</text></g>
+  <g transform="translate(772 223)"><circle r="8" fill="#e3896a" stroke="#1e1c19" stroke-width="2"/>
+    <text y="-17" font-size="14" text-anchor="middle" fill="#e8e0cc" paint-order="stroke" stroke="#1e1c19" stroke-width="4" stroke-linejoin="round">agent</text></g>
+  <text x="34" y="52" font-size="22" font-weight="600" fill="#e8e0cc">Together</text>
 </g>
 </svg>
