@@ -102,6 +102,14 @@ test("checkScene names each broken art rule", () => {
       /CSS `d`/,
     ],
   ];
+  const anim = (keyTimes, mode = "") =>
+    GOOD.replace(
+      '<circle r="1" fill="{{ink}}"/></g>',
+      `<circle r="1" fill="{{ink}}"><animate attributeName="r" values="1;2;1" keyTimes="${keyTimes}" dur="2s"${mode}/></circle></g>`,
+    );
+  assert.deepEqual(checkScene(anim("0;0.5;1")), []);
+  assert.deepEqual(checkScene(anim("0;0.5;0.9", ' calcMode="discrete"')), []);
+  cases.push([anim("0;0.5;0.9"), /keyTimes/]);
   for (const [svg, want] of cases) {
     const issues = checkScene(svg);
     assert.ok(

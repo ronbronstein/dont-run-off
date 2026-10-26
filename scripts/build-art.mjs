@@ -73,6 +73,22 @@ export function checkScene(svg) {
     issues.push(
       "the CSS `d` property: WebKit does not play it, use SMIL (art rule 1)",
     );
+  // A SMIL animation with bad keyTimes is ignored, and the base value shows.
+  for (const [tag] of svg.matchAll(/<animate\w*\b[^>]*>/g)) {
+    const keyTimes = tag
+      .match(/\bkeyTimes="([^"]*)"/)?.[1]
+      .split(";")
+      .map(Number);
+    if (!keyTimes) continue;
+    const values = tag.match(/\bvalues="([^"]*)"/)?.[1].split(";");
+    const discrete = /\bcalcMode="discrete"/.test(tag);
+    if (!discrete && keyTimes.at(-1) !== 1)
+      issues.push(
+        `keyTimes must end at 1, or the browser ignores the animation: ${tag.slice(0, 80)}`,
+      );
+    if (values && values.length !== keyTimes.length)
+      issues.push(`keyTimes and values differ in count: ${tag.slice(0, 80)}`);
+  }
   return issues;
 }
 

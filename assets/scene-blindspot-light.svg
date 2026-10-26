@@ -24,7 +24,7 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
   <mask id="lens-hole">
     <rect x="0" y="0" width="960" height="380" fill="#fff"/>
     <circle cx="670" cy="200" r="46" fill="#000">
-      <animate attributeName="r" values="0;0;46;46" keyTimes="0;0.16;0.18;1" dur="9s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="0;0;46;46;0;0" keyTimes="0;0.16;0.18;0.4;0.42;1" dur="9s" repeatCount="indefinite"/>
       <animate attributeName="cx" values="330;330;670;670" keyTimes="0;0.17;0.36;1" dur="9s" repeatCount="indefinite"/>
     </circle>
   </mask>
@@ -97,23 +97,6 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
     </path>
   </g>
 
-  <!-- The fog over the unknown part. The lens clears it. -->
-  <g clip-path="url(#map)"><g mask="url(#lens-hole)" opacity="0">
-    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.2;0.38;1" dur="9s" repeatCount="indefinite"/>
-    <g filter="url(#soft)" fill="#fbf8f0">
-      <animateTransform attributeName="transform" type="translate" values="0 0;14 5;0 0" dur="9s" repeatCount="indefinite"/>
-      <ellipse cx="420" cy="190" rx="110" ry="210"/>
-      <ellipse cx="530" cy="190" rx="120" ry="220"/>
-      <ellipse cx="610" cy="190" rx="90" ry="220"/>
-    </g>
-  </g></g>
-  <g opacity="0" transform="translate(340 0)">
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.19;0.35;0.39;1" dur="9s" repeatCount="indefinite"/>
-    <animateTransform attributeName="transform" type="translate" values="0 0;0 0;340 0;340 0" keyTimes="0;0.17;0.36;1" dur="9s" repeatCount="indefinite"/>
-    <circle cx="330" cy="200" r="46" fill="none" stroke="#3b3a36" stroke-width="4"/>
-    <path d="M363 233 L392 262" stroke="#3b3a36" stroke-width="7" stroke-linecap="round"/>
-  </g>
-
   <!-- The three questions: a question mark first, then a number. -->
   <g>
     <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.33;0.36;1" dur="9s" repeatCount="indefinite"/>
@@ -133,6 +116,27 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
     <text x="640" y="110" font-size="16" font-weight="700" text-anchor="middle" fill="#3b3a36" opacity="0">?<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
     <text x="640" y="110" font-size="15" font-weight="700" text-anchor="middle" fill="#c86a4a">3<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.44;0.48;1" dur="9s" repeatCount="indefinite"/></text>
   </g>
+</g>
+
+<!-- The fog and the lens: above the route, outside the fade, so the restart starts covered. -->
+<g class="motion">
+  <!-- The fog over the unknown part. The lens clears it. -->
+  <g clip-path="url(#map)"><g mask="url(#lens-hole)" opacity="0">
+    <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.2;0.38;0.9;0.96;1" dur="9s" repeatCount="indefinite"/>
+    <g filter="url(#soft)" fill="#fbf8f0">
+      <animateTransform attributeName="transform" type="translate" values="0 0;14 5;0 0" dur="9s" repeatCount="indefinite"/>
+      <ellipse cx="420" cy="190" rx="110" ry="210"/>
+      <ellipse cx="530" cy="190" rx="120" ry="220"/>
+      <ellipse cx="610" cy="190" rx="90" ry="220"/>
+    </g>
+  </g></g>
+  <g opacity="0" transform="translate(340 0)">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.16;0.19;0.35;0.39;1" dur="9s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 0;340 0;340 0" keyTimes="0;0.17;0.36;1" dur="9s" repeatCount="indefinite"/>
+    <circle cx="330" cy="200" r="46" fill="none" stroke="#3b3a36" stroke-width="4"/>
+    <path d="M363 233 L392 262" stroke="#3b3a36" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
 </g>
 
 <!-- The still frame for reduced motion: the same as the last frame above. -->
