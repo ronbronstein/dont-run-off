@@ -63,8 +63,8 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
   </path>
 
   <!-- Alone: one thin plank, thrown fast. It sags, snaps, and the halves swing onto the walls. -->
-  <g stroke="{{route}}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45">
-    <animate attributeName="opacity" values="1;1;0.45;0.45" keyTimes="0;0.3;0.34;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+  <g stroke="{{route}}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7">
+    <animate attributeName="opacity" values="1;1;0.7;0.7" keyTimes="0;0.3;0.34;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
     <path pathLength="1" d="M380 232 L440 334" stroke-dasharray="1 1" stroke-dashoffset="0">
       <animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.06;0.085;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1"/>
       <animate attributeName="d" values="M380 232 L500 232;M380 232 L500 232;M380 232 L500 262;M380 232 L500 257;M380 232 L500 265;M380 232 L478 312;M380 232 L430 340;M380 232 L446 330;M380 232 L440 334;M380 232 L440 334" keyTimes="0;0.11;0.17;0.19;0.21;0.235;0.26;0.272;0.285;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.5 0 1 1;0.2 0 0.4 1;0.3 0 0.6 1;0.3 0 0.6 1;0 0 1 1"/>
@@ -125,23 +125,23 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 
   <!-- You and the agent. -->
   <g>
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.355;0.38;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
-    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;352 223;352 223;818 223;818 223" keyTimes="0;0.37;0.44;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.325;0.35;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;352 223;352 223;818 223;818 223" keyTimes="0;0.34;0.44;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
     <circle r="8" fill="{{ink}}" stroke="{{paper}}" stroke-width="2"/>
     <text y="-17" font-size="14" text-anchor="middle" fill="{{ink}}" paint-order="stroke" stroke="{{paper}}" stroke-width="4" stroke-linejoin="round">you</text>
   </g>
   <g>
-    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.355;0.38;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
-    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;312 223;312 223;410 223;410 223;470 223;470 223;530 223;530 223;590 223;590 223;772 223;772 223" keyTimes="0;0.37;0.44;0.575;0.585;0.635;0.64;0.69;0.695;0.745;0.75;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.325;0.35;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/>
+    <animateTransform attributeName="transform" type="translate" values="104 223;104 223;312 223;312 223;410 223;410 223;470 223;470 223;530 223;530 223;590 223;590 223;772 223;772 223" keyTimes="0;0.34;0.44;0.575;0.585;0.635;0.64;0.69;0.695;0.745;0.75;0.82;0.93;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/>
     <circle r="8" fill="{{route}}" stroke="{{paper}}" stroke-width="2"/>
-    <text y="-17" font-size="14" text-anchor="middle" fill="{{ink}}" paint-order="stroke" stroke="{{paper}}" stroke-width="4" stroke-linejoin="round">agent</text>
+    <text y="-17" font-size="14" text-anchor="middle" fill="{{ink}}" paint-order="stroke" stroke="{{paper}}" stroke-width="4" stroke-linejoin="round">agent<animate attributeName="y" values="-17;-17;30;30;-17;-17" keyTimes="0;0.57;0.585;0.75;0.765;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"/></text>
   </g>
-  <text x="34" y="52" font-size="22" font-weight="600" fill="{{ink}}">Together<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.34;0.37;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/></text>
+  <text x="34" y="52" font-size="22" font-weight="600" fill="{{ink}}">Together<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.32;0.345;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 1 1;0 0 1 1"/></text>
 </g>
 
 <!-- The still frame for reduced motion: the same as the last frame above. -->
 <g class="still">
-  <g stroke="{{route}}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45">
+  <g stroke="{{route}}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7">
     <path d="M380 232 L440 334"/>
     <path d="M620 232 L560 334"/>
   </g>
