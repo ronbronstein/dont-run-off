@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" role="img" aria-label="When each part loads, across one session. The rules in CLAUDE.md are present on every message. A skill loads only when its moment comes: lets-start, lets-explore, lets-wrap. The records are plain files in git: lets-start reads them, and they are kept true as you work, up to lets-wrap.">
+<!-- Source for assets/scene-layers-*.svg. Edit this file, then run: npm run art -->
+<!-- The base attribute values draw the final frame (art rule 7); every animation runs on one 10 s clock.
+     A playhead crosses the session from x 300 to 926 between 0.05 and 0.85; a mark at x fires at 0.05 + 0.8 * (x - 300) / 626. -->
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+.halo { paint-order: stroke; stroke: #1e1c19; stroke-width: 5px; stroke-linejoin: round; }
+.still { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .motion { display: none; }
+  .still { display: inline; }
+  * { animation: none !important; }
+}
+</style>
+<defs>
+  <g id="marks">
+    <path d="M380 208 V272 M870 208 V272" stroke="#5a5144" stroke-width="2"/>
+    <circle cx="380" cy="280" r="7" fill="#1e1c19" stroke="#e3896a" stroke-width="2.5"/>
+    <circle cx="870" cy="280" r="7" fill="#1e1c19" stroke="#e3896a" stroke-width="2.5"/>
+    <circle cx="380" cy="200" r="8" fill="#e3896a"/>
+    <circle cx="620" cy="200" r="8" fill="#e3896a"/>
+    <circle cx="870" cy="200" r="8" fill="#e3896a"/>
+  </g>
+</defs>
+
+<!-- Paper, the rows, the captions. Always still. -->
+<rect x="6" y="6" width="948" height="328" rx="14" fill="#1e1c19" stroke="#3a352d" stroke-width="2"/>
+<text x="34" y="46" font-size="15" font-weight="700" letter-spacing="2" fill="#e3896a">WHEN EACH PART LOADS</text>
+<text x="926" y="46" font-size="14" text-anchor="end" fill="#e8e0cc" opacity="0.75">one session</text>
+<path d="M300 64 H922 M914 59 L922 64 L914 69" fill="none" stroke="#5a5144" stroke-width="1.5"/>
+
+<g fill="#e8e0cc">
+  <text x="34" y="124" font-size="20" font-weight="700">Rules</text>
+  <text x="34" y="146" font-size="14" opacity="0.75">CLAUDE.md</text>
+  <text x="34" y="204" font-size="20" font-weight="700">Skills</text>
+  <text x="34" y="226" font-size="14" opacity="0.75">12 moves</text>
+  <text x="34" y="284" font-size="20" font-weight="700">Records</text>
+  <text x="34" y="306" font-size="14" opacity="0.75">DECISIONS.md, current-state.md</text>
+</g>
+<path d="M300 200 H926 M300 280 H926" stroke="#5a5144" stroke-width="2" stroke-dasharray="6 7"/>
+
+<g font-size="12" font-weight="600" text-anchor="middle" fill="#e8e0cc">
+  <text x="380" y="184" class="halo">lets-start</text>
+  <text x="620" y="184" class="halo">lets-explore</text>
+  <text x="870" y="184" class="halo">lets-wrap</text>
+  <text x="404" y="285" text-anchor="start" class="halo">read</text>
+  <text x="846" y="285" text-anchor="end" class="halo">write</text>
+</g>
+
+<g class="motion">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.03;0.96;1" dur="10s" repeatCount="indefinite"/>
+
+  <!-- The rules are lit for the whole session. -->
+  <path pathLength="1" d="M300 120 H926" stroke="#e3896a" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 1" stroke-dashoffset="0">
+    <animate attributeName="stroke-dashoffset" values="1;1;0;0" keyTimes="0;0.05;0.85;1" dur="10s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- lets-start fires at 0.178: it reads the records. -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.175;0.19;1" dur="10s" repeatCount="indefinite"/>
+    <path d="M380 208 V272" stroke="#5a5144" stroke-width="2"/>
+    <circle cx="380" cy="280" r="7" fill="#1e1c19" stroke="#e3896a" stroke-width="2.5"/>
+    <circle cx="380" cy="200" r="8" fill="#e3896a">
+      <animate attributeName="r" values="0;0;12;8;8" keyTimes="0;0.175;0.2;0.23;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- lets-explore fires at 0.485. -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.48;0.495;1" dur="10s" repeatCount="indefinite"/>
+    <circle cx="620" cy="200" r="8" fill="#e3896a">
+      <animate attributeName="r" values="0;0;12;8;8" keyTimes="0;0.48;0.505;0.535;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- lets-wrap fires at 0.811: it writes the records. -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.805;0.82;1" dur="10s" repeatCount="indefinite"/>
+    <path d="M870 208 V272" stroke="#5a5144" stroke-width="2"/>
+    <circle cx="870" cy="280" r="7" fill="#1e1c19" stroke="#e3896a" stroke-width="2.5"/>
+    <circle cx="870" cy="200" r="8" fill="#e3896a">
+      <animate attributeName="r" values="0;0;12;8;8" keyTimes="0;0.805;0.83;0.86;1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- The playhead: now, in the session. -->
+  <path d="M0 76 V316" stroke="#e8e0cc" stroke-width="1.5" opacity="0" transform="translate(926 0)">
+    <animateTransform attributeName="transform" type="translate" values="300 0;300 0;926 0;926 0" keyTimes="0;0.05;0.85;1" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0.4;0.4;0;0" keyTimes="0;0.04;0.06;0.84;0.88;1" dur="10s" repeatCount="indefinite"/>
+  </path>
+</g>
+
+<!-- The captions sit above the connectors. -->
+<g font-size="14" fill="#e8e0cc" class="halo">
+  <text x="300" y="146">Every message, in full. That is why it stays short.</text>
+  <text x="300" y="232">Only when its moment comes. Free the rest of the time.</text>
+  <text x="300" y="312">Plain files in git. Read at the start, kept true as you work.</text>
+</g>
+
+<!-- The still frame for reduced motion. -->
+<g class="still">
+  <path d="M300 120 H926" stroke="#e3896a" stroke-width="6" stroke-linecap="round"/>
+  <use href="#marks"/>
+</g>
+</svg>
