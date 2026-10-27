@@ -191,7 +191,7 @@ Every move starts with `lets-`. Type `/lets` in Claude Code to see them all.
 | | `lets-explore` | You want options before you choose |
 | | `lets-blindspot` | You enter territory you do not know |
 | **Check** | `lets-explain` | A change landed and you want to understand it |
-| | `lets-check` | Something does not fire, or you want to audit your setup |
+| | `lets-check` | Something does not fire, or you want to audit your setup. It starts with `/doctor`. |
 | **Set up** | `lets-set-up` | You install or upgrade |
 | | `lets-track` | Anything about tasks, in the task tool you already use |
 

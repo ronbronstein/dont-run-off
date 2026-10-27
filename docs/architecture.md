@@ -68,7 +68,7 @@ The layer people skip, and the one that matters most if you can't read the diff.
 | Question | How to answer it |
 |---|---|
 | What actually loaded this session? | `/context all` |
-| Which of it *wins* where sources disagree? | the `lets-check` skill |
+| Which of it *wins* where sources disagree? | the `lets-check` skill, which starts by asking you to run `/doctor` (a narrow question about one skill, command, hook, or rule skips that stop) |
 | Is my install healthy, and my settings valid? | `/doctor` |
 | What skills and hooks are active, from where? | `/skills`, `/hooks`, `/status` |
 | What did it just do? | the recap rule in the method block |

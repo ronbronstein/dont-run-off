@@ -52,7 +52,7 @@ Reach for these skills when the moment comes; each one's description says when. 
 
 - **Session:** `lets-start`, `lets-catch-up`, `lets-look-back` (earlier sessions), `lets-wrap`.
 - **Decide:** `lets-align` (questions for me), `lets-shape` (whether, what, how big, how), `lets-explore` (real options), `lets-blindspot` (new territory).
-- **Check:** `lets-explain` (what landed), `lets-check` (my setup).
+- **Check:** `lets-explain` (what landed), `lets-check` (my setup; it starts with `/doctor`).
 - **Set up:** `lets-set-up` (this harness), `lets-track` (tasks).
 
 Run `/context` to see that these instructions loaded. When they seem ignored, `lets-check` finds what overrides them.
