@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 — unreleased
+## 0.4.0 — 2026-10-27
 
 ### The old names are gone
 
