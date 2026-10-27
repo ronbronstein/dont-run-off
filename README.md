@@ -1,282 +1,295 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
-    <img alt="Don't Run Off — a context-engineering harness for AI coding agents" src="assets/banner-light.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/scene-hero-dark.svg">
+    <img alt="Don't Run Off. A clean paper map lifts off the land, and under it is the real territory: hills, a river, and fog that the map does not show." src="assets/scene-hero-light.svg" width="100%">
   </picture>
 </p>
 
 <p align="center">
-  <a href="#install"><img alt="Install" src="https://img.shields.io/badge/install-%2Fplugin-C86A4A?style=flat-square"></a>
-  <a href="#install"><img alt="For Claude Code" src="https://img.shields.io/badge/for-Claude%20Code-3B3A36?style=flat-square"></a>
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-3B3A36?style=flat-square"></a>
+  <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-C86A4A?style=flat-square"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.0" src="https://img.shields.io/badge/version-0.4.0-3B3A36?style=flat-square"></a>
+  <a href="#the-moves"><img alt="12 skills" src="https://img.shields.io/badge/skills-12-3B3A36?style=flat-square"></a>
+  <a href="https://agentskills.io"><img alt="Agent Skills format" src="https://img.shields.io/badge/format-Agent%20Skills-3B3A36?style=flat-square"></a>
+  <a href="https://github.com/ronbronstein/dont-run-off/actions/workflows/validate.yml"><img alt="Checks" src="https://github.com/ronbronstein/dont-run-off/actions/workflows/validate.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-3B3A36?style=flat-square"></a>
+</p>
+
+<h3 align="center">Your prompt is a map, not the territory.</h3>
+
+<p align="center">
+  A harness for Claude Code that checks the map with you before it builds,<br>
+  and thinks it through with you.
 </p>
 
 <p align="center">
-  <b>You direct the agent. You ship the result. You don't read every line.</b><br>
-  This is the setup that makes that safe.
+  <a href="#install"><b>Install</b></a> ·
+  <a href="#how-it-works"><b>How it works</b></a> ·
+  <a href="#the-moves"><b>The moves</b></a> ·
+  <a href="docs/"><b>Docs</b></a>
 </p>
 
 <br>
 
-## The thirty seconds before it goes wrong
+## Quick start
 
-You ask for something. The agent is confident, fast, and already three files deep in a direction you never wanted. You find out when it's expensive to undo.
+In Claude Code:
 
-That isn't the model being bad. It's the model acting on an **unknown** as if it were known.
+```
+/plugin marketplace add ronbronstein/dont-run-off
+/plugin install dont-run-off@kidamti
+/dont-run-off:lets-set-up
+```
 
-<table>
-<tr>
-<td width="50%" valign="top">
-
-**Your prompt is a map**
-
-What you asked for. Short, clean, and missing most of the detail.
-
-</td>
-<td width="50%" valign="top">
-
-**The codebase is the territory**
-
-What's actually there. Messy, specific, full of things you didn't mention.
-
-</td>
-</tr>
-</table>
-
-The gaps between them are **unknowns**. Every bad outcome starts with an agent walking confidently across one. Catching them is cheap early — a question, a plan, four options with trade-offs — and expensive late.
-
-If you can't audit the diff yourself, that gap is the whole risk. **This harness trades process visibility for code review.**
+Setup asks a few questions and writes the one rule and your profile into your `CLAUDE.md`. Then run `/context` and check that your `CLAUDE.md` is in the list. [More install options](#install)
 
 <br>
 
-## The one rule
+## How it works
 
-> ### Don't run off
->
-> Before anything multi-step, ambiguous, unfamiliar, or hard to reverse: **stop and align first.** Propose a short plan, ask what's unclear, get a nod.
->
-> For small, clear, low-risk tasks — just do them. Don't ceremony-ize a one-liner.
+Claude Code reads your code very well. It cannot read what is in your head: what you want, why, and what you already decided. [Anthropic's own guide](https://code.claude.com/docs/en/best-practices) says to tell Claude what it cannot see, and to let it interview you. **Don't Run Off makes that the default.**
 
-Everything else here supports that rule or cleans up after it.
+> *"A map is not the territory it represents, but, if correct, it has a similar structure to the territory, which accounts for its usefulness."*
+> — Alfred Korzybski, 1933
+
+| | The idea | What you get |
+|---|---|---|
+| **1** | A map is not the territory | [You agree on the direction before it builds.](#1--agree-on-the-direction) |
+| **2** | A map never shows all of the territory | [You find the gaps together, and see real options.](#2--find-the-gaps-together) |
+| **3** | You can make a map of the map | [The work keeps a record. The next session starts where this one stopped.](#3--keep-the-thread) |
 
 <br>
 
-## How it's built
-
-Four layers, separated by **when they load**. That distinction is what most setups get wrong, and getting it wrong is why instructions quietly stop working.
+### 1 · Agree on the direction
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/layers-dark.svg">
-    <img alt="Rules are present on every message. Skills appear only when one fires. Records are touched only by a skill." src="assets/layers-light.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/scene-runs-off-dark.svg">
+    <img alt="The map taken for the territory: one thin plank across a gorge, which snaps when the agent walks onto it. The territory, walked together: you set the posts and the deck, the agent adds the bracing, and you both cross a strong bridge to the goal." src="assets/scene-runs-off-light.svg" width="100%">
   </picture>
 </p>
 
-<table>
-<tr><th align="left" width="22%">Layer</th><th align="left" width="43%">What it is</th><th align="left">When it loads</th></tr>
-<tr>
-<td valign="top"><b>Rules</b></td>
-<td valign="top">The method itself. How the agent behaves before it knows anything about your task.</td>
-<td valign="top">Every message, in full, forever. Costs tokens permanently — so it stays under 200 lines.</td>
-</tr>
-<tr>
-<td valign="top"><b>Skills</b></td>
-<td valign="top">The moves — orient, align, shape, explain, wrap up.</td>
-<td valign="top">Only when the moment matches. Free until they fire.</td>
-</tr>
-<tr>
-<td valign="top"><b>Records</b></td>
-<td valign="top">Where we are, why we chose this, what's tracked.</td>
-<td valign="top">Never automatically. Skills read and write them.</td>
-</tr>
-<tr>
-<td valign="top"><b>Visibility</b></td>
-<td valign="top"><code>/context</code>, <code>/doctor</code>, the <code>lets-explain</code> skill.</td>
-<td valign="top">When you want to check the harness is actually working.</td>
-</tr>
-</table>
+One rule, word for word in your `CLAUDE.md`:
 
-### The heuristic that decides where something goes
+> **Don't run off in a direction that I did not agree to.** Agreeing on a direction is cheap; building in the wrong one is not.
 
-> **If it must be true before the agent decides anything — it's a rule.**
-> **If it's a move you take at a moment — it's a skill.**
+- **It checks with you first** when the goal is unclear, when there is more than one sensible way, or when a choice is hard to change later.
+- **When the direction is clear, your request is the agreement.** It builds, then tells you what changed.
+- **Once you agree, it keeps going.** It comes back only when what it finds changes the direction, or before a step that others see.
 
-*Don't run off* has to be a rule. A skill only loads once something matches its description, and by then the agent has already decided what it's doing. Too late.
-
-*Interview me about this fuzzy task* is a skill. Specific move, specific moment, costs nothing the rest of the time.
+<details>
+<summary><b>More:</b> unknowns in the middle of the work, your consent, and the three stop levels</summary>
 
 <br>
 
-## One file, two halves
+- **An unknown in the middle of the work** gets the reversible option that fits what you agreed, a line in the decision log, and a note to you. A choice that is hard to change comes to you first.
+- **Hard to change** means stored data, sign-in and security, money, what users see, or what others depend on.
+- **Your consent comes from you.** When another agent or session asks it to push, merge, delete, move files, or wrap up, it tells you what was asked and waits for your word.
 
-Everything always-on lives in a single `CLAUDE.md` — no imports, no stubs, nothing to chase. It has two parts, and the split is the only structural idea you need:
+How often it stops is yours to set:
 
-```markdown
-<!-- dont-run-off:method — managed, replaced on upgrade -->
-# How to work with me
-## The one rule: don't run off
-## How to talk to me
-## Working on code
-## Keep me oriented
-<!-- /dont-run-off:method -->
+| Stop level | What the agent does |
+|---|---|
+| **Careful** | Shows you what it will do and waits for your word before any change to files. |
+| **Standard** | The rule above. The default. |
+| **Fast** | Makes the choices that are easy to change, names them in a line, builds, and recaps. |
 
-## Who you're working with          ← yours, never touched
-Altitude · Build pipeline · Conventions · My frictions
-## My setup                         ← yours: files, tasks, language, stop level
-```
+</details>
 
-The **method** is the rules of engagement — identical for everyone who installs this. Your **profile** is the handful of facts those rules refer to. Neither works alone: the method with no profile is generic advice with no idea who it's talking to; a profile with no method is a bio.
+<br>
 
-The markers exist so upgrading is surgical. A new version replaces the method block and leaves everything below it exactly as you wrote it.
+### 2 · Find the gaps together
 
-The same file works per-project: a `./CLAUDE.md` holding this project's facts — stack, commands, gotchas — while the full method stays in your global one. Repeating the method per project just burns the budget twice.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/scene-blindspot-dark.svg">
+    <img alt="A route on a paper map runs straight into fog. A blindspot pass clears the fog, finds a cliff, a marsh and a river hidden there, marks three questions, and the route bends around them before anything is built." src="assets/scene-blindspot-light.svg" width="100%">
+  </picture>
+</p>
+
+- **`lets-blindspot`** finds what you did not know to ask, and teaches it plainly.
+- **`lets-explore`** gives you real options before you choose one.
+- **`lets-align`** asks the questions that decide it: in chat, or on a local review page.
+
+<details>
+<summary><b>More:</b> how the moves think with you, and <code>lets-shape</code></summary>
+
+<br>
+
+- **`lets-blindspot`** is for new ground. It names the things you do not know you do not know, and teaches the few you need, before you commit to a direction.
+- **`lets-explore`** shows several directions that are really different, with the trade-offs of each, and gives its own view. You choose.
+- **`lets-align`** brings you the decisions only you can make. A few questions come in chat, one at a time. Many questions come on a local review page: plain questions, options with pros and cons, its recommended pick, and room for notes. You paste the answers back.
+- **`lets-shape`** asks whether to build it at all, how big it is, and how to cut it into slices you can check one by one.
+
+Say "interview me", "give me options", or "what am I missing" in your own words. The moves start from what you say.
+
+</details>
+
+<br>
+
+### 3 · Keep the thread
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/scene-session-dark.svg">
+    <img alt="Three short sessions, one thread. Each session runs lets-start, lets-shape, build it, lets-explain, lets-wrap, with lets-align, lets-explore and lets-blindspot as a detour when the ask is fuzzy. At wrap, a record card drops onto the stack of records, and lets-catch-up and lets-look-back carry the thread from the records to the next session's start." src="assets/scene-session-light.svg" width="100%">
+  </picture>
+</p>
+
+Anthropic's guide says that [`/clear` between tasks](https://code.claude.com/docs/en/best-practices) "is still worth doing, because a focused context gets you better answers and costs less." A small session starts with an empty chat, so the thread must live outside the chat. Here it lives in two record files.
+
+- **`lets-start`** and **`lets-wrap`** open and close each session, so the next one starts where this one stopped.
+- **`lets-catch-up`** and **`lets-look-back`** bring back what was decided, and when.
+- **Two record files** (`DECISIONS.md`, `current-state.md`) hold the thread in git, where you can read and diff it.
+
+<details>
+<summary><b>More:</b> what the records hold, and how you check what landed</summary>
+
+<br>
+
+| File | What it holds |
+|---|---|
+| `current-state.md` | Where the work is now, and what comes next |
+| `DECISIONS.md` | Each decision and its reason, the choices made alone in the middle of the work, and the open questions |
+
+- **`lets-start`** reads the records, names the kind of session, and picks the next move before anything is built.
+- **`lets-wrap`** leaves the records true, so the next session needs no explanation from you.
+- **`lets-catch-up`** tells you where the work is, what was decided and why, and the one next step.
+- **`lets-look-back`** searches your earlier sessions in full, and gives you dates, short quotes, and the command that opens each session again.
+- **`lets-explain`** explains a change that just landed, at your level, then asks a few questions until you really understand it.
+
+Your project uses other file names, or no decision log? Say so in **My setup**, and every move uses your names. [Make it yours →](docs/make-it-yours.md)
+
+</details>
+
+<br>
+
+## How it loads
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/scene-layers-dark.svg">
+    <img alt="When each part loads, across one session. The rules in CLAUDE.md are present on every message. A skill loads only when its moment comes: lets-start, lets-explore, lets-wrap. The records are plain files in git: lets-start reads them, and they are kept true as you work, up to lets-wrap." src="assets/scene-layers-light.svg" width="100%">
+  </picture>
+</p>
+
+The rule is short because Claude Code reads it on every message. Each skill loads in full only when its moment comes; until then, only its one-line description is in context. The records are plain files, so you can read them, diff them, and fix them by hand. [More on how it loads →](docs/architecture.md)
 
 <br>
 
 ## The moves
 
-Every move starts with `lets-`, so typing `/lets` in Claude Code finds them. Four groups:
+Every move starts with `lets-`. Type `/lets` in Claude Code to see them all.
 
-<table>
-<tr><th align="left" width="20%">Skill</th><th align="left" width="34%">Use it when</th><th align="left">What you get</th></tr>
-<tr><th align="left" colspan="3">Session <sub>— Orient, keep the thread, close cleanly</sub></th></tr>
-<tr><td><code>lets-start</code></td><td>Beginning a session</td><td>Where things stand, what type of session this is, and the right next move — before anything gets built</td></tr>
-<tr><td><code>lets-catch-up</code></td><td>You've lost the thread</td><td>Where we are, what was decided and why, the single next step</td></tr>
-<tr><td><code>lets-look-back</code></td><td>You need something from an earlier session</td><td>The sessions that discussed it, with dates, short quotes and the command that reopens each one — searched in full, not only by title</td></tr>
-<tr><td><code>lets-wrap</code></td><td>Stopping for the day</td><td>The record left accurate, so the next session starts instantly</td></tr>
-<tr><th align="left" colspan="3">Decide <sub>— Before anything gets built</sub></th></tr>
-<tr><td><code>lets-align</code></td><td>The agent needs answers or decisions from you</td><td>A few questions in chat, or a local review page for many: plain questions, options with pros and cons, its recommended pick, notes and files. You paste the answers back.</td></tr>
-<tr><td><code>lets-shape</code></td><td>Deciding whether to build at all</td><td>Frame the real problem, size it, judge if it's worth it, phase it into slices</td></tr>
-<tr><td><code>lets-explore</code></td><td>You want options</td><td>Four genuinely different approaches with trade-offs, before converging on one</td></tr>
-<tr><td><code>lets-blindspot</code></td><td>Entering territory you don't know</td><td>The things you don't know you don't know, taught plainly</td></tr>
-<tr><th align="left" colspan="3">Check <sub>— Know what landed and what is in force</sub></th></tr>
-<tr><td><code>lets-explain</code></td><td>A change just landed (you type it)</td><td>The change explained at your level, with a diagram or a local page when that helps, then a short quiz until you actually understand it</td></tr>
-<tr><td><code>lets-check</code></td><td>Something isn't firing</td><td>What actually loads, what shadows what, and what silently never runs — across rules, skills, commands and hooks</td></tr>
-<tr><th align="left" colspan="3">Set up <sub>— Fit the harness to you</sub></th></tr>
-<tr><td><code>lets-set-up</code></td><td>Installing, or upgrading later</td><td>Your <code>CLAUDE.md</code> written and personalized — detected where it can be, asked where it can't, merged with whatever was already there</td></tr>
-<tr><td><code>lets-track</code></td><td>Anything about tasks</td><td>Your own task tool — Taskwarrior, GitHub Issues, Linear, Jira, a to-do file, or none — through the same seven steps, acting on stable IDs so the wrong task never changes</td></tr>
-</table>
-
-<br>
-
-## A session, end to end
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/session-dark.svg">
-    <img alt="A session runs lets-start, lets-shape, build it, lets-explain, lets-wrap — with lets-align, lets-explore and lets-blindspot as detours before committing, and lets-catch-up returning you to the start next time." src="assets/session-light.svg" width="100%">
-  </picture>
-</p>
+| | Move | Use it when |
+|---|---|---|
+| **Session** | `lets-start` | You begin a session |
+| | `lets-catch-up` | You lost the thread |
+| | `lets-look-back` | You need something from an earlier session |
+| | `lets-wrap` | You stop for the day |
+| **Decide** | `lets-align` | The agent needs answers or decisions from you |
+| | `lets-shape` | You decide whether to build it, how big, and in which slices |
+| | `lets-explore` | You want options before you choose |
+| | `lets-blindspot` | You enter territory you do not know |
+| **Check** | `lets-explain` | A change landed and you want to understand it |
+| | `lets-check` | Something does not fire, or you want to audit your setup |
+| **Set up** | `lets-set-up` | You install or upgrade |
+| | `lets-track` | Anything about tasks, in the task tool you already use |
 
 <br>
 
 ## Install
 
-Two commands, then one conversation. In Claude Code:
-
 ```
 /plugin marketplace add ronbronstein/dont-run-off
 /plugin install dont-run-off@kidamti
-```
-
-> **Installed before 2026-09-27?** The marketplace was renamed from `ronbronstein` to `kidamti`, and Claude Code knows a marketplace by its name. Re-add it once, in your shell:
->
-> ```bash
-> claude plugin marketplace remove ronbronstein
-> claude plugin marketplace add ronbronstein/dont-run-off
-> claude plugin install dont-run-off@kidamti
-> ```
->
-> Then turn auto-update back on: `/plugin` → **Marketplaces** → `kidamti` → **Enable auto-update**.
-
-That installs the skills. A plugin can't write your `CLAUDE.md`, so the method arrives the same way everything else here does — by asking first:
-
-```
 /dont-run-off:lets-set-up
 ```
 
-It checks what it can see for itself (your task tool, version control, whether record files already exist), asks about what it can't see, one question at a time — how you want to be talked to, the language level of its replies, what usually goes wrong when you work with an agent, and when it should stop and ask — and writes the result.
+A plugin cannot write your `CLAUDE.md`, so setup does it, and it asks first. It reads what it can see (your task tool, version control, your record files) and asks about the rest, one question at a time. Then run `/context` and check that your `CLAUDE.md` is in the list.
 
-> **Already have a `~/.claude/CLAUDE.md`?** It won't be overwritten. Setup reads it first, backs it up to `CLAUDE.md.bak` (never over an earlier backup), names anything that duplicates the method, and proposes a merge before writing anything. Two sets of instructions saying the same thing differently is how rules start getting quietly ignored — [`docs/architecture.md`](docs/architecture.md) has the debug order if that ever happens.
+**Needs:** Claude Code. Three moves also use [Node.js](https://nodejs.org): `lets-look-back`, `lets-check`, and `lets-align`. Without it they still run, and say what they skipped.
 
-Finally, run **`/context`** and confirm your `CLAUDE.md` is listed. If it isn't, it didn't load, and nothing else you do matters. An install you haven't verified isn't finished.
+<details>
+<summary><b>You already have a <code>CLAUDE.md</code></b></summary>
 
-### Or one line, without the plugin system
+<br>
 
-```bash
-npx skills add ronbronstein/dont-run-off -g
-```
+Setup does not overwrite it. It reads it first, backs it up to `CLAUDE.md.bak`, names anything that repeats the method, and proposes a merge before it writes.
 
-Copies the skills into `~/.claude/skills/` — drop `-g` to install into the current project instead. Then run **`/lets-set-up`** (no plugin namespace on this path, so it's `/lets-set-up`, not `/dont-run-off:lets-set-up`).
+</details>
 
-The plugin route above is still the one to prefer: it updates itself. This one you update by re-running `npx skills update`.
+<details>
+<summary><b>Upgrade</b></summary>
 
-### Upgrading
+<br>
 
 ```
 /plugin update dont-run-off@kidamti
 /dont-run-off:lets-set-up
 ```
 
-Setup sees the markers, replaces the method block, and leaves your profile exactly as you wrote it.
+Setup replaces the method block and keeps your profile as you wrote it.
 
-### Works with
+</details>
 
-**Claude Code** — that's the target, and the whole harness is built around what it actually loads: `CLAUDE.md` every message, skills only when they fire, `/context` to prove it. The skills themselves follow the [Agent Skills](https://agentskills.io) format and will work anywhere that reads it, but the install path and the visibility commands here are Claude Code's.
+<details>
+<summary><b>Install without the plugin system</b></summary>
 
-**Needs:** Claude Code. Three moves also use [Node.js](https://nodejs.org): `lets-look-back` (its search), `lets-check` (its usage count) and `lets-align` (its page checker). Without Node.js they still run, and say what they skipped.
+<br>
+
+```bash
+npx skills add ronbronstein/dont-run-off -g
+```
+
+This copies the skills into `~/.claude/skills/` (without `-g`, into the current project). Then run `/lets-set-up`. Update with `npx skills update`. The plugin path updates itself, so use it when you can.
+
+</details>
+
+<details>
+<summary><b>Installed before 2026-09-27</b></summary>
+
+<br>
+
+The marketplace name changed from `ronbronstein` to `kidamti`. Add it again once, in your shell:
+
+```bash
+claude plugin marketplace remove ronbronstein
+claude plugin marketplace add ronbronstein/dont-run-off
+claude plugin install dont-run-off@kidamti
+```
+
+Then turn auto-update on again: `/plugin` → **Marketplaces** → `kidamti` → **Enable auto-update**.
+
+</details>
 
 <br>
 
 ## Make it yours
 
-Everything personal lives below the method block in your `CLAUDE.md`. Setup fills it in for you, and you can edit it freely afterwards — upgrades only ever touch the marked block above it.
+Your profile lives under the method block in your `CLAUDE.md`: how you want answers, your conventions, the frictions you want it to watch for, and **My setup** (your record files, your task tool, your language level, your stop level). Upgrades never touch it.
 
-```markdown
-**Altitude.** Product director — I care about the decision and the
-trade-offs, not line-by-line mechanics.
+[How to make it yours →](docs/make-it-yours.md) · [How it loads →](docs/architecture.md)
 
-**Conventions.** Python for scripts, plain HTML/JS for small web tools.
-Failing test first. Never mutate in place.
+<br>
 
-**My frictions.** It runs off before I've agreed to anything.
-I can't tell what it actually did. I lose the thread between sessions.
-```
+## Why I built it
 
-**Frictions is the line that earns its keep.** Naming what usually goes wrong is what makes the agent watch for it, and it's the field people leave blank. Setup will push you on it.
+I build with Claude Code every day, and I direct more than I type. Three things kept happening. The work went in a direction I had not agreed to. I could not tell what had changed. And a new session did not know what the last one had decided. None of that was the model's fault: it was what I had not told it. Don't Run Off is the setup I wrote for my side of the work. I use it in every session.
 
-**Conventions is where your opinions go** — stack, testing bar, house style. Deliberately not in the method: those are true for you, not for everyone, and a shared harness full of one person's preferences is how it stops being usable by anyone else.
-
-**My setup is how the harness fits your workflow** — in plain words, not a config file:
-
-```markdown
-## My setup
-- Status file: `docs/STATUS.md`
-- Decision log: none. Decisions go in the status file, under "Decided".
-- Tasks: GitHub Issues in this repo
-- Language: plain
-- Stop level: fast — stop only before steps that are hard to undo or that others see
-- Work branch: `staging`. Parallel copies: off.
-```
-
-Every move reads these lines instead of assuming a file name, a task tool, how careful you want the agent to be, or how it should write to you. Replies come in the language you write in. For English, the default level is strict [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/): short sentences, one meaning per word, nothing to decode. Setup fills them from what it finds in your project. A project's own `CLAUDE.md` can repeat a line to change it for that project.
-
-Starting a new project? [`templates/`](templates/) has the record files ready to drop in.
+— [@ronbronstein](https://github.com/ronbronstein)
 
 <br>
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Skills must be agnostic, must change what the agent actually does, and must stay small. Arguments for **removing** a skill are as welcome as arguments for adding one.
+See [CONTRIBUTING.md](CONTRIBUTING.md). A skill must work for any user, must change what the agent does, and must stay small. An argument to remove a skill is as welcome as one to add a skill.
 
 ```bash
-npm test    # frontmatter, naming, cross-references, the always-on budget
+npm test
 ```
 
 <br>
 
 ---
 
-<p align="center">
-  <sub>MIT licensed. Built on the map-versus-territory approach to working with AI agents.</sub>
-</p>
+<p align="center"><sub>MIT licensed · Built on Korzybski's map and territory · For Claude Code</sub></p>
