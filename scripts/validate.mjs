@@ -67,7 +67,11 @@ const LEAK_EXEMPT = new Set([
   "LICENSE",
 ]);
 
+// Every path that had the leak check, so the sweep over skills/ does not repeat it.
+const leakChecked = new Set();
+
 function checkLeaks(at, text) {
+  leakChecked.add(at);
   if (LEAK_EXEMPT.has(at)) return;
   for (const { re, what } of GENERIC_LEAKS) {
     const hit = text.match(re);
@@ -281,9 +285,21 @@ if (marketplace) {
 
 // ---------- docs and templates ----------
 
-for (const rel of ["README.md", "CONTRIBUTING.md", "docs/architecture.md"]) {
+for (const rel of ["README.md", "CONTRIBUTING.md"]) {
   const path = join(ROOT, rel);
   if (existsSync(path)) checkLeaks(rel, readFileSync(path, "utf8"));
+}
+
+// Every text file in skills/ and docs/ ships to users: references, scripts,
+// pages, and data files, not only SKILL.md.
+const TEXT_FILE = /\.(md|mjs|cjs|js|json|html|css|txt|ya?ml|sh|svg)$/i;
+for (const dir of [SKILLS, join(ROOT, "docs")]) {
+  if (!existsSync(dir)) continue;
+  for (const path of filesUnder(dir)) {
+    const rel = path.slice(ROOT.length + 1);
+    if (TEXT_FILE.test(path) && !leakChecked.has(rel))
+      checkLeaks(rel, readFileSync(path, "utf8"));
+  }
 }
 
 // ---------- eval cases ----------
