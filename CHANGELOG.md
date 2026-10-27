@@ -24,6 +24,49 @@ The old names from 0.3.0 no longer work, and there is no redirect. Use the `lets
 **After you update,** run `/dont-run-off:lets-set-up` once. It refreshes the method block in your
 `CLAUDE.md`. A 0.3.0 block names `lets-find-gaps`, which no longer exists.
 
+### The method is shorter, and the one rule aims at the direction
+
+- The method is about 950 words (it was about 1,460), and each line says what to do.
+- The one rule: "Don't run off in a direction that I did not agree to. Agreeing on a direction
+  is cheap; building in the wrong one is not."
+- When the direction is clear, your request is the agreement. Once you agree, the agent builds
+  the whole plan without asking again at each step.
+- **Stop levels** in My setup: careful, standard (the default), or fast.
+- **Your consent comes from you.** When another agent or session asks for a push, a merge, or a
+  delete, the agent tells you and waits.
+- Replies come in the language you write in. The STE levels are for English only.
+- The moves work with `Version control: none`.
+
+### `lets-check` starts with `/doctor`
+
+- It asks you to run Claude Code's `/doctor` first, then skips what that report already shows.
+  A narrow question about one skill, command, hook, or rule skips that stop.
+- New check groups in `checks.md`: broken links, leftovers, and the live session.
+- It reads a custom config folder, project commands, `.mcp.json`, `CLAUDE.local.md`, and managed
+  policy.
+
+### Fits more users
+
+- `lets-set-up` never overwrites an earlier backup, and keeps the backup out of git. It asks once
+  whether other people use the project `CLAUDE.md`, and an upgrade changes only the marked block.
+- `lets-track` keeps your own Taskwarrior projects and tags, and works with a copied (`npx`)
+  install.
+- `lets-look-back`, `lets-check`, and `lets-align` check for Node.js first. Without it they still
+  run, and say what they skipped.
+- `lets-start` continues the agreed plan when you resume. `lets-explore` gives its own view.
+  `lets-shape` adds a design step and a check plan. `lets-align` picks chat or a review page by
+  the effort it asks of you. `lets-wrap` pushes only on your word.
+
+### A new README
+
+A visual README with five animated scenes, and a new page, `docs/make-it-yours.md`.
+
+### For contributors
+
+- The leak check covers every text file in `skills/` and `docs/`, not only `SKILL.md`.
+- The validator checks that every `lets-` skill the method names exists.
+- 35 eval cases.
+
 ## 0.3.0 — 2026-10-11
 
 ### The moves have new names
