@@ -131,7 +131,7 @@ Say "interview me", "give me options", or "what am I missing" in your own words.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/scene-session-dark.svg">
-    <img alt="Three short sessions, one thread. Each session runs lets-start, lets-shape, build it, lets-explain, lets-wrap, with lets-align, lets-explore and lets-blindspot as a detour when the ask is fuzzy. At wrap, a record card drops onto the stack of records, and lets-catch-up and lets-look-back carry the thread from the records to the next session's start." src="assets/scene-session-light.svg" width="100%">
+    <img alt="Three short sessions, one thread. Each session runs lets-start, lets-shape, build it, lets-explain, lets-wrap, with lets-align, lets-explore and lets-blindspot as a detour when the ask is fuzzy. At wrap, a record card drops onto the stack of records, and lets-catch-up and lets-look-back carry the thread from the records to the next session's start, or back into a session where you lost it." src="assets/scene-session-light.svg" width="100%">
   </picture>
 </p>
 
