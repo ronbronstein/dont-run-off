@@ -1,7 +1,7 @@
 {
   "name": "dont-run-off",
   "description": "A harness for Claude Code that keeps you and the agent aligned. It checks the direction with you before it builds, thinks it through with you, and keeps the thread from one session to the next. A setup wizard writes the one rule and your profile into your CLAUDE.md.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "Ron Bronstein",
     "url": "https://github.com/ronbronstein"
