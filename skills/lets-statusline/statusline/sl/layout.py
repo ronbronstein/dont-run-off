@@ -8,7 +8,6 @@ from . import theme
 
 CHIP_PAD = 2  # one space on each side of a chip's text
 GAP = 1       # the width of the separator between chips
-APART = " ┃ "  # the separator before a chip that stands apart from the rest
 
 
 @dataclass(frozen=True)
@@ -18,20 +17,17 @@ class Segment:
     priority: higher stays longer when the line is too wide.
     tone:     "calm" (slate), "warn" (solid amber: act soon), "bad" (solid red: act now).
     short:    optional compact form, used before the chip is dropped.
-    apart:    a heavy, wider separator goes before it, for a different kind of item.
     """
     text: str
     priority: int = 50
     tone: str = "calm"
     short: Optional[str] = None
-    apart: bool = False
 
 
 def _total(segs: Sequence[Segment]) -> int:
     if not segs:
         return 0
-    gaps = sum(theme.width(APART) if s.apart else GAP for s in segs[1:])
-    return sum(theme.width(s.text) + CHIP_PAD for s in segs) + gaps
+    return sum(theme.width(s.text) + CHIP_PAD for s in segs) + GAP * (len(segs) - 1)
 
 
 def fit(segments: Sequence[Segment], budget: int) -> Tuple[Segment, ...]:
@@ -73,14 +69,8 @@ def line(segments: Iterable[Segment], budget: int) -> str:
     if not segs:
         return ""
     kept = fit(segs, budget)
-    thin = theme.paint("│", fg=theme.SEPARATOR, bg=theme.CHIP_BG)
-    heavy = theme.paint(APART, fg=theme.LABEL, bg=theme.CHIP_BG)
-    out = ""
-    for i, s in enumerate(kept):
-        if i:
-            out += heavy if s.apart else thin
-        out += theme.chip(s.text, s.tone)
-    return theme.truncate_visible(out, budget)
+    separator = theme.paint("│", fg=theme.SEPARATOR, bg=theme.CHIP_BG)
+    return theme.truncate_visible(separator.join(theme.chip(s.text, s.tone) for s in kept), budget)
 
 
 def block(rows: Sequence[str]) -> List[str]:

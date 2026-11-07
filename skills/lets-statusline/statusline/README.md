@@ -26,8 +26,10 @@ design, so that a bar shows what it measures.
    - The cache countdown: an hourglass, sand that runs down, and the time (`⏳ cache ⣿⣿⣿⣿⣿⣀ 53:12`), or
      `⌛ cache cold · next reply re-reads 295k`. The hourglass turns at each refresh.
    - The active task, and overdue or due-today tasks, when Taskwarrior is in use.
-3. **How much usage is left?** Claude Code gives the limits to subscribers. With an API key, only the
-   cost shows.
+   - Last, the coins `⛁ $7.78`: the session cost at API prices that Claude Code estimates. A
+     subscriber does not pay it, so it stays white.
+3. **How much usage is left?** Claude Code gives the limits to subscribers. With an API key, this row
+   does not show.
    - The 5-hour limit: a meter, the pace, and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  ↯ ~6h38m  ◷ 𝟮𝗵𝟰𝟬𝗺`).
      The digits are heavy Unicode digits, because a terminal has one font size.
    - The 7-day limit: one square per day, the pace, and the reset day and time
@@ -36,8 +38,6 @@ design, so that a bar shows what it measures.
      nudge to use the limit before it resets: amber means much of it will go unused, green means good
      use, and red means you run out before the reset. It shows after the first 10% of a window;
      before that, the speed is noise.
-   - Last, after a heavy `┃`: the coins `⛁ $7.78`, the session cost at API prices that Claude Code
-     estimates. A subscriber does not pay it, so it stays white.
 
 A banner line goes above these rows at a high context level.
 

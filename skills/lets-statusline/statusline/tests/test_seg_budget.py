@@ -2,7 +2,7 @@ import os
 import time
 import unittest
 
-from sl import fmt, seg_budget, theme
+from sl import fmt, seg_budget, seg_session, theme
 from sl.payload import Limit
 
 NOW = 1_800_000_000
@@ -105,10 +105,11 @@ class Pace(Utc):
 
 
 class Cost(unittest.TestCase):
-    def test_the_api_cost_has_its_label_and_stands_apart(self):
-        seg = seg_budget.cost_segment(7.7808866)
+    """The session cost is a session chip (row 2). Row 3 holds only the limits."""
+
+    def test_the_api_cost_is_a_coin_stack_and_the_amount(self):
+        seg = seg_session.cost_chip(7.7808866)
         self.assertEqual(theme.strip(seg.text), "⛁ $7.78")
-        self.assertTrue(seg.apart)
 
     def test_money_formats(self):
         for usd, text in ((0, "$0.00"), (0.004, "$0.00"), (7.7808866, "$7.78"), (99.99, "$99.99"),
@@ -116,7 +117,7 @@ class Cost(unittest.TestCase):
             self.assertEqual(fmt.money(usd), text, usd)
 
     def test_no_cost_in_the_payload_gives_no_chip(self):
-        self.assertIsNone(seg_budget.cost_segment(None))
+        self.assertIsNone(seg_session.cost_chip(None))
 
 
 class SevenDayChip(Utc):

@@ -93,22 +93,17 @@ class Layout(Base):
         self.assertEqual(len({theme.width(row) for row in rows[-3:]}), 1)
         self.assertNotIn(theme.chip_fill(1), rows[0])
 
-    def test_no_limits_and_no_cost_means_no_empty_row(self):
+    def test_no_limits_means_no_empty_row(self):
         d = payload()
         del d["rate_limits"]
-        del d["cost"]
         _, lines = self.run_render(d)
         self.assertEqual(len(lines), 2)
 
-    def test_an_api_key_user_still_sees_the_cost_on_row_three(self):
-        d = payload()
-        del d["rate_limits"]
-        _, lines = self.run_render(d)
-        self.assertEqual(theme.strip(lines[2]).strip(), "⛁ $7.78")
-
-    def test_the_cost_ends_row_three_after_a_heavy_separator(self):
+    def test_the_session_cost_ends_row_two(self):
+        # It is about the session, not the limits.
         _, lines = self.run_render(payload())
-        self.assertTrue(theme.strip(lines[2]).rstrip().endswith("┃  ⛁ $7.78"), lines[2])
+        self.assertTrue(theme.strip(lines[1]).rstrip().endswith("│ ⛁ $7.78"), lines[1])
+        self.assertNotIn("⛁", theme.strip(lines[2]))
 
     def test_model_comes_first_on_the_second_line(self):
         _, lines = self.run_render(payload())

@@ -67,6 +67,16 @@ def session_chip(s: Session) -> Optional[Segment]:
     return Segment(name + " " + value(age), priority=30, short=value(age))
 
 
+COINS = "⛁"  # the session cost at API prices
+
+
+def cost_chip(usd: Optional[float]) -> Optional[Segment]:
+    """The session cost at API prices. A subscriber does not pay it, so it stays white."""
+    if usd is None:
+        return None
+    return Segment(label(f"{COINS} ") + value(fmt.money(usd)), priority=60)
+
+
 def task_chip(t: Optional[TaskSummary]) -> Optional[Segment]:
     """Only what needs attention. A backlog count is noise."""
     if t is None:

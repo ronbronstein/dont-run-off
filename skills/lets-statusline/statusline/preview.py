@@ -134,7 +134,7 @@ def scenarios(top):
         ("USAGE — good use: both limits land near 100% at the reset (green)",
          base_payload(rate_limits=good), git(top), None, []),
         ("USAGE — 7d runs out before the reset (red)", base_payload(rate_limits=week_out), git(top), None, []),
-        ("USAGE — an API key: no limits, only the cost",
+        ("USAGE — an API key: no limits row",
          {k: v for k, v in base_payload().items() if k != "rate_limits"}, git(top), None, []),
         ("MODEL — Fable, max effort", base_payload(model={"display_name": "Fable 5.1"},
                                                    effort={"level": "max"}), git(top), None, []),

@@ -93,6 +93,7 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
     named = seg_session.session_chip(session)
     model = seg_session.model(session)
     task = seg_session.task_chip(summary)
+    cost = seg_session.cost_chip(session.cost_usd)
     lines += layout.block([
         layout.line(seg_place.build(session, git, home, now, errors,
                                     git_age=view.age if view else 0,
@@ -100,7 +101,7 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
                                     pr=seg_pr.build(pr, now))
                     + ([named] if named else []), budget),
         layout.line(([model] if model else []) + seg_context.build(session, now, size)
-                    + ([task] if task else []), budget),
+                    + ([task] if task else []) + ([cost] if cost else []), budget),
         layout.line(seg_budget.build(session, now, size), budget),
     ])
     return layout.compose(lines)

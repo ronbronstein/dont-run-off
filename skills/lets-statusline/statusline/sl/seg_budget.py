@@ -17,7 +17,6 @@ SQUARES = ("■", "■", "□")
 CLOCK = "◷"                     # one-column text symbols, not emoji
 CALENDAR = "▦"
 BURN = "↯"                      # the pace: how long the limit lasts at this speed
-COINS = "⛁"                     # the session cost at API prices
 
 
 def pace(limit: Limit, now: float):
@@ -53,11 +52,6 @@ def _pace_text(projected: Optional[float], lasts: Optional[float], left: Optiona
     return paint(f"  {BURN} ~{fmt.duration(lasts)}", fg=pace_color(projected), bold=True)
 
 
-def cost_segment(usd: Optional[float]) -> Optional[Segment]:
-    """The session cost at API prices. A subscriber does not pay it, so it stays white."""
-    if usd is None:
-        return None
-    return Segment(label(f"{COINS} ") + value(fmt.money(usd)), priority=60, apart=True)
 
 
 def state(limit: Limit, projected: Optional[float]) -> int:
@@ -116,6 +110,4 @@ def limit_segment(limit: Limit, now: float, priority: int, tier: str = "wide") -
 
 
 def build(s: Session, now: float, tier: str = "wide") -> List[Segment]:
-    segs = [limit_segment(l, now, PRIORITY.get(l.label, 70), tier) for l in s.limits]
-    cost = cost_segment(s.cost_usd)
-    return segs + ([cost] if cost else [])
+    return [limit_segment(l, now, PRIORITY.get(l.label, 70), tier) for l in s.limits]

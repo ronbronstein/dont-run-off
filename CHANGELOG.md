@@ -4,7 +4,7 @@
 
 ### New: `lets-statusline`
 
-Type `/lets-statusline` to install a status line: where you are in git, how long the session can go on, and how much usage is left. It shows a preview, makes backups, and asks first. Only you can start it. The line is yours to customize. To update, run the command again: it names the files that you changed and keeps a backup. `/lets-statusline undo` puts your earlier line back. The usage row shows how long each limit lasts at your pace, colored as a nudge to use it before it resets, and the session cost at API prices. It needs Python 3 and git. `gh` and Taskwarrior are optional. Tested on macOS, not on Windows.
+Type `/lets-statusline` to install a status line: where you are in git, how long the session can go on, and how much usage is left. It shows a preview, makes backups, and asks first. Only you can start it. The line is yours to customize. To update, run the command again: it names the files that you changed and keeps a backup. `/lets-statusline undo` puts your earlier line back. The usage row shows how long each limit lasts at your pace, colored as a nudge to use it before it resets. The session row shows the session cost at API prices. It needs Python 3 and git. `gh` and Taskwarrior are optional. Tested on macOS, not on Windows.
 
 ### Public repo cleanup
 
