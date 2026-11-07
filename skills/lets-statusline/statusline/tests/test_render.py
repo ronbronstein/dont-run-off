@@ -83,18 +83,15 @@ class Layout(Base):
         _, lines = self.run_render(payload())
         self.assertIn("xhigh │ ctx", lines[1])
 
-    def test_the_three_rows_make_one_even_block(self):
+    def test_a_calm_line_has_no_background(self):
+        # Only amber and red chips are solid; calm chips use the terminal's own background.
         out, _ = self.run_render(payload())
-        self.assertEqual(len({theme.width(row) for row in out.split("\n")}), 1)
+        self.assertNotIn("\x1b[48;", out)
 
-    def test_banners_stay_outside_the_block(self):
-        d = payload()
-        d["context_window"] = dict(d["context_window"], total_input_tokens=650_000,
-                                   used_percentage=65)
-        out, _ = self.run_render(d)
-        rows = out.split("\n")
-        self.assertEqual(len({theme.width(row) for row in rows[-3:]}), 1)
-        self.assertNotIn(theme.chip_fill(1), rows[0])
+    def test_rows_have_no_padding_at_the_end(self):
+        out, _ = self.run_render(payload())
+        for row in out.split("\n"):
+            self.assertFalse(theme.strip(row).endswith("  "), row)
 
     def test_no_limits_means_no_empty_row(self):
         d = payload()

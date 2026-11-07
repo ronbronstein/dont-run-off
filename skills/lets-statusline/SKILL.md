@@ -36,7 +36,7 @@ The colors need the user's own terminal. Ask them to run this, with the real pat
 
 Ask: "Can you read it? Do the colors and the symbols show correctly?"
 
-The colors assume a dark terminal. The line cannot detect a light one, so if `theme` is `light`, or is unset or `auto` and you do not know, ask about this first. On a light terminal the band keeps its own dark background, so look at the edges and at any text outside the band. If the user cannot read it, do not install. Offer to change `sl/theme.py` first, or stop.
+The colors assume a dark terminal. The line cannot detect a light one, so if `theme` is `light`, or is unset or `auto` and you do not know, ask about this first. The calm items have no background of their own, so on a light terminal the white text can be hard to read. If the user cannot read it, do not install. Offer to change `sl/theme.py` first, or stop.
 
 ## 4. Say what will change, and get a yes
 

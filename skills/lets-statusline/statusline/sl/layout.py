@@ -69,15 +69,8 @@ def line(segments: Iterable[Segment], budget: int) -> str:
     if not segs:
         return ""
     kept = fit(segs, budget)
-    separator = theme.paint("│", fg=theme.SEPARATOR, bg=theme.CHIP_BG)
+    separator = theme.paint("│", fg=theme.SEPARATOR)
     return theme.truncate_visible(separator.join(theme.chip(s.text, s.tone) for s in kept), budget)
-
-
-def block(rows: Sequence[str]) -> List[str]:
-    """Pad the rows to one width, so that they read as one even band."""
-    widest = max((theme.width(r) for r in rows), default=0)
-    return [r + theme.chip_fill(widest - theme.width(r)) if r and theme.width(r) < widest else r
-            for r in rows]
 
 
 def compose(lines: Iterable[str]) -> str:

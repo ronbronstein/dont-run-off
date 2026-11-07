@@ -101,7 +101,7 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
     task = seg_session.task_chip(summary)
     cost = seg_session.cost_chip(session.cost_usd)
     month = seg_session.month_chip(month_usd, time.strftime("%b", time.localtime(now)))
-    lines += layout.block([
+    lines += [
         layout.line(seg_place.build(session, git, home, now, errors,
                                     git_age=view.age if view else 0,
                                     git_pending=bool(view and view.pending),
@@ -111,5 +111,5 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
                     + ([task] if task else []) + ([cost] if cost else [])
                     + ([month] if month else []), budget),
         layout.line(seg_budget.build(session, now, size), budget),
-    ])
+    ]
     return layout.compose(lines)

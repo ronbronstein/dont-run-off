@@ -46,14 +46,12 @@ class TextColors(unittest.TestCase):
 
 
 class Chip(unittest.TestCase):
-    def test_calm_keeps_inner_colors_and_the_background_after_each_reset(self):
+    def test_calm_keeps_inner_colors_with_no_background(self):
         inner = theme.paint("a", fg=theme.OK) + theme.paint("b", fg=theme.BAD)
         out = theme.chip(inner)
         self.assertEqual(theme.strip(out), " ab ")
-        bg = "\x1b[48;2;%d;%d;%dm" % theme.CHIP_BG
-        self.assertEqual(out.count(bg), 3)
+        self.assertNotIn("\x1b[48;", out)
         self.assertIn("38;2;%d;%d;%d" % theme.OK, out)
-        self.assertTrue(out.endswith(theme.RESET))
 
     def test_solid_tones_flatten_the_inner_colors(self):
         inner = theme.paint("a", fg=theme.OK)

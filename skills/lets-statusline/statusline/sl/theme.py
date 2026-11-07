@@ -2,7 +2,7 @@
 
 Colors are 24-bit for a dark terminal background.
 
-The rule of the line: everything sits on one slate band. Only what needs you gets
+The rule of the line: calm chips have no background. Only what needs you gets
 a solid color: amber = act soon, red = act now. So a calm line has no solid block.
 
 Text: white = labels, white bold = values.
@@ -18,7 +18,6 @@ from typing import Optional, Tuple
 RGB = Tuple[int, int, int]
 
 BG = (30, 33, 39)          # assumed terminal background, used to make dim tints
-CHIP_BG = (52, 57, 68)     # slate: the background of a calm chip
 INK = (30, 33, 39)         # dark text on a solid amber chip
 TEXT = (238, 240, 244)     # white: values (bold)
 LABEL = (212, 216, 223)    # white: labels
@@ -99,18 +98,13 @@ def link(text: str, url: Optional[str]) -> str:
 
 
 def chip(text: str, tone: str = "calm") -> str:
-    """One group on the line. Calm keeps its inner colors; warn and bad are solid."""
+    """One group on the line. Calm keeps its inner colors on the terminal's own background;
+    warn and bad are solid."""
     if tone in ("warn", "bad"):
         flat = _SGR.sub("", text)
         fg, bg = (INK, WARN) if tone == "warn" else (ALARM_FG, ALARM_BG)
         return paint(f" {flat} ", fg=fg, bg=bg, bold=True)
-    background = "\x1b[48;2;%d;%d;%dm" % CHIP_BG
-    return background + " " + text.replace(RESET, RESET + background) + " " + RESET
-
-
-def chip_fill(columns: int) -> str:
-    """Empty columns on the chip background, to even out the rows."""
-    return paint(" " * columns, bg=CHIP_BG)
+    return f" {text} "
 
 
 def strip(s: str) -> str:

@@ -31,7 +31,7 @@ def effort_mark(level: str, color: theme.RGB) -> Optional[str]:
     if filled is None:
         return None
     return (paint("●" * filled, fg=color)
-            + paint("○" * (EFFORT_CELLS - filled), fg=theme.mix(color, theme.CHIP_BG, 0.55)))
+            + paint("○" * (EFFORT_CELLS - filled), fg=theme.mix(color, theme.BG, 0.55)))
 
 
 def model(s: Session) -> Optional[Segment]:

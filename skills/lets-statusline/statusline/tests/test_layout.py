@@ -63,12 +63,12 @@ class Line(unittest.TestCase):
         out = layout.line((Segment("a"), Segment("b")), 80)
         self.assertEqual(plain(out), " a │ b ")
 
-    def test_the_separator_sits_on_the_same_background_as_the_chips(self):
+    def test_the_separator_has_no_background(self):
         out = layout.line((Segment("a"), Segment("b")), 80)
-        self.assertIn(theme.paint("│", fg=theme.SEPARATOR, bg=theme.CHIP_BG), out)
+        self.assertIn(theme.paint("│", fg=theme.SEPARATOR), out)
 
-    def test_calm_chip_has_the_slate_background(self):
-        self.assertIn(bg_code(theme.CHIP_BG), layout.line((Segment("a"),), 80))
+    def test_calm_chip_has_no_background(self):
+        self.assertNotIn("\x1b[48;", layout.line((Segment("a"), Segment("b")), 80))
 
     def test_warn_chip_is_solid_amber(self):
         self.assertIn(bg_code(theme.WARN), layout.line((Segment("a", tone="warn"),), 80))
@@ -83,20 +83,6 @@ class Line(unittest.TestCase):
     def test_line_fits_budget(self):
         segs = tuple(Segment("x" * 20, priority=p) for p in (90, 50, 10))
         self.assertLessEqual(theme.width(layout.line(segs, 50)), 50)
-
-
-class Block(unittest.TestCase):
-    def test_rows_get_the_same_width_on_the_same_background(self):
-        rows = layout.block([layout.line((Segment("a"),), 80), layout.line((Segment("long text"),), 80)])
-        self.assertEqual(theme.width(rows[0]), theme.width(rows[1]))
-        self.assertTrue(rows[0].endswith(theme.chip_fill(8)))
-
-    def test_the_widest_row_does_not_change(self):
-        row = layout.line((Segment("long text"),), 80)
-        self.assertEqual(layout.block([row])[0], row)
-
-    def test_an_empty_row_stays_empty(self):
-        self.assertEqual(layout.block(["", layout.line((Segment("a"),), 80)])[0], "")
 
 
 class Compose(unittest.TestCase):

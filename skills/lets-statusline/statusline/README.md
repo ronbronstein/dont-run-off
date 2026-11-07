@@ -8,7 +8,7 @@ backup, and asks before it replaces them.
 
 ## What the rows show
 
-All rows sit on one slate band of one width. A thin `│` separates the items. Each bar has its own
+The rows sit on your terminal's own background. A thin `│` separates the items. Each bar has its own
 design, so that a bar shows what it measures.
 
 1. **Where am I?**
@@ -52,7 +52,7 @@ A banner line goes above these rows at a high context level.
 - **Optional:** `gh` adds merged and closed PRs, checks, and conflicts. Taskwarrior adds the task chip,
   when a repo names its project in `TASKS.md` or `.taskproject`. Without them, these items do not show.
 - **Terminal:** one that shows 24-bit color and these symbols. The colors assume a dark terminal. The
-  band has its own dark background, so preview it on a light terminal before you keep it.
+  white text is hard to read on a light terminal, so preview it there before you keep it.
 
 ## Colors
 
@@ -60,7 +60,7 @@ A banner line goes above these rows at a high context level.
 |---|---|
 | Solid red chip | Act now |
 | Solid amber chip | Act soon |
-| Slate band | Nothing to do |
+| No background | Nothing to do |
 | Teal name | The base branch |
 | Blue name | Another branch |
 | Magenta name | A worktree |
@@ -98,7 +98,7 @@ A banner line goes above these rows at a high context level.
 - `sl/seg_place.py`, `sl/seg_pr.py`, `sl/seg_context.py`, `sl/seg_budget.py`: the items in each row.
 - `sl/ladder.py`: the context warning levels and banners.
 - `sl/render.py`: which item goes in which row.
-- `sl/layout.py`, `sl/fmt.py`: the band and the text formats.
+- `sl/layout.py`, `sl/fmt.py`: the chips, the separators, and the text formats.
 - `sl/payload.py`: reads the JSON from Claude Code.
 - `sl/gitstate.py`, `sl/gitcache.py`, `sl/prstate.py`, `sl/tasks.py`: the data sources.
 - `sl/background.py`: starts a detached refresh job. `sl/errlog.py`: the error log.
