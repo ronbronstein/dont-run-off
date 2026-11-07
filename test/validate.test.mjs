@@ -6,6 +6,7 @@ import {
   cpSync,
   mkdirSync,
   mkdtempSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -117,6 +118,48 @@ test("a leak in a tracked dotfile fails", () => {
   const r = run(dir);
   assert.equal(r.status, 1);
   assert.match(r.stderr, /\.somerc: email address/);
+});
+
+test("a leak in a tracked file with an unlisted extension fails", () => {
+  const { dir, git } = repo();
+  writeFileSync(
+    join(dir, "skills/lets-check/x.toml"),
+    "a = 'someone@example.com'\n",
+  );
+  git("add", "skills/lets-check/x.toml");
+  const r = run(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /x\.toml: email address/);
+});
+
+test("a leak in a tracked file with a space and a quote in its name fails", () => {
+  const { dir, git } = repo();
+  writeFileSync(join(dir, 'odd "näme.md'), "Mail someone@example.com\n");
+  git("add", "-A");
+  const r = run(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /email address/);
+});
+
+test("a tracked symlink does not stop the sweep", () => {
+  const { dir, git } = repo();
+  symlinkSync("skills", join(dir, "a-link"));
+  writeFileSync(join(dir, "zz.md"), "Mail someone@example.com\n");
+  git("add", "-A");
+  const r = run(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /zz\.md: email address/);
+});
+
+test("a private term in a test file fails", () => {
+  const { dir, git } = repo();
+  mkdirSync(join(dir, "test"));
+  writeFileSync(join(dir, "test/x.test.mjs"), "// the secretproject path\n");
+  git("add", "test/x.test.mjs");
+  writeFileSync(join(dir, "blocklist.local.txt"), "secretproject\n");
+  const r = run(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /test\/x\.test\.mjs: private term/);
 });
 
 test("the fake leaks in test files do not fail", () => {

@@ -10,6 +10,7 @@
 //      blocklist naming your private projects is itself a leak.
 
 import {
+  lstatSync,
   readdirSync,
   readFileSync,
   statSync,
@@ -79,10 +80,10 @@ const LEAK_EXEMPT = new Set([
 // Every path that had the leak check, so the sweep over skills/ does not repeat it.
 const leakChecked = new Set();
 
-function checkLeaks(at, text) {
+function checkLeaks(at, text, { generic = true } = {}) {
   leakChecked.add(at);
   if (LEAK_EXEMPT.has(at)) return;
-  for (const { re, what } of GENERIC_LEAKS) {
+  for (const { re, what } of generic ? GENERIC_LEAKS : []) {
     const hit = text.match(re);
     if (hit) errors.push(`${at}: ${what} — ${JSON.stringify(hit[0])}`);
   }
@@ -411,23 +412,29 @@ try {
 
 // ---------- every public text file ----------
 // Whatever git tracks is public after a push, so the leak check reads all of it.
-// Test files hold fake leaks on purpose.
+// Test files hold fake paths and addresses on purpose, so they get only the
+// private terms. A file with a NUL byte is binary.
 
-const DOTFILE = /(^|\/)\.[\w.-]+$/;
+let trackedFiles = null;
 try {
-  const tracked = execFileSync("git", ["ls-files"], {
+  trackedFiles = execFileSync("git", ["ls-files", "-z"], {
     cwd: ROOT,
     encoding: "utf8",
-  });
-  for (const rel of tracked.split("\n")) {
-    const isText = TEXT_FILE.test(rel) || DOTFILE.test(rel);
-    if (!rel || !isText || rel.startsWith("test/") || leakChecked.has(rel))
-      continue;
-    const path = join(ROOT, rel);
-    if (existsSync(path)) checkLeaks(rel, readFileSync(path, "utf8"));
-  }
+  }).split("\0");
 } catch {
   warnings.push("git is not available — skipped the sweep of tracked files");
+}
+for (const rel of trackedFiles ?? []) {
+  const path = join(ROOT, rel);
+  if (!rel || leakChecked.has(rel) || !existsSync(path)) continue;
+  if (!lstatSync(path).isFile()) continue; // a symlink or a submodule has no text
+  try {
+    const text = readFileSync(path, "utf8");
+    if (!text.includes("\0"))
+      checkLeaks(rel, text, { generic: !rel.startsWith("test/") });
+  } catch (e) {
+    errors.push(`${rel}: the leak check cannot read it — ${e.message}`);
+  }
 }
 
 // ---------- commit authors ----------
