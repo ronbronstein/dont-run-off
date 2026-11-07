@@ -45,6 +45,7 @@ Use `state`:
 - **`not-installed`:** a new install.
 - **`up-to-date`:** say so. Stop unless the user wants to install it again.
 - **`update-available`:** a new version is ready.
+- **`not-active`:** the code is current, but `settings.json` runs another line, for example after an undo. Installing makes this line active again.
 - **`no-record`:** code is in the folder, but this skill did not install it.
 
 If `changed_by_user` has files, name them. **Warning:** the update replaces those files. The old folder stays as a backup, and the user can copy their changes back from it.

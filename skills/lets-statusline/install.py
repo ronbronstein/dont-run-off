@@ -135,6 +135,8 @@ def status() -> dict:
     else:
         changed = changed_files(record.get("files", {}))
         state = "up-to-date" if record.get("files") == source else "update-available"
+        if state == "up-to-date" and not is_ours(settings.get("statusLine")):
+            state = "not-active"  # the code is current, but settings run another line
     return {
         "state": state,
         "changed_by_user": changed,

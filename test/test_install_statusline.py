@@ -119,6 +119,12 @@ class Installer(unittest.TestCase):
         self.assertEqual(s["state"], "up-to-date")
         self.assertEqual(s["changed_by_user"], [])
 
+    def test_after_undo_the_code_is_current_but_the_line_is_not_active(self):
+        self.write_settings({"statusLine": {"type": "command", "command": "mine"}})
+        self.run_it("install")
+        self.run_it("undo")
+        self.assertEqual(self.status()["state"], "not-active")
+
     def test_status_names_the_files_that_the_user_changed(self):
         self.run_it("install")
         self.edit_installed()
