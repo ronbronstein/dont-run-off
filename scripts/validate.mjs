@@ -40,31 +40,40 @@ const GENERIC_LEAKS = [
 ];
 
 // Optional private blocklist, one term or /regex/ per line, # for comments.
+// A line that starts with `author:` applies only to commit author and committer
+// addresses, not to file text.
 const blocklistFile = join(ROOT, "blocklist.local.txt");
-const privateBlocklist = existsSync(blocklistFile)
+const blocklistLines = existsSync(blocklistFile)
   ? readFileSync(blocklistFile, "utf8")
       .split("\n")
       .map((l) => l.trim())
       .filter((l) => l && !l.startsWith("#"))
-      .map((l) =>
-        l.startsWith("/") && l.lastIndexOf("/") > 0
-          ? new RegExp(
-              l.slice(1, l.lastIndexOf("/")),
-              l.slice(l.lastIndexOf("/") + 1),
-            )
-          : new RegExp(
-              `\\b${l.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
-              "i",
-            ),
-      )
   : [];
+const toPattern = (l) =>
+  l.startsWith("/") && l.lastIndexOf("/") > 0
+    ? new RegExp(
+        l.slice(1, l.lastIndexOf("/")),
+        l.slice(l.lastIndexOf("/") + 1),
+      )
+    : new RegExp(`\\b${l.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+const AUTHOR = "author:";
+const privateBlocklist = blocklistLines
+  .filter((l) => !l.startsWith(AUTHOR))
+  .map(toPattern);
+const authorBlocklist = blocklistLines
+  .filter((l) => l.startsWith(AUTHOR))
+  .map((l) => toPattern(l.slice(AUTHOR.length)));
 
-// `profile.md` exists to hold personal detail, and package.json/LICENSE carry
-// the author's name and email by design.
+// `profile.md` exists to hold personal detail. package.json, LICENSE and the two
+// plugin manifests carry the author's public name and contact by design. This
+// script holds the leak patterns themselves.
 const LEAK_EXEMPT = new Set([
+  "scripts/validate.mjs",
   "skills/lets-set-up/profile.md",
   "package.json",
   "LICENSE",
+  ".claude-plugin/plugin.json",
+  ".claude-plugin/marketplace.json",
 ]);
 
 // Every path that had the leak check, so the sweep over skills/ does not repeat it.
@@ -156,7 +165,9 @@ for (const dir of dirs) {
       `skills/${dir}/SKILL.md: a redirect must set disable-model-invocation: true, or its description costs context in every session`,
     );
   if (!names.has(target))
-    errors.push(`skills/${dir}/SKILL.md: redirects to '${target}', which does not exist`);
+    errors.push(
+      `skills/${dir}/SKILL.md: redirects to '${target}', which does not exist`,
+    );
 }
 
 // Cross-references between skills must resolve.
@@ -205,8 +216,7 @@ for (const f of ["method.md", "profile.md"]) {
   }
   // The moves list names skills as bare `lets-…` words, with no table row.
   for (const m of text.matchAll(/`(lets-[a-z0-9-]+)`/g)) {
-    if (!names.has(m[1]))
-      errors.push(`${at}: names unknown skill '${m[1]}'`);
+    if (!names.has(m[1])) errors.push(`${at}: names unknown skill '${m[1]}'`);
   }
 }
 
@@ -225,7 +235,9 @@ const setupSkill = existsSync(join(SETUP, "SKILL.md"))
   ? readFileSync(join(SETUP, "SKILL.md"), "utf8")
   : "";
 if (!setupSkill)
-  errors.push("skills/lets-set-up/SKILL.md: missing — nothing installs the harness");
+  errors.push(
+    "skills/lets-set-up/SKILL.md: missing — nothing installs the harness",
+  );
 for (const f of ["method.md", "profile.md"])
   if (setupSkill && !setupSkill.includes(f))
     errors.push(`skills/lets-set-up/SKILL.md: never references ${f}`);
@@ -292,7 +304,7 @@ for (const rel of ["README.md", "CONTRIBUTING.md"]) {
 
 // Every text file in skills/ and docs/ ships to users: references, scripts,
 // pages, and data files, not only SKILL.md.
-const TEXT_FILE = /\.(md|mjs|cjs|js|json|html|css|txt|ya?ml|sh|svg)$/i;
+const TEXT_FILE = /\.(md|mjs|cjs|js|json|html|css|txt|ya?ml|sh|svg|py)$/i;
 for (const dir of [SKILLS, join(ROOT, "docs")]) {
   if (!existsSync(dir)) continue;
   for (const path of filesUnder(dir)) {
@@ -395,6 +407,50 @@ try {
       );
 } catch {
   warnings.push("git is not available — skipped the private-path check");
+}
+
+// ---------- every public text file ----------
+// Whatever git tracks is public after a push, so the leak check reads all of it.
+// Test files hold fake leaks on purpose.
+
+const DOTFILE = /(^|\/)\.[\w.-]+$/;
+try {
+  const tracked = execFileSync("git", ["ls-files"], {
+    cwd: ROOT,
+    encoding: "utf8",
+  });
+  for (const rel of tracked.split("\n")) {
+    const isText = TEXT_FILE.test(rel) || DOTFILE.test(rel);
+    if (!rel || !isText || rel.startsWith("test/") || leakChecked.has(rel))
+      continue;
+    const path = join(ROOT, rel);
+    if (existsSync(path)) checkLeaks(rel, readFileSync(path, "utf8"));
+  }
+} catch {
+  warnings.push("git is not available — skipped the sweep of tracked files");
+}
+
+// ---------- commit authors ----------
+// A commit carries its author's address to the public repo, and no file check
+// sees it. The terms stay in the local blocklist: naming them here is a leak.
+
+if (authorBlocklist.length) {
+  try {
+    const people = execFileSync("git", ["log", "--format=%ae%n%ce", "HEAD"], {
+      cwd: ROOT,
+      encoding: "utf8",
+    });
+    for (const address of new Set(people.split("\n")))
+      for (const re of authorBlocklist)
+        if (re.test(address))
+          errors.push(
+            `commit author or committer: private term — ${JSON.stringify(address)}`,
+          );
+  } catch {
+    warnings.push(
+      "git history is not available — skipped the commit author check",
+    );
+  }
 }
 
 // ---------- report ----------
