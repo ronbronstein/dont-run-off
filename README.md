@@ -8,7 +8,7 @@
 <p align="center">
   <a href="#install"><img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude%20Code-plugin-C86A4A?style=flat-square"></a>
   <a href="CHANGELOG.md"><img alt="Version 0.4.0" src="https://img.shields.io/badge/version-0.4.0-3B3A36?style=flat-square"></a>
-  <a href="#the-moves"><img alt="12 skills" src="https://img.shields.io/badge/skills-12-3B3A36?style=flat-square"></a>
+  <a href="#the-moves"><img alt="13 skills" src="https://img.shields.io/badge/skills-13-3B3A36?style=flat-square"></a>
   <a href="https://agentskills.io"><img alt="Agent Skills format" src="https://img.shields.io/badge/format-Agent%20Skills-3B3A36?style=flat-square"></a>
   <a href="https://github.com/ronbronstein/dont-run-off/actions/workflows/validate.yml"><img alt="Checks" src="https://github.com/ronbronstein/dont-run-off/actions/workflows/validate.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-3B3A36?style=flat-square"></a>
@@ -194,6 +194,7 @@ Every move starts with `lets-`. Type `/lets` in Claude Code to see them all.
 | | `lets-check` | Something does not fire, or you want to audit your setup. It starts with `/doctor`. |
 | **Set up** | `lets-set-up` | You install or upgrade |
 | | `lets-track` | Anything about tasks, in the task tool you already use |
+| | `lets-statusline` | You want a status line that shows git state, context, and usage limits. Only you can start it. It needs Python 3. |
 
 <br>
 

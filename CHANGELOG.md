@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New: `lets-statusline`
+
+Type `/lets-statusline` to install a status line: where you are in git, how long the session can go on, and how much usage is left. It shows a preview, makes backups, and asks first. Only you can start it. The line is yours to customize. To update, run the command again: it names the files that you changed and keeps a backup. `/lets-statusline undo` puts your earlier line back. It needs Python 3 and git. `gh` and Taskwarrior are optional. Tested on macOS, not on Windows.
+
 ### Public repo cleanup
 
 - The leak check now reads every text file that git tracks, including Python files and dotfiles.

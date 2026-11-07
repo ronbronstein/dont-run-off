@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "test": "node scripts/validate.mjs && node --test test/*.test.mjs",
+    "test": "node scripts/validate.mjs && node --test test/*.test.mjs && npm run test:statusline",
+    "test:statusline": "python3 -m unittest discover -s skills/lets-statusline/statusline/tests -t skills/lets-statusline/statusline && python3 -m unittest discover -s test -p 'test_*.py'",
     "test:page": "node scripts/test-review-page.mjs",
     "art": "node scripts/build-art.mjs",
     "evals:sync": "node scripts/sync-eval-method.mjs",

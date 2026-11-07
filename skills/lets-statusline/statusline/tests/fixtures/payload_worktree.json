@@ -1,0 +1,89 @@
+{
+  "session_id": "00000000-0000-4000-8000-000000000001",
+  "cwd": "/fake-home/Code/some-repo/.claude/worktrees/wt-a",
+  "effort": {
+    "level": "xhigh"
+  },
+  "model": {
+    "id": "claude-opus-5-5",
+    "display_name": "Opus 5.5"
+  },
+  "workspace": {
+    "current_dir": "/fake-home/Code/some-repo/.claude/worktrees/wt-a",
+    "project_dir": "/fake-home/Code/some-repo/.claude/worktrees/wt-a",
+    "added_dirs": [],
+    "git_worktree": "wt-a",
+    "repo": {
+      "host": "github.com",
+      "owner": "someone",
+      "name": "some-repo"
+    }
+  },
+  "version": "2.1.318",
+  "output_style": {
+    "name": "default"
+  },
+  "cost": {
+    "total_cost_usd": 1.0,
+    "total_duration_ms": 14777776,
+    "total_api_duration_ms": 1244598,
+    "total_lines_added": 436,
+    "total_lines_removed": 45
+  },
+  "context_window": {
+    "total_input_tokens": 294575,
+    "total_output_tokens": 1035,
+    "context_window_size": 1000000,
+    "current_usage": {
+      "input_tokens": 1,
+      "output_tokens": 1035,
+      "cache_creation_input_tokens": 2781,
+      "cache_read_input_tokens": 291793
+    },
+    "used_percentage": 29,
+    "remaining_percentage": 71
+  },
+  "exceeds_200k_tokens": true,
+  "prompt_cache": {
+    "warm": false,
+    "caching_observed": true,
+    "ttl": "1h",
+    "expires_at": 1793982465,
+    "requests": 60,
+    "misses": 1,
+    "expected_rebuilds": 0,
+    "hit_ratio": 0.965087043852875,
+    "cache_write_tokens": 441531,
+    "miss_recache_tokens": 178316,
+    "last_miss_at": 1793974257,
+    "last_miss_cause": {
+      "causes": [
+        "ttl_expired_1h"
+      ]
+    },
+    "miss_causes": {
+      "ttl_expired_1h": 1
+    },
+    "recache_tokens_if_cold": 294575
+  },
+  "fast_mode": false,
+  "thinking": {
+    "enabled": true
+  },
+  "rate_limits": {
+    "five_hour": {
+      "used_percentage": 23,
+      "resets_at": 1793993400
+    },
+    "seven_day": {
+      "used_percentage": 40,
+      "resets_at": 1794034800
+    }
+  },
+  "worktree": {
+    "name": "wt-a",
+    "path": "/fake-home/Code/some-repo/.claude/worktrees/wt-a",
+    "branch": "branch-a",
+    "original_cwd": "/fake-home/Code/some-repo"
+  }
+}

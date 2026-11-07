@@ -1,0 +1,80 @@
+{
+  "context_window": {
+    "context_window_size": 1000000,
+    "current_usage": {
+      "cache_creation_input_tokens": 834,
+      "cache_read_input_tokens": 207355,
+      "input_tokens": 2,
+      "output_tokens": 737
+    },
+    "remaining_percentage": 79,
+    "total_input_tokens": 208191,
+    "total_output_tokens": 737,
+    "used_percentage": 21
+  },
+  "cost": {
+    "total_api_duration_ms": 1318961,
+    "total_cost_usd": 7.7808866,
+    "total_duration_ms": 1187350,
+    "total_lines_added": 151,
+    "total_lines_removed": 0
+  },
+  "cwd": "/fake-home/Code/demo-theme/_migration",
+  "effort": {
+    "level": "xhigh"
+  },
+  "exceeds_200k_tokens": true,
+  "fast_mode": false,
+  "model": {
+    "display_name": "Opus 5.5",
+    "id": "claude-opus-5-5"
+  },
+  "output_style": {
+    "name": "default"
+  },
+  "prompt_cache": {
+    "cache_write_tokens": 182380,
+    "caching_observed": true,
+    "expected_rebuilds": 0,
+    "expires_at": 1791636250,
+    "hit_ratio": 0.9800809696273858,
+    "last_miss_at": null,
+    "last_miss_cause": null,
+    "miss_causes": {},
+    "miss_recache_tokens": 0,
+    "misses": 0,
+    "recache_tokens_if_cold": 208191,
+    "requests": 65,
+    "ttl": "1h",
+    "warm": true
+  },
+  "prompt_id": "11111111-1111-4111-8111-111111111111",
+  "rate_limits": {
+    "five_hour": {
+      "resets_at": 1791642600,
+      "used_percentage": 26
+    },
+    "seven_day": {
+      "resets_at": 1792220400,
+      "used_percentage": 8
+    }
+  },
+  "scratchpad_dir": "/private/tmp/claude-501/demo/scratchpad",
+  "session_id": "00000000-0000-4000-8000-000000000000",
+  "session_name": "demo site rebuild",
+  "thinking": {
+    "enabled": true
+  },
+  "transcript_path": "/fake-home/.claude/projects/demo/00000000.jsonl",
+  "version": "2.1.318",
+  "workspace": {
+    "added_dirs": [],
+    "current_dir": "/fake-home/Code/demo-theme/_migration",
+    "project_dir": "/fake-home/Code/demo-theme",
+    "repo": {
+      "host": "github.com",
+      "owner": "test",
+      "name": "demo-theme"
+    }
+  }
+}
