@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Public repo cleanup
+
+- The leak check now reads every text file that git tracks, including Python files and dotfiles.
+- The leak check can block commit author addresses: add `author:<term>` to your local `blocklist.local.txt`.
+- The maintainer's old `current-state.md` and `DECISIONS.md` left the repo. They described an early state and were no longer true.
+
 ## 0.4.0 — 2026-10-27
 
 ### The old names are gone
