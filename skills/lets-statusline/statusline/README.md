@@ -28,15 +28,15 @@ design, so that a bar shows what it measures.
    - The active task, and overdue or due-today tasks, when Taskwarrior is in use.
 3. **How much usage is left?** Claude Code gives the limits to subscribers. With an API key, only the
    cost shows.
-   - The 5-hour limit: a meter, the pace, and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  lasts ~6h38m  ◷ 𝟮𝗵𝟰𝟬𝗺`).
+   - The 5-hour limit: a meter, the pace, and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  ↯ ~6h38m  ◷ 𝟮𝗵𝟰𝟬𝗺`).
      The digits are heavy Unicode digits, because a terminal has one font size.
    - The 7-day limit: one square per day, the pace, and the reset day and time
-     (`7d ■□□□□□□ 8%  lasts ~11d12h  ▦ Fri 00:18`).
-   - The pace says how long the limit lasts at your current speed: `lasts ~6h38m`, or `out in ~1h20m`
-     when it runs out before the reset. It is a nudge to use the limit before it resets: amber means
-     much of it will go unused, green means good use, red means you run out. It shows after the first
-     10% of a window; before that, the speed is noise.
-   - Last, after a heavy `┃`: `In API costs: $7.78`, the session cost at API prices that Claude Code
+     (`7d ■□□□□□□ 8%  ↯ ~11d12h  ▦ Fri 00:18`).
+   - The pace `↯` (burn rate) says how long the limit lasts at your current speed: `↯ ~6h38m`. It is a
+     nudge to use the limit before it resets: amber means much of it will go unused, green means good
+     use, and red means you run out before the reset. It shows after the first 10% of a window;
+     before that, the speed is noise.
+   - Last, after a heavy `┃`: the coins `⛁ $7.78`, the session cost at API prices that Claude Code
      estimates. A subscriber does not pay it, so it stays white.
 
 A banner line goes above these rows at a high context level.

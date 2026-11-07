@@ -16,6 +16,8 @@ METER = ("▮", "▮", "▯")         # filled, partial (rounds up), empty
 SQUARES = ("■", "■", "□")
 CLOCK = "◷"                     # one-column text symbols, not emoji
 CALENDAR = "▦"
+BURN = "↯"                      # the pace: how long the limit lasts at this speed
+COINS = "⛁"                     # the session cost at API prices
 
 
 def pace(limit: Limit, now: float):
@@ -47,15 +49,15 @@ def pace_color(projected: float) -> theme.RGB:
 def _pace_text(projected: Optional[float], lasts: Optional[float], left: Optional[float]) -> str:
     if projected is None or lasts is None or left is None:
         return ""
-    words = f"  out in ~{fmt.duration(lasts)}" if lasts < left else f"  lasts ~{fmt.duration(lasts)}"
-    return paint(words, fg=pace_color(projected), bold=True)
+    # One icon for every state: the color says if it runs out before the reset (red).
+    return paint(f"  {BURN} ~{fmt.duration(lasts)}", fg=pace_color(projected), bold=True)
 
 
 def cost_segment(usd: Optional[float]) -> Optional[Segment]:
     """The session cost at API prices. A subscriber does not pay it, so it stays white."""
     if usd is None:
         return None
-    return Segment(label("In API costs: ") + value(fmt.money(usd)), priority=60, apart=True)
+    return Segment(label(f"{COINS} ") + value(fmt.money(usd)), priority=60, apart=True)
 
 
 def state(limit: Limit, projected: Optional[float]) -> int:

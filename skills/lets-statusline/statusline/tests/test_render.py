@@ -104,11 +104,11 @@ class Layout(Base):
         d = payload()
         del d["rate_limits"]
         _, lines = self.run_render(d)
-        self.assertEqual(theme.strip(lines[2]).strip(), "In API costs: $7.78")
+        self.assertEqual(theme.strip(lines[2]).strip(), "⛁ $7.78")
 
     def test_the_cost_ends_row_three_after_a_heavy_separator(self):
         _, lines = self.run_render(payload())
-        self.assertTrue(theme.strip(lines[2]).rstrip().endswith("┃  In API costs: $7.78"), lines[2])
+        self.assertTrue(theme.strip(lines[2]).rstrip().endswith("┃  ⛁ $7.78"), lines[2])
 
     def test_model_comes_first_on_the_second_line(self):
         _, lines = self.run_render(payload())
