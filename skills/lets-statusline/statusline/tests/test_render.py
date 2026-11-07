@@ -93,11 +93,22 @@ class Layout(Base):
         self.assertEqual(len({theme.width(row) for row in rows[-3:]}), 1)
         self.assertNotIn(theme.chip_fill(1), rows[0])
 
-    def test_no_limits_means_no_empty_row(self):
+    def test_no_limits_and_no_cost_means_no_empty_row(self):
+        d = payload()
+        del d["rate_limits"]
+        del d["cost"]
+        _, lines = self.run_render(d)
+        self.assertEqual(len(lines), 2)
+
+    def test_an_api_key_user_still_sees_the_cost_on_row_three(self):
         d = payload()
         del d["rate_limits"]
         _, lines = self.run_render(d)
-        self.assertEqual(len(lines), 2)
+        self.assertEqual(theme.strip(lines[2]).strip(), "In API costs: $7.78")
+
+    def test_the_cost_ends_row_three_after_a_heavy_separator(self):
+        _, lines = self.run_render(payload())
+        self.assertTrue(theme.strip(lines[2]).rstrip().endswith("┃  In API costs: $7.78"), lines[2])
 
     def test_model_comes_first_on_the_second_line(self):
         _, lines = self.run_render(payload())
@@ -110,7 +121,8 @@ class Layout(Base):
     def test_vanity_stats_are_gone(self):
         out, _ = self.run_render(payload())
         text = theme.strip(out)
-        for word in ("$", "+151", "% hit", "cached", "next warning", "all pushed", "tasks", "┃", "▌"):
+        # The API cost came back on purpose (2026-11-07), on row 3 only.
+        for word in ("+151", "% hit", "cached", "next warning", "all pushed", "tasks", "▌"):
             self.assertNotIn(word, text)
 
     def test_narrow_terminal_fits(self):

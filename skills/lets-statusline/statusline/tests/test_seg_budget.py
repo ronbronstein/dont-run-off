@@ -41,7 +41,7 @@ class Utc(unittest.TestCase):
 class FiveHourChip(unittest.TestCase):
     def test_a_meter_a_clock_icon_and_heavy_digits(self):
         seg = seg_budget.limit_segment(limit(30, 9600), NOW, 100)
-        self.assertEqual(plain(seg), ("5h ▮▮▮▯▯▯▯▯▯▯ 30%  ◷ 𝟮𝗵𝟰𝟬𝗺", "5h 30%  ◷ 𝟮𝗵𝟰𝟬𝗺"))
+        self.assertEqual(plain(seg), ("5h ▮▮▮▯▯▯▯▯▯▯ 30%  lasts ~5h26m  ◷ 𝟮𝗵𝟰𝟬𝗺", "5h 30%  lasts ~5h26m  ◷ 𝟮𝗵𝟰𝟬𝗺"))
         self.assertEqual(seg.tone, "calm")
 
     def test_the_heavy_digits_count_one_column_each(self):
@@ -50,7 +50,7 @@ class FiveHourChip(unittest.TestCase):
 
     def test_the_meter_gets_narrower_with_the_terminal(self):
         seg = seg_budget.limit_segment(limit(50, 3000), NOW, 100, "narrow")
-        self.assertEqual(plain(seg)[0], "5h ▮▮▮▯▯▯ 50%  ◷ 𝟱𝟬𝗺")
+        self.assertEqual(plain(seg)[0], "5h ▮▮▮▯▯▯ 50%  lasts ~4h9m  ◷ 𝟱𝟬𝗺")
 
     def test_running_out_before_the_reset_is_solid_red(self):
         # 80% used, halfway through the 5h window: at this pace it runs out early.
@@ -70,10 +70,59 @@ class FiveHourChip(unittest.TestCase):
         self.assertNotIn("out in", plain(seg)[0])
 
 
+class Pace(Utc):
+    """The pace is a time, never a second percent. It always shows after the first 10% of a window."""
+
+    def test_room_to_spare_says_how_long_the_limit_lasts_in_the_nudge_color(self):
+        # 10% used, halfway through: at this pace it lasts 22h30m, far past the reset.
+        seg = seg_budget.limit_segment(limit(10, 9000), NOW, 100)
+        self.assertIn("lasts ~22h30m", plain(seg)[0])
+        self.assertIn("lasts ~22h30m", plain(seg)[1])
+        self.assertIn(theme.paint("  lasts ~22h30m", fg=theme.POOR, bold=True), seg.text)
+        self.assertNotIn("at reset", plain(seg)[0])
+
+    def test_good_use_is_green(self):
+        # 45% used, halfway through: projected 90% at the reset.
+        seg = seg_budget.limit_segment(limit(45, 9000), NOW, 100)
+        self.assertIn(theme.paint("  lasts ~3h3m", fg=theme.GOOD, bold=True), seg.text)
+
+    def test_the_week_gets_a_pace_too(self):
+        # 30% used, halfway through the week: projected 60%.
+        seg = seg_budget.limit_segment(week(30, WEEK // 2), NOW, 80)
+        self.assertIn("lasts ~8d4h", plain(seg)[0])
+        self.assertIn(theme.paint("  lasts ~8d4h", fg=theme.FAIR, bold=True), seg.text)
+
+    def test_the_week_says_when_it_runs_out(self):
+        seg = seg_budget.limit_segment(week(80, WEEK // 2), NOW, 80)
+        self.assertIn("out in ~21h", plain(seg)[0])
+        self.assertEqual(seg.tone, "bad")
+
+    def test_pace_colors_nudge_to_use_the_limit(self):
+        for projected, color in ((10, theme.POOR), (59, theme.POOR), (60, theme.FAIR),
+                                 (84, theme.FAIR), (85, theme.GOOD), (99, theme.GOOD),
+                                 (100, theme.BADLY), (150, theme.BADLY)):
+            self.assertEqual(seg_budget.pace_color(projected), color, projected)
+
+
+class Cost(unittest.TestCase):
+    def test_the_api_cost_has_its_label_and_stands_apart(self):
+        seg = seg_budget.cost_segment(7.7808866)
+        self.assertEqual(theme.strip(seg.text), "In API costs: $7.78")
+        self.assertTrue(seg.apart)
+
+    def test_money_formats(self):
+        for usd, text in ((0, "$0.00"), (0.004, "$0.00"), (7.7808866, "$7.78"), (99.99, "$99.99"),
+                          (123.4, "$123"), (1234.6, "$1,235")):
+            self.assertEqual(fmt.money(usd), text, usd)
+
+    def test_no_cost_in_the_payload_gives_no_chip(self):
+        self.assertIsNone(seg_budget.cost_segment(None))
+
+
 class SevenDayChip(Utc):
     def test_one_square_per_day_and_the_day_and_time_of_the_reset(self):
         seg = seg_budget.limit_segment(week(8, 6 * 86400), NOW, 80)
-        self.assertEqual(plain(seg), ("7d ■□□□□□□ 8%  ▦ Thu 08:00", "7d 8%  ▦ Thu 08:00"))
+        self.assertEqual(plain(seg), ("7d ■□□□□□□ 8%  lasts ~11d12h  ▦ Thu 08:00", "7d 8%  lasts ~11d12h  ▦ Thu 08:00"))
 
     def test_the_squares_stay_seven_on_every_width(self):
         for tier in ("wide", "normal", "narrow"):

@@ -31,6 +31,11 @@ def duration(seconds: float) -> str:
     return f"{d}d{h}h" if h else f"{d}d"
 
 
+def money(usd: float) -> str:
+    """Dollars: cents below $100, whole dollars from there ($7.78, $123, $1,235)."""
+    return f"${usd:,.2f}" if usd < 99.995 else f"${usd:,.0f}"
+
+
 def clock(seconds: float) -> str:
     """A countdown: 53:12, 4:07, 0:09."""
     minutes, secs = divmod(max(0, int(seconds)), 60)

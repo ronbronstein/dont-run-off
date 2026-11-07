@@ -46,6 +46,9 @@ class ParseRealPayload(unittest.TestCase):
         self.assertEqual(c.recache_tokens, 208191)
         self.assertEqual(c.last_miss_causes, ())
 
+    def test_cost(self):
+        self.assertAlmostEqual(self.s.cost_usd, 7.7808866)
+
     def test_limits(self):
         labels = [(l.label, l.used_pct, l.resets_at, l.window_s) for l in self.s.limits]
         self.assertEqual(labels, [

@@ -26,13 +26,18 @@ design, so that a bar shows what it measures.
    - The cache countdown: an hourglass, sand that runs down, and the time (`⏳ cache ⣿⣿⣿⣿⣿⣀ 53:12`), or
      `⌛ cache cold · next reply re-reads 295k`. The hourglass turns at each refresh.
    - The active task, and overdue or due-today tasks, when Taskwarrior is in use.
-3. **How much usage is left?** Claude Code gives these numbers to subscribers. With an API key, this
-   row can stay empty.
-   - The 5-hour limit: a meter and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  ◷ 𝟮𝗵𝟰𝟬𝗺`). The digits are heavy Unicode
-     digits, because a terminal has one font size.
-   - The 7-day limit: one square per day and the reset day and time (`7d ■□□□□□□ 8%  ▦ Fri 00:18`).
-   - A run-out warning when the pace is too fast. A low percent is green. A long 5-hour wait is red,
-     and a short wait is green. The 7-day date stays white.
+3. **How much usage is left?** Claude Code gives the limits to subscribers. With an API key, only the
+   cost shows.
+   - The 5-hour limit: a meter, the pace, and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  lasts ~6h38m  ◷ 𝟮𝗵𝟰𝟬𝗺`).
+     The digits are heavy Unicode digits, because a terminal has one font size.
+   - The 7-day limit: one square per day, the pace, and the reset day and time
+     (`7d ■□□□□□□ 8%  lasts ~11d12h  ▦ Fri 00:18`).
+   - The pace says how long the limit lasts at your current speed: `lasts ~6h38m`, or `out in ~1h20m`
+     when it runs out before the reset. It is a nudge to use the limit before it resets: amber means
+     much of it will go unused, green means good use, red means you run out. It shows after the first
+     10% of a window; before that, the speed is noise.
+   - Last, after a heavy `┃`: `In API costs: $7.78`, the session cost at API prices that Claude Code
+     estimates. A subscriber does not pay it, so it stays white.
 
 A banner line goes above these rows at a high context level.
 
@@ -57,6 +62,7 @@ A banner line goes above these rows at a high context level.
 | Amber name | A detached HEAD |
 | Green, gray, purple, red PR tag | Open, draft, merged, closed (GitHub's colors) |
 | Green, lime, amber, red limit | Percent used: under 50, under 70, under 90, 90 and up. Share of the window left to wait: under 25%, under 50%, under 75%, 75% and up |
+| Amber, lime, green, red pace | Projected use at the reset: under 60%, under 85%, under 100%, 100% and up (runs out) |
 | Rose `❦`, violet `◆`, sky blue `♪`, mint `✿` | Fable, Opus, Sonnet, Haiku. White `◇`: any other model |
 
 ## Refresh and speed

@@ -19,7 +19,10 @@ CALENDAR = "▦"
 
 
 def pace(limit: Limit, now: float):
-    """Return (projected % at reset or None, seconds until 100% or None, seconds to reset)."""
+    """Return (projected % at reset, seconds until 100% at this pace, seconds to reset).
+
+    The first two are None early in the window or before any use: the pace is noise then.
+    """
     if limit.resets_at is None:
         return None, None, None
     left = max(0.0, limit.resets_at - now)
@@ -28,8 +31,31 @@ def pace(limit: Limit, now: float):
         return None, None, left
     rate = limit.used_pct / elapsed                 # percent per second
     projected = limit.used_pct + rate * left
-    runs_out = (100 - limit.used_pct) / rate if projected > 100 else None
-    return projected, runs_out, left
+    lasts = max(0.0, 100 - limit.used_pct) / rate
+    return projected, lasts, left
+
+
+def pace_color(projected: float) -> theme.RGB:
+    """Use it or lose it: room left unused at the reset is a nudge, running out is the alarm."""
+    if projected >= 100:
+        return theme.BADLY
+    if projected >= 85:
+        return theme.GOOD
+    return theme.FAIR if projected >= 60 else theme.POOR
+
+
+def _pace_text(projected: Optional[float], lasts: Optional[float], left: Optional[float]) -> str:
+    if projected is None or lasts is None or left is None:
+        return ""
+    words = f"  out in ~{fmt.duration(lasts)}" if lasts < left else f"  lasts ~{fmt.duration(lasts)}"
+    return paint(words, fg=pace_color(projected), bold=True)
+
+
+def cost_segment(usd: Optional[float]) -> Optional[Segment]:
+    """The session cost at API prices. A subscriber does not pay it, so it stays white."""
+    if usd is None:
+        return None
+    return Segment(label("In API costs: ") + value(fmt.money(usd)), priority=60, apart=True)
 
 
 def state(limit: Limit, projected: Optional[float]) -> int:
@@ -73,19 +99,21 @@ def limit_segment(limit: Limit, now: float, priority: int, tier: str = "wide") -
     if limit.resets_at is not None and limit.resets_at <= now:
         # The window has reset but the payload is older than the clock (idle timer refresh).
         return Segment(label(f"{limit.label} reset"), priority=priority)
-    projected, runs_out, left = pace(limit, now)
+    projected, lasts, left = pace(limit, now)
     health = state(limit, projected)
     pct = paint(f"{limit.used_pct:.0f}%", fg=used_color(limit.used_pct), bold=True)
     head = label(limit.label + " ") + pct
     is_week = limit.label == "7d"
     bar = bars.zone_bar(limit.used_pct, 100, WEEK_CELLS if is_week else METER_CELLS[tier],
                         used_color, SQUARES if is_week else METER)
-    out = paint(f" out in ~{fmt.duration(runs_out)}", fg=theme.BADLY, bold=True) if runs_out else ""
+    speed = _pace_text(projected, lasts, left)
     reset = _reset(limit, left)
-    return Segment(label(limit.label + " ") + bar + " " + pct + out + reset, priority=priority,
+    return Segment(label(limit.label + " ") + bar + " " + pct + speed + reset, priority=priority,
                    tone="bad" if health == 2 else "calm",
-                   short=head + out + reset)
+                   short=head + speed + reset)
 
 
 def build(s: Session, now: float, tier: str = "wide") -> List[Segment]:
-    return [limit_segment(l, now, PRIORITY.get(l.label, 70), tier) for l in s.limits]
+    segs = [limit_segment(l, now, PRIORITY.get(l.label, 70), tier) for l in s.limits]
+    cost = cost_segment(s.cost_usd)
+    return segs + ([cost] if cost else [])

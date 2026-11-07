@@ -80,6 +80,12 @@ def scenarios(top):
             "seven_day": {"used_percentage": 41, "resets_at": NOW + 3 * 86400}}
     week = {"five_hour": {"used_percentage": 12, "resets_at": NOW + 4 * 3600},
             "seven_day": {"used_percentage": 82, "resets_at": NOW + 1 * 86400}}
+    room = {"five_hour": {"used_percentage": 15, "resets_at": NOW + 2.5 * 3600},
+            "seven_day": {"used_percentage": 20, "resets_at": NOW + 3.5 * 86400}}
+    good = {"five_hour": {"used_percentage": 45, "resets_at": NOW + 2.5 * 3600},
+            "seven_day": {"used_percentage": 50, "resets_at": NOW + 3 * 86400}}
+    week_out = {"five_hour": {"used_percentage": 30, "resets_at": NOW + 2.5 * 3600},
+                "seven_day": {"used_percentage": 80, "resets_at": NOW + 3.5 * 86400}}
     return [
         ("WHERE — on main, clean and in sync", base_payload(), git(top), None, []),
         ("WHERE — on main, work in progress", base_payload(),
@@ -123,6 +129,13 @@ def scenarios(top):
          git(top), None, []),
         ("USAGE — 5h runs out before the reset", base_payload(rate_limits=burn), git(top), None, []),
         ("USAGE — 7d is getting high", base_payload(rate_limits=week), git(top), None, []),
+        ("USAGE — room to push: much of both limits will go unused (amber)",
+         base_payload(rate_limits=room), git(top), None, []),
+        ("USAGE — good use: both limits land near 100% at the reset (green)",
+         base_payload(rate_limits=good), git(top), None, []),
+        ("USAGE — 7d runs out before the reset (red)", base_payload(rate_limits=week_out), git(top), None, []),
+        ("USAGE — an API key: no limits, only the cost",
+         {k: v for k, v in base_payload().items() if k != "rate_limits"}, git(top), None, []),
         ("MODEL — Fable, max effort", base_payload(model={"display_name": "Fable 5.1"},
                                                    effort={"level": "max"}), git(top), None, []),
         ("MODEL — Opus, xhigh effort", base_payload(), git(top), None, []),

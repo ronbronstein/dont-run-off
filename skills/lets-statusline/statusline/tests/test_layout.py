@@ -67,6 +67,17 @@ class Line(unittest.TestCase):
         out = layout.line((Segment("a"), Segment("b")), 80)
         self.assertIn(theme.paint("│", fg=theme.SEPARATOR, bg=theme.CHIP_BG), out)
 
+    def test_a_chip_apart_gets_a_heavy_wide_separator(self):
+        out = layout.line((Segment("a"), Segment("b", apart=True)), 80)
+        self.assertEqual(plain(out), " a  ┃  b ")
+        self.assertEqual(theme.width(out), 9)
+
+    def test_fit_counts_the_wide_separator(self):
+        segs = (Segment("a" * 10, priority=90), Segment("b" * 10, priority=10, apart=True))
+        # 12 + 12 for the chips, 3 for " ┃ "
+        self.assertEqual(len(layout.fit(segs, 26)), 1)
+        self.assertEqual(len(layout.fit(segs, 27)), 2)
+
     def test_calm_chip_has_the_slate_background(self):
         self.assertIn(bg_code(theme.CHIP_BG), layout.line((Segment("a"),), 80))
 

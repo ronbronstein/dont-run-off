@@ -75,6 +75,7 @@ class Session:
     agent_name: Optional[str]
     output_style: Optional[str]
     duration_s: Optional[int]
+    cost_usd: Optional[float]   # Claude Code's estimate at API prices, for the whole session
     context: Optional[Context]
     cache: Optional[Cache]
     limits: Tuple[Limit, ...]
@@ -194,6 +195,7 @@ def parse(raw: str) -> Session:
         agent_name=_str(_get(d, "agent", "name")),
         output_style=_str(_get(d, "output_style", "name")),
         duration_s=_duration(d),
+        cost_usd=_num(_get(d, "cost", "total_cost_usd")),
         context=_context(d, model_id),
         cache=_cache(d),
         limits=_limits(d),
