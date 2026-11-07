@@ -68,13 +68,23 @@ def session_chip(s: Session) -> Optional[Segment]:
 
 
 COINS = "⛁"  # the session cost at API prices
+SUM = "∑"    # this month's total at API prices
 
 
 def cost_chip(usd: Optional[float]) -> Optional[Segment]:
     """The session cost at API prices. A subscriber does not pay it, so it stays white."""
     if usd is None:
         return None
-    return Segment(label(f"{COINS} ") + value(fmt.money(usd)), priority=60)
+    amount = label(f"{COINS} ") + value(fmt.money(usd))
+    return Segment(amount + label(" session"), priority=60, short=amount)
+
+
+def month_chip(usd: Optional[float], month: str) -> Optional[Segment]:
+    """All sessions this month at API prices. It goes before the session cost on a short line."""
+    if usd is None:
+        return None
+    amount = label(f"{SUM} ") + value(fmt.money(usd))
+    return Segment(amount + label(f" {month}"), priority=50, short=amount)
 
 
 def task_chip(t: Optional[TaskSummary]) -> Optional[Segment]:

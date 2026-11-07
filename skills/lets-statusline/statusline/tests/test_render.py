@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 from sl import gitstate, render, theme
@@ -51,13 +52,15 @@ class Base(unittest.TestCase):
     def setUp(self):
         shutil.rmtree(self.cache, ignore_errors=True)
 
-    def run_render(self, d, columns=140, runner=no_tasks, collect_git=None, cwd=None, get_pr=None):
+    def run_render(self, d, columns=140, runner=no_tasks, collect_git=None, cwd=None, get_pr=None,
+                   get_month=None):
         d = dict(d)
         d["cwd"] = cwd or self.repo
         kw = {"collect_git": collect_git} if collect_git else {}
         out = render.render(json.dumps(d), {"COLUMNS": str(columns)}, NOW, home=self.home,
                             cache_dir=self.cache, task_runner=runner, spawn=no_spawn,
-                            get_pr=get_pr or (lambda s, g: None), **kw)
+                            get_pr=get_pr or (lambda s, g: None),
+                            get_month=get_month or (lambda: None), **kw)
         return out, [theme.strip(l) for l in out.split("\n")]
 
 
@@ -102,8 +105,18 @@ class Layout(Base):
     def test_the_session_cost_ends_row_two(self):
         # It is about the session, not the limits.
         _, lines = self.run_render(payload())
-        self.assertTrue(theme.strip(lines[1]).rstrip().endswith("│ ⛁ $7.78"), lines[1])
+        self.assertTrue(theme.strip(lines[1]).rstrip().endswith("│ ⛁ $7.78 session"), lines[1])
         self.assertNotIn("⛁", theme.strip(lines[2]))
+
+    def test_the_month_total_comes_after_the_session_cost(self):
+        _, lines = self.run_render(payload(), columns=200, get_month=lambda: 730.55)
+        self.assertTrue(lines[1].rstrip().endswith("│ ⛁ $7.78 session │ ∑ $731 " + time.strftime(
+            "%b", time.localtime(NOW))), lines[1])
+        self.assertNotIn("∑", lines[2])
+
+    def test_the_month_total_goes_first_on_a_short_line(self):
+        _, lines = self.run_render(payload(), columns=60, get_month=lambda: 730.55)
+        self.assertNotIn("∑", lines[1])
 
     def test_model_comes_first_on_the_second_line(self):
         _, lines = self.run_render(payload())

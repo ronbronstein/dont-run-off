@@ -107,9 +107,22 @@ class Pace(Utc):
 class Cost(unittest.TestCase):
     """The session cost is a session chip (row 2). Row 3 holds only the limits."""
 
-    def test_the_api_cost_is_a_coin_stack_and_the_amount(self):
+    def test_the_api_cost_is_a_coin_stack_the_amount_and_the_word_session(self):
         seg = seg_session.cost_chip(7.7808866)
-        self.assertEqual(theme.strip(seg.text), "⛁ $7.78")
+        self.assertEqual(theme.strip(seg.text), "⛁ $7.78 session")
+        self.assertEqual(theme.strip(seg.short), "⛁ $7.78")
+
+    def test_the_month_total_names_the_month(self):
+        seg = seg_session.month_chip(730.55, "Nov")
+        self.assertEqual(theme.strip(seg.text), "∑ $731 Nov")
+        self.assertEqual(theme.strip(seg.short), "∑ $731")
+
+    def test_the_month_chip_goes_before_the_session_cost_on_a_short_line(self):
+        self.assertLess(seg_session.month_chip(1, "Nov").priority,
+                        seg_session.cost_chip(1).priority)
+
+    def test_no_month_total_gives_no_chip(self):
+        self.assertIsNone(seg_session.month_chip(None, "Nov"))
 
     def test_money_formats(self):
         for usd, text in ((0, "$0.00"), (0.004, "$0.00"), (7.7808866, "$7.78"), (99.99, "$99.99"),

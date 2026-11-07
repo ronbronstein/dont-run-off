@@ -26,8 +26,13 @@ design, so that a bar shows what it measures.
    - The cache countdown: an hourglass, sand that runs down, and the time (`⏳ cache ⣿⣿⣿⣿⣿⣀ 53:12`), or
      `⌛ cache cold · next reply re-reads 295k`. The hourglass turns at each refresh.
    - The active task, and overdue or due-today tasks, when Taskwarrior is in use.
-   - Last, the coins `⛁ $7.78`: the session cost at API prices that Claude Code estimates. A
+   - The coins `⛁ $7.78 session`: the session cost at API prices that Claude Code estimates. A
      subscriber does not pay it, so it stays white.
+   - Last, the month total `∑ $731 Nov`: all sessions on this computer since the first day of the
+     month, at API list prices. It comes from Claude Code's session logs in `~/.claude/projects`, in a
+     background job every 5 minutes. The prices are in `sl/monthcost.py` (`PRICES`, with the date of
+     the prices): update them when Anthropic changes its prices. A model with no price counts as $0.
+     On a short line, this chip goes first.
 3. **How much usage is left?** Claude Code gives the limits to subscribers. With an API key, this row
    does not show.
    - The 5-hour limit: a meter, the pace, and a countdown (`5h ▮▮▮▯▯▯▯▯▯▯ 26%  ↯ ~6h38m  ◷ 𝟮𝗵𝟰𝟬𝗺`).
@@ -73,6 +78,8 @@ A banner line goes above these rows at a high context level.
 - Git data comes from a cache, read inline with a 0.5 s limit. A slow repo shows the last good state
   and refreshes in a background job.
 - PR data comes from `gh` in a background job only. The line never waits for `gh`.
+- The month total comes from a background scan of the session logs (about 1 s), at most once in
+  5 minutes. Until the first scan ends, the chip does not show.
 
 ## Commands
 

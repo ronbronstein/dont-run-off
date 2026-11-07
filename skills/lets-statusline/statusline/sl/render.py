@@ -4,10 +4,11 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import time
 from typing import Callable, List, Mapping, Optional, TypeVar
 
 from . import (background, errlog, gitcache, gitstate, ladder, layout, prstate, seg_budget,
-               seg_context, seg_place, seg_pr, seg_session, tasks, theme)
+               monthcost, seg_context, seg_place, seg_pr, seg_session, tasks, theme)
 from .payload import parse
 
 MARGIN = 4            # columns Claude Code keeps for its own spacing
@@ -65,7 +66,8 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
            task_runner: Callable[..., subprocess.CompletedProcess] = subprocess.run,
            collect_git: Callable[..., Optional[gitstate.GitState]] = gitstate.collect,
            spawn: Callable[..., bool] = background.spawn,
-           get_pr: Optional[Callable[..., Optional[prstate.PrView]]] = None) -> str:
+           get_pr: Optional[Callable[..., Optional[prstate.PrView]]] = None,
+           get_month: Optional[Callable[[], Optional[float]]] = None) -> str:
     home = home or os.path.expanduser("~")
     cache_dir = cache_dir or default_cache_dir()
     log_path = os.path.join(cache_dir, "errors.log")
@@ -87,6 +89,10 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
                     errors, log_path, namespace=ns) if ns else None
     pr_source = get_pr or (lambda s, g: prstate.get(s, g, cache_dir, now, log_path, spawn=spawn))
     pr = _safe("pr", lambda: pr_source(session, git), errors, log_path, cwd=session.cwd)
+    projects = monthcost.projects_dir(env, home)
+    month_source = get_month or (lambda: monthcost.get(cache_dir, now, log_path, projects,
+                                                       spawn=spawn))
+    month_usd = _safe("month-cost", month_source, errors, log_path)
 
     banners = ladder.banner_lines(session.context, budget) if session.context else []
     lines = [theme.truncate_visible(b, budget) for b in banners]
@@ -94,6 +100,7 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
     model = seg_session.model(session)
     task = seg_session.task_chip(summary)
     cost = seg_session.cost_chip(session.cost_usd)
+    month = seg_session.month_chip(month_usd, time.strftime("%b", time.localtime(now)))
     lines += layout.block([
         layout.line(seg_place.build(session, git, home, now, errors,
                                     git_age=view.age if view else 0,
@@ -101,7 +108,8 @@ def render(raw: str, env: Mapping[str, str], now: float, home: Optional[str] = N
                                     pr=seg_pr.build(pr, now))
                     + ([named] if named else []), budget),
         layout.line(([model] if model else []) + seg_context.build(session, now, size)
-                    + ([task] if task else []) + ([cost] if cost else []), budget),
+                    + ([task] if task else []) + ([cost] if cost else [])
+                    + ([month] if month else []), budget),
         layout.line(seg_budget.build(session, now, size), budget),
     ])
     return layout.compose(lines)
