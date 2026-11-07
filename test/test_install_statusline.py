@@ -169,6 +169,13 @@ class Installer(unittest.TestCase):
         self.run_it("undo")
         self.assertEqual(self.read_settings()["statusLine"], old)
 
+    def test_undo_restores_a_user_line_with_a_similar_path(self):
+        old = {"type": "command", "command": f"{self.claude}/statusline.sh"}
+        self.write_settings({"statusLine": old})
+        self.run_it("install")
+        self.run_it("undo")
+        self.assertEqual(self.read_settings()["statusLine"], old)
+
     def test_undo_with_no_earlier_line_removes_the_key(self):
         self.write_settings({"model": "m"})
         self.run_it("install")

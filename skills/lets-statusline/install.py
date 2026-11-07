@@ -148,7 +148,9 @@ def status() -> dict:
 
 
 def is_ours(line: object) -> bool:
-    return isinstance(line, dict) and target_dir() in str(line.get("command", ""))
+    """Exact on the quoted entry path: a user's ~/.claude/statusline.sh is not ours."""
+    entry = os.path.join(target_dir(), "statusline.py")
+    return isinstance(line, dict) and str(line.get("command", "")).endswith(f'"{entry}"')
 
 
 def install() -> dict:
