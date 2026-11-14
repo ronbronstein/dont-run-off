@@ -36,7 +36,7 @@ In Claude Code:
 
 ```
 /plugin marketplace add ronbronstein/dont-run-off
-/plugin install dont-run-off@kidamti
+/plugin install dont-run-off@ronbronstein
 /dont-run-off:lets-set-up
 ```
 
@@ -202,7 +202,7 @@ Every move starts with `lets-`. Type `/lets` in Claude Code to see them all.
 
 ```
 /plugin marketplace add ronbronstein/dont-run-off
-/plugin install dont-run-off@kidamti
+/plugin install dont-run-off@ronbronstein
 /dont-run-off:lets-set-up
 ```
 
@@ -225,7 +225,7 @@ Setup does not overwrite it. It reads it first, backs it up to `CLAUDE.md.bak`, 
 <br>
 
 ```
-/plugin update dont-run-off@kidamti
+/plugin update dont-run-off@ronbronstein
 /dont-run-off:lets-set-up
 ```
 
@@ -247,19 +247,21 @@ This copies the skills into `~/.claude/skills/` (without `-g`, into the current 
 </details>
 
 <details>
-<summary><b>Installed before 2026-09-27</b></summary>
+<summary><b>Added the catalog before 2026-11-14</b></summary>
 
 <br>
 
-The marketplace name changed from `ronbronstein` to `kidamti`. Add it again once, in your shell:
+The catalog name changed from `kidamti` to `ronbronstein`. Claude Code cannot rename a catalog in place, so add it again once.
 
-```bash
-claude plugin marketplace remove ronbronstein
-claude plugin marketplace add ronbronstein/dont-run-off
-claude plugin install dont-run-off@kidamti
+**Caution:** removing the catalog uninstalls the plugin, and Claude Code then deletes the plugin's data folder. If `lets-track` saved a task guide in `~/.claude/plugins/data/dont-run-off-kidamti/`, copy it first. Then put it in `dont-run-off-ronbronstein/` and fix the path in your `CLAUDE.md`.
+
+```
+/plugin marketplace remove kidamti
+/plugin marketplace add ronbronstein/dont-run-off
+/plugin install dont-run-off@ronbronstein
 ```
 
-Then turn auto-update on again: `/plugin` → **Marketplaces** → `kidamti` → **Enable auto-update**.
+Then turn auto-update on again: `/plugin` → **Marketplaces** → `ronbronstein` → **Enable auto-update**.
 
 </details>
 

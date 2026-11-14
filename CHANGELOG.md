@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### The catalog is now `ronbronstein`
+
+The plugin catalog changed its name from `kidamti` to `ronbronstein`. The install id is now `dont-run-off@ronbronstein`. If you added the catalog before 2026-11-14, run `/plugin marketplace remove kidamti`, then add `ronbronstein/dont-run-off` again and install `dont-run-off@ronbronstein`. The README install section has the steps and a caution about saved task guides.
+
 ## 0.5.0 — 2026-11-07
 
 ### New: `lets-statusline`
